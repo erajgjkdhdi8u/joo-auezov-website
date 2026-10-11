@@ -1,0 +1,43 @@
+/* JOO route transitions: Golden Diagonal Wipe + Perspective Depth + Golden Split.
+   Self-contained vanilla CSS. No blur, no custom pointer and no overflow locks. */
+:root{--joo-route-ink:#06162f;--joo-route-navy:#0c2856;--joo-route-blue:#164693;--joo-route-gold:#f0c56a}
+#jooPageRoute{position:fixed;inset:0;z-index:2147482900;visibility:hidden;pointer-events:none;isolation:isolate;overflow:hidden;contain:layout paint;font-family:Inter,system-ui,sans-serif;color:#fff}
+#jooPageRoute.is-covering,html.joo-route-incoming #jooPageRoute{visibility:visible;pointer-events:auto}
+.joo-route__panel{position:absolute;top:-3%;bottom:-3%;width:57%;will-change:transform;backface-visibility:hidden}
+.joo-route__panel--left{left:-1%;background:linear-gradient(135deg,var(--joo-route-ink),var(--joo-route-navy) 75%,#123f82);clip-path:polygon(0 0,100% 0,calc(100% - 8vw) 100%,0 100%);transform:translate3d(-110%,0,0)}
+.joo-route__panel--right{right:-1%;background:linear-gradient(210deg,#071733,#143e82 64%,var(--joo-route-ink));clip-path:polygon(8vw 0,100% 0,100% 100%,0 100%);transform:translate3d(110%,0,0)}
+.joo-route__panel--left::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 40%,rgba(245,192,91,.11),transparent 58%),repeating-linear-gradient(45deg,transparent 0 32px,rgba(255,255,255,.018) 33px 34px)}
+.joo-route__panel--right::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 28% 56%,rgba(68,137,239,.17),transparent 58%)}
+/* The skewed blade follows the diagonal seam. */
+.joo-route__blade{position:absolute;z-index:3;left:50%;top:-22%;height:144%;width:clamp(3px,.48vw,8px);transform:translate3d(-50%,-105%,0) rotate(12deg);background:linear-gradient(180deg,transparent,#fff0ba 14%,#e8ad4a 43%,#fff0b8 75%,transparent);box-shadow:0 0 28px 4px rgba(245,197,98,.32);opacity:0;will-change:transform,opacity}
+.joo-route__brand{position:absolute;z-index:4;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;opacity:0;transform:translate3d(0,24px,0) scale(.94);pointer-events:none;padding:20px}
+.joo-route__brand strong{display:block;font:800 clamp(56px,11vw,132px)/.85 Oswald,Impact,sans-serif;letter-spacing:-.075em;color:var(--joo-route-gold);text-shadow:0 16px 60px rgba(0,0,0,.16)}
+.joo-route__brand strong span{color:#fff}
+.joo-route__brand small{display:block;max-width:min(90vw,600px);font:700 clamp(12px,1.35vw,17px)/1.35 Inter,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#e3ebff}
+.joo-route__brand i{display:block;width:82px;height:2px;background:var(--joo-route-gold);transform-origin:center}
+#jooPageRoute.is-covering .joo-route__panel--left{animation:jooCoverLeft .56s cubic-bezier(.65,.04,.19,1) both}
+#jooPageRoute.is-covering .joo-route__panel--right{animation:jooCoverRight .56s .045s cubic-bezier(.65,.04,.19,1) both}
+#jooPageRoute.is-covering .joo-route__blade{animation:jooBladeEnter .48s .09s cubic-bezier(.4,0,.2,1) both}
+#jooPageRoute.is-covering .joo-route__brand{animation:jooBrandIn .32s .38s cubic-bezier(.15,1,.3,1) both}
+@keyframes jooCoverLeft{to{transform:translate3d(0,0,0)}}
+@keyframes jooCoverRight{to{transform:translate3d(0,0,0)}}
+@keyframes jooBladeEnter{from{opacity:0;transform:translate3d(-50%,-105%,0) rotate(12deg)}to{opacity:1;transform:translate3d(-50%,0,0) rotate(12deg)}}
+@keyframes jooBrandIn{to{opacity:1;transform:translate3d(0,0,0) scale(1)}}
+/* The destination renders behind closed panels on its first frame, then both panels split. */
+html.joo-route-incoming #jooPageRoute .joo-route__panel--left{animation:jooOpenLeft .82s .12s cubic-bezier(.78,0,.18,1) both}
+html.joo-route-incoming #jooPageRoute .joo-route__panel--right{animation:jooOpenRight .82s .12s cubic-bezier(.78,0,.18,1) both}
+html.joo-route-incoming #jooPageRoute .joo-route__blade{animation:jooBladeExit .72s .07s ease-out both}
+html.joo-route-incoming #jooPageRoute .joo-route__brand{animation:jooBrandExit .42s .08s ease-in both}
+@keyframes jooOpenLeft{from{transform:translate3d(0,0,0)}to{transform:translate3d(-112%,0,0)}}
+@keyframes jooOpenRight{from{transform:translate3d(0,0,0)}to{transform:translate3d(112%,0,0)}}
+@keyframes jooBladeExit{0%{opacity:1;transform:translate3d(-50%,0,0) rotate(12deg)}75%{opacity:.8}100%{opacity:0;transform:translate3d(-50%,108%,0) rotate(12deg)}}
+@keyframes jooBrandExit{from{opacity:1;transform:translate3d(0,0,0) scale(1)}to{opacity:0;transform:translate3d(0,-18px,0) scale(1.07)}}
+/* Gentle 3D depth between the panels; existing page styles remain unchanged. */
+html.joo-route-departing main{animation:jooRouteDepartDepth .65s cubic-bezier(.2,.75,.26,1) both;transform-origin:center 35%;backface-visibility:hidden}
+html.joo-route-departing .masthead{animation:jooRouteDepartHeader .65s ease both}
+html.joo-route-incoming main{animation:jooRouteArriveDepth 1s cubic-bezier(.16,.84,.27,1) both;transform-origin:center 35%}
+@keyframes jooRouteDepartDepth{from{transform:perspective(1100px) translate3d(0,0,0) scale(1);opacity:1}to{transform:perspective(1100px) translate3d(0,8px,-88px) scale(.965);opacity:.75}}
+@keyframes jooRouteDepartHeader{to{opacity:.78}}
+@keyframes jooRouteArriveDepth{from{transform:perspective(1100px) translate3d(0,-7px,-72px) scale(.973);opacity:.86}to{transform:perspective(1100px) translate3d(0,0,0) scale(1);opacity:1}}
+@media(max-width:700px){.joo-route__panel{width:61%}.joo-route__brand{gap:12px}.joo-route__brand small{letter-spacing:.1em}.joo-route__blade{box-shadow:0 0 18px 3px rgba(245,197,98,.26)}}
+@media(prefers-reduced-motion:reduce){#jooPageRoute{display:none!important}html.joo-route-departing main,html.joo-route-incoming main,html.joo-route-departing .masthead{animation:none!important}}

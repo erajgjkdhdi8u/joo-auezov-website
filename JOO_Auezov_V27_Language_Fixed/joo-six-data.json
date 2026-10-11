@@ -1,0 +1,68 @@
+{
+  "students": [
+    {
+      "name": "Қабылбек Ханкелді",
+      "score": 121,
+      "progress": 43,
+      "profile": "Информатика + математика",
+      "photo": "assets/images/results/kabyldbek-kankeldi-121-1200.webp",
+      "key": "info-math"
+    },
+    {
+      "name": "Ерлан Диас",
+      "score": 116,
+      "progress": 42,
+      "profile": "Биология + химия",
+      "photo": "assets/images/results/erlan-dias-116-1200.webp",
+      "key": "bio-chem"
+    },
+    {
+      "name": "Абубакир Азамат",
+      "score": 106,
+      "progress": 43,
+      "profile": "География + математика",
+      "photo": "assets/images/results/abubakir-azamat-106-1200.webp",
+      "key": "geo-math"
+    },
+    {
+      "name": "Базархан Жанел",
+      "score": 103,
+      "progress": 49,
+      "profile": "География + математика",
+      "photo": "assets/images/results/bazarkhan-zhanel-103-1200.webp",
+      "key": "geo-math"
+    },
+    {
+      "name": "Ескожа Құралай",
+      "score": 100,
+      "progress": 50,
+      "profile": "География + математика",
+      "photo": "assets/images/results/eskozha-kuralai-100-1200.webp",
+      "key": "geo-math"
+    },
+    {
+      "name": "Турарова Аяжан",
+      "score": 99,
+      "progress": 39,
+      "profile": "География + биология",
+      "photo": "assets/images/results/turarova-ayazhan-99-1200.webp",
+      "key": "geo-bio"
+    },
+    {
+      "name": "Нұрғалым Еркегали",
+      "score": 93,
+      "progress": 39,
+      "profile": "Информатика + математика",
+      "photo": "assets/images/results/nurgalym-erkezhan-93-1200.webp",
+      "key": "info-math"
+    },
+    {
+      "name": "Наурызбай Нұрасыл",
+      "score": 91,
+      "progress": 35,
+      "profile": "География + математика",
+      "photo": "assets/images/results/nauryzbay-nurasyl-91-1200.webp",
+      "key": "geo-math"
+    }
+  ]
+}

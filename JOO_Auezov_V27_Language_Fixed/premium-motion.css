@@ -1,0 +1,97 @@
+/* JOO Auezov V27 — premium motion layer. Additive; V27 page layout stays intact.
+   Inspiration: image-archive, cursor-reactive CSS, Kinesis pointer motion,
+   Codrops depth gallery, circular background switcher, CSSAnimation and stroll.js.
+   No custom cursor, no scroll hijacking, no photograph blur. */
+:root{--fx-gold:#ffe05b;--fx-ice:#a6d8ff;--fx-transition:cubic-bezier(.2,.75,.18,1)}
+html{scroll-behavior:smooth}
+body{cursor:auto}
+button,a{touch-action:manipulation}
+a,button{--fx-x:50%;--fx-y:50%}
+/* Layered header: keep the actual V27 nav fixed-in-view when page scrolls */
+.masthead{position:sticky;top:0;z-index:400;background:rgba(244,246,250,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.masthead::after{content:"";position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#1b65d3, #ffe05b, transparent);background-size:200% 100%;opacity:.6;pointer-events:none}
+.nav-main-link{position:relative}
+.nav-main-link::after{content:"";position:absolute;bottom:-9px;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;background:#1e65cc;transition:transform .35s var(--fx-transition)}
+.nav-main-link:hover::after,.nav-main-link[aria-current="page"]::after{transform:scaleX(1)}
+/* Editorial kinetic decoration, subtle and never obscures photos */
+.hero__info::before{content:"";position:absolute;inset:-30%;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 67% 42%,rgba(61,132,220,.16),transparent 37%);animation:fxAmbient 16s ease-in-out infinite alternate}
+.hero__info>*{position:relative;z-index:1}
+.hero__eyebrow .little-dot{box-shadow:0 0 0 5px rgba(255,224,91,.12)}
+.hero__photo-marker{transition:letter-spacing .6s var(--fx-transition)}
+.hero__photo:hover .hero__photo-marker{letter-spacing:.2em}
+@keyframes fxAmbient{from{transform:translate3d(-3%,0,0)}to{transform:translate3d(4%,2%,0)}}
+/* Pointer-driven light within cards — intentionally no visible cursor ring */
+.fx-pointer-card{position:relative;isolation:isolate;--fx-x:50%;--fx-y:50%}
+.fx-pointer-card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(300px circle at var(--fx-x) var(--fx-y),rgba(46,126,237,.10),transparent 60%);opacity:0;transition:opacity .4s}
+.fx-pointer-card:hover::after,.fx-pointer-card:focus-within::after{opacity:1}
+.fx-pointer-card>*{position:relative;z-index:1}
+.fx-pointer-card img{filter:none!important}
+/* Archival image grids inspired by 3D archive: neighbours subdue, active tile lifts. */
+@media(hover:hover) and (pointer:fine){
+ .gallery-band__grid:has(figure:hover) figure:not(:hover){opacity:.79}
+ .gallery-band__grid figure{transition:opacity .5s,box-shadow .5s,translate .5s var(--fx-transition)}
+ .gallery-band__grid figure:hover{translate:0 -8px;box-shadow:0 24px 48px rgba(0,0,0,.25);z-index:2}
+ .gallery-band__grid figure img{transition:transform .7s var(--fx-transition),opacity .4s;transform-origin:center}
+ .gallery-band__grid figure:hover img{transform:perspective(900px) rotateX(var(--fx-rx,0deg)) rotateY(var(--fx-ry,0deg)) scale(1.055)}
+ .system-card figure img,.ecosystem__tile img,.case-card>img,.rg-stories img,.guide-card__image img{transition:transform .85s var(--fx-transition)}
+ .system-card:hover figure img,.case-card:hover>img,.rg-stories article:hover img,.guide-card:hover .guide-card__image img{transform:scale(1.035)}
+ .ecosystem__tile:hover img{transform:scale(1.055)}
+ .pill:hover,.journey__tab:hover,.chapter-nav a:hover{transition-duration:.35s}
+}
+/* Buttons: gold sweep without rotating the cursor or locking scroll */
+.pill,.menu-toggle{position:relative;overflow:hidden;isolation:isolate}
+.pill::after,.menu-toggle::after{content:"";position:absolute;inset:-30%;z-index:-1;pointer-events:none;background:linear-gradient(100deg,transparent 33%,rgba(255,255,255,.35) 49%,transparent 65%);transform:translateX(-110%);transition:transform .85s var(--fx-transition)}
+.pill:hover::after,.menu-toggle:hover::after{transform:translateX(110%)}
+/* Input focus and tabs become tactile */
+.journey__tab,.path-tabs button,[data-filter],.profile-tile{transition:background .35s,color .35s,border-color .35s,box-shadow .35s,translate .35s var(--fx-transition)}
+.journey__tab:hover,.path-tabs button:hover{translate:0 -3px}
+.journey__tab.is-current,.path-tabs button.is-active{box-shadow:inset 0 -4px 0 #ffe05b}
+/* Scroll entry never hides content while JS loads. */
+.fx-scroll-in{animation:fxScrollArrival .85s var(--fx-transition) both}
+@keyframes fxScrollArrival{0%{opacity:.8;translate:0 19px}100%{opacity:1;translate:0 0}}
+/* Kinetic orbit loosely inspired by the solar codepen: background object only. */
+.v27-career-cover__ring{animation:fxOrbit 35s linear infinite}
+.v27-global-art__globe{animation:fxOrbit 48s linear infinite reverse}
+@keyframes fxOrbit{to{rotate:360deg}}
+/* The supplied real-photo montage cards retain their existing V27 composition. */
+.guide-card__image,.case-card{overflow:hidden}
+.guide-card__image img,.case-card>img,.rg-stories img{filter:none!important}
+/* Campus circular thumbnail / background image switcher, reinterpreting user's jquery demo */
+.fx-archive{background:#071b3b;color:#fff;padding:clamp(75px,9vw,135px) var(--edge);position:relative;overflow:hidden}
+.fx-archive::before{content:"";position:absolute;inset:-50% 30% auto -20%;height:600px;pointer-events:none;border:1px solid rgba(255,255,255,.08);border-radius:50%}
+.fx-archive__intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(230px,.9fr);align-items:end;gap:45px;margin-bottom:34px;position:relative}
+.fx-archive__index,.fx-archive__overline{display:block;color:#ffe05b;font-size:11px;font-weight:900;letter-spacing:.17em;text-transform:uppercase}
+.fx-archive__intro h2{font:600 clamp(42px,5.4vw,92px)/.98 Oswald,Impact,sans-serif;letter-spacing:-.035em;max-width:11ch;margin:18px 0 0;text-transform:uppercase}
+.fx-archive__intro h2 em{color:#ffe05b}
+.fx-archive__intro p{max-width:520px;color:#c1d3f0;font-size:clamp(14px,1.4vw,18px);line-height:1.8}
+.fx-archive__stage{height:clamp(375px,53vw,720px);position:relative;overflow:hidden;background:#173862;isolation:isolate}
+.fx-archive__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:0;transition:opacity .65s ease;filter:none!important}
+.fx-archive__image.is-current{opacity:1;z-index:1}
+.fx-archive__stage::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(0deg,rgba(4,17,39,.86),transparent 42%)}
+.fx-archive__overlay{position:absolute;inset:auto clamp(20px,4vw,60px) clamp(20px,3vw,45px);z-index:3;pointer-events:none}
+.fx-archive__heading{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-top:18px}
+.fx-archive__heading strong{font:700 clamp(32px,5vw,66px)/1 Oswald,sans-serif;color:#ffe05b}
+.fx-archive__heading strong small{font:600 18px/1 Oswald,sans-serif;color:#fff}
+.fx-archive__heading h3{font:600 clamp(24px,4vw,55px)/1.05 Oswald,sans-serif;text-transform:uppercase;margin-top:8px}
+.fx-archive__arrows{display:flex;gap:8px;pointer-events:auto}
+.fx-archive__arrows button{display:grid;place-items:center;border:1px solid rgba(255,255,255,.5);background:rgba(4,17,39,.46);color:#fff;width:52px;height:52px;border-radius:50%;font:700 23px Inter,sans-serif;transition:background .3s,scale .3s}
+.fx-archive__arrows button:hover,.fx-archive__arrows button:focus-visible{background:#ffe05b;color:#071b3b;scale:1.08}
+.fx-archive__footer{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:28px}
+.fx-archive__footer>span{font-size:10px;font-weight:900;letter-spacing:.17em;color:#adc5e9;white-space:nowrap}
+.fx-archive__thumbs{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.fx-archive__thumb{position:relative;display:block;border-radius:50%;width:clamp(58px,6vw,86px);height:clamp(58px,6vw,86px);flex-shrink:0;border:3px solid transparent;padding:3px;background:transparent;transition:border-color .3s,scale .4s var(--fx-transition),opacity .3s}
+.fx-archive__thumb img{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;filter:none!important}
+.fx-archive__thumb:hover{scale:1.11;border-color:rgba(255,255,255,.72)}
+.fx-archive__thumb.is-active{border-color:#ffe05b;scale:1.09}
+.fx-archive__thumb:focus-visible{outline:3px solid #ffe05b;outline-offset:4px}
+@media(max-width:980px){.fx-archive__intro{grid-template-columns:1fr}.fx-archive__footer{flex-wrap:wrap;justify-content:center}.fx-archive__footer>span:last-child{display:none}}
+@media(max-width:700px){.fx-archive{padding:75px var(--edge)}.fx-archive__intro{gap:10px}.fx-archive__stage{height:390px}.fx-archive__footer{justify-content:flex-start}.fx-archive__thumbs{gap:7px}.fx-archive__thumb{width:58px;height:58px}.fx-archive__overline{font-size:9px}.fx-archive__heading h3{font-size:28px}.fx-archive__arrows button{width:40px;height:40px}.fx-archive__footer>span:first-child{display:none}}
+@media(max-width:390px){.fx-archive__thumb{width:53px;height:53px}.fx-archive__stage{height:340px}.fx-archive__thumbs{gap:4px}}
+@media(prefers-reduced-motion:reduce){
+ .hero__info::before,.v27-career-cover__ring,.v27-global-art__globe{animation:none!important}
+ .fx-scroll-in{animation:none!important}
+ .fx-archive__image,.fx-archive__thumb,.fx-archive__arrows button,.pill::after,.menu-toggle::after,.gallery-band__grid figure,.gallery-band__grid figure img{transition:none!important;animation:none!important}
+ .gallery-band__grid figure,.gallery-band__grid figure img{transform:none!important;translate:none!important}
+}
+/* The full-screen menu must sit above the sticky header so CLOSE remains clickable. */
+.menu-panel:not([hidden]){z-index:650}
