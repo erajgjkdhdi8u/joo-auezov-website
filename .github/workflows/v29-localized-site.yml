@@ -9,6 +9,7 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
 
 permissions:
   contents: write
@@ -31,6 +32,8 @@ jobs:
         run: python JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py
       - name: Reduce repeated school scenes
         run: python JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py
+      - name: Add screen-reader tab semantics and translated photo descriptions
+        run: python JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py
       - name: Generate indexable language pages
         run: python JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
       - name: Verify all 42 localized pages
