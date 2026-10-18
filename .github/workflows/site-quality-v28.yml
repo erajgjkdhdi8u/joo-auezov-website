@@ -1,0 +1,68 @@
+name: JOO V28 site quality and SEO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/site-quality-v28.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py'
+
+permissions:
+  contents: write
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install image reader
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Compile quality script
+        run: python -m py_compile JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py
+      - name: Improve SEO, photos and accessibility
+        run: python JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py
+      - name: Verify site output
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          root = Path('JOO_Auezov_V27_Language_Fixed')
+          pages = sorted(p for p in root.glob('*.html') if p.name != '404.html')
+          assert len(pages) == 14, len(pages)
+          for p in pages:
+              s = p.read_text(encoding='utf-8')
+              assert s.count('<!-- JOO V28 SEO START -->') == 1, p
+              assert s.count('class="skip-link"') == 1, p
+              assert 'rel="canonical"' in s, p
+              assert 'property="og:image"' in s, p
+              for tag in re.findall(r'<img\b[^>]*>', s, flags=re.I | re.S):
+                  m = re.search(r'\bsrc="([^"]+)"', tag)
+                  if m and m.group(1).startswith('assets/images/'):
+                      assert (root / m.group(1)).is_file(), (p, m.group(1))
+                      assert re.search(r'\bwidth="\d+"', tag), (p, tag[:140])
+                      assert re.search(r'\bheight="\d+"', tag), (p, tag[:140])
+          career = (root / 'career.html').read_text(encoding='utf-8')
+          assert not re.search('Мереке Ұстаз|mereke-ustaz', career, re.I)
+          home = (root / 'index.html').read_text(encoding='utf-8')
+          assert len(re.findall(r'<h1\b', home, re.I)) == 1
+          assert (root / 'sitemap.xml').is_file()
+          assert (root / 'robots.txt').is_file()
+          print('PASS: 14 pages, SEO, dimensions, links, accessibility, Mereke removal')
+          PY
+      - name: Commit verified quality improvements
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml' 'JOO_Auezov_V27_Language_Fixed/robots.txt'
+          if ! git diff --cached --quiet; then
+            git commit -m "Polish V28 photo variety, SEO, image dimensions and keyboard access"
+            git push
+          fi
