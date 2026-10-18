@@ -123,7 +123,7 @@ def update_images(page: str, content: str):
                 sized += 1
             if not re.search(r'''\bheight\s*=\s*["']\d+["']''', tag):
                 tag = tag.replace("<img", '<img height="' + str(dims[1]) + '"', 1)
-        if not re.search(r'''\bdecoding\s*='' ', tag, re.I):
+        if not re.search(r'\bdecoding\s*=', tag, re.I):
             # No extra layout effect; browsers may decode off-screen images asynchronously.
             tag = tag.replace("<img", '<img decoding="async"', 1)
         return tag
