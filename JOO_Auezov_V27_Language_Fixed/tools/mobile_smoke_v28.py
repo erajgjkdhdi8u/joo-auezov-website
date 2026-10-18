@@ -22,7 +22,7 @@ checks = []
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True)
     for viewport_name, width, height in [("mobile", 390, 844), ("desktop", 1440, 900)]:
-        context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1)
+        context = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1, permissions=["clipboard-read", "clipboard-write"])
         for name in PAGES:
             page = context.new_page()
             errors = []
@@ -63,6 +63,7 @@ with sync_playwright() as playwright:
                     result["previewWorks"] = "Ата-ана Тест" in page.locator("#enquiryPreview").inner_text()
                     result["copyButtonExists"] = page.locator("#enquiryCopy").count() == 1
                     page.locator("#enquiryCopy").click()
+                    page.wait_for_timeout(600)
                     result["copyFeedbackWorks"] = bool(page.locator("#enquiryFeedback").inner_text().strip())
                 if name == "index":
                     page.locator('[data-lang="en"]').first.evaluate("(el) => el.click()")
