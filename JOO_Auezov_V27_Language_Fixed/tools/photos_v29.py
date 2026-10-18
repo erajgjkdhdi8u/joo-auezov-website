@@ -58,6 +58,11 @@ def family(src):
 
 def related(key, alt):
     a = alt.lower()
+    # A generic gallery caption can use any distinct real campus scene.
+    if a.startswith("joo auezov view"):
+        return ["school-building", "school-corridor", "school-reception", "school-lounge",
+                "school-classroom", "school-students", "school-gym", "school-cafeteria",
+                "exterior", "corridor", "hall", "classroom", "computerlab", "students", "assembly"]
     if re.search(r"спорт|gym|sports|физкультур", a):
         key = "school-gym"
     elif re.search(r"асхана|столов|cafeteria|dining", a):
@@ -85,10 +90,26 @@ def run(page):
             return tag
         src = found.group(2)
         key = family(src)
-        if key is None:
-            return tag
         alt = ALT.search(tag)
         caption = alt.group(2) if alt else ""
+        # Staff cards retain their real portraits. Repeated portraits in generic
+        # editorial sections are replaced by actual campus photos instead.
+        if key is None and page == "team" and src.startswith("assets/images/team/") and (
+                caption.startswith("JOO Auezov view") or caption.isupper()):
+            for alternative in related("school-students", caption):
+                candidate = SCENES[alternative]
+                if alternative not in used and (ROOT / candidate).is_file():
+                    tag = SRC.sub(lambda x: "src=" + x.group(1) + candidate + x.group(1), tag, count=1)
+                    tag = re.sub(r'''\s+(?:srcset|sizes)\s*=\s*(["']).*?\1''', "", tag, flags=re.I | re.S)
+                    with Image.open(ROOT / candidate) as im:
+                        width, height = im.size
+                    tag = re.sub(r'''(?<![\w-])width\s*=\s*(["'])\d+\1''', 'width="' + str(width) + '"', tag, count=1)
+                    tag = re.sub(r'''(?<![\w-])height\s*=\s*(["'])\d+\1''', 'height="' + str(height) + '"', tag, count=1)
+                    used.add(alternative)
+                    replacements += 1
+                    return tag
+        if key is None:
+            return tag
         hero = bool(re.search(r'''fetchpriority\s*=\s*["']high["']''', tag, re.I))
         menu = "data-joo-menu-image" in tag
         # Keep hero and menu compositions intact; do not invent visual variety by cropping.
