@@ -91,3 +91,12 @@ body.menu-is-open{overflow:hidden}
 .enquiry-form__feedback{min-height:1.4em;font-size:13px;line-height:1.5;color:#ffe05b}
 @media(max-width:600px){.enquiry-form{padding:26px 20px;gap:18px}.enquiry-form__actions{gap:10px}.enquiry-form__copy{font-size:12px;letter-spacing:.06em}.enquiry-form__preview{font-size:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
+/* V29 admission consent and alternative delivery. */
+.enquiry-form__consent{display:flex;align-items:flex-start;gap:12px;font-size:13px;line-height:1.55;letter-spacing:0;color:#e8f2ff;cursor:pointer}
+.enquiry-form__consent input{flex:0 0 auto;width:20px;height:20px;margin-top:2px;accent-color:#ffe05b;cursor:pointer}
+.enquiry-form__consent span{flex:1}
+.enquiry-form__save{min-height:48px;border:1px solid #ffe05b;background:#ffe05b;color:#09244d;font-weight:800}
+.enquiry-form__save:hover{filter:brightness(.96)}
+.enquiry-form__save:disabled{opacity:.55;cursor:wait}
+.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}
