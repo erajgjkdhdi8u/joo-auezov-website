@@ -80,7 +80,7 @@ body.menu-is-open{overflow:hidden}
 
 /* V28 quality: keyboard access and transparent admissions workflow. */
 .skip-link{position:fixed;z-index:200000;left:16px;top:-120px;padding:12px 18px;background:#ffe05b;color:#071b3b;border:2px solid #071b3b;font-weight:800;text-decoration:none;border-radius:4px}
-.skip-link:focus,.skip-link:focus-visible{top:12px}
+.skip-link:focus,.skip-link:focus-visible{top:calc(var(--head,78px) + 12px);max-width:calc(100vw - 32px)}
 :where(a,button,input,select,textarea,[role="button"]):focus-visible{outline:3px solid #ffe05b;outline-offset:4px}
 .enquiry-form__actions{display:flex;flex-direction:column;gap:12px}
 .enquiry-form__copy{background:transparent;border:1px solid rgba(255,255,255,.65);color:#fff;min-height:48px}
