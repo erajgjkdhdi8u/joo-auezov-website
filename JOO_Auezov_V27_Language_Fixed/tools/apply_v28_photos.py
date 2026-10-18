@@ -30,11 +30,11 @@ TEACHERS = [
     ("09", "teacher-eldos.webp", "Әбдіқадыр Елдос", "ДЕНЕ ШЫНЫҚТЫРУ ПӘНІ МҰҒАЛІМІ", "Елдос Абдикадыр", "Учитель физкультуры", "Eldos Abdikadyr", "Physical education teacher"),
     ("10", "teacher-balzhan.webp", "Орақбай Балжан", "БИОЛОГИЯ ПӘНІ МҰҒАЛІМІ", "Балжан Оракбай", "Учитель биологии", "Balzhan Orakbay", "Biology teacher"),
 ]
-IMG_RE = re.compile(r"<img\\b[^>]*>", re.I | re.S)
-SRC_RE = re.compile(r"\\bsrc\\s*=\\s*([\\\"'])(.*?)\\1", re.I | re.S)
-SRCSET_RE = re.compile(r"\\s+srcset\\s*=\\s*([\\\"']).*?\\1", re.I | re.S)
-SIZES_RE = re.compile(r"\\s+sizes\\s*=\\s*([\\\"']).*?\\1", re.I | re.S)
-ORIG_RE = re.compile(r"^assets/images/(exterior|classroom|students|corridor|hall|assembly|computerlab)(?:-(?:480|800|1200))?\\.webp$", re.I)
+IMG_RE = re.compile(r"<img\b[^>]*>", re.I | re.S)
+SRC_RE = re.compile(r"""\bsrc\s*=\s*(["'])(.*?)\1""", re.I | re.S)
+SRCSET_RE = re.compile(r"""\s+srcset\s*=\s*(["']).*?\1""", re.I | re.S)
+SIZES_RE = re.compile(r"""\s+sizes\s*=\s*(["']).*?\1""", re.I | re.S)
+ORIG_RE = re.compile(r"^assets/images/(exterior|classroom|students|corridor|hall|assembly|computerlab)(?:-(?:480|800|1200))?\.webp$", re.I)
 
 
 def escape(value: str) -> str:
@@ -62,7 +62,7 @@ def update_team(html: str) -> str:
     if 'data-joo-v28="teacher"' in html:
         return html
     match = re.search(
-        r'(<div\\s+class="staff-grid staff-grid--teachers"[^>]*>)(.*?)(</div>\\s*</section>)',
+        r'(<div\s+class="staff-grid staff-grid--teachers"[^>]*>)(.*?)(</div>\s*</section>)',
         html, re.S | re.I
     )
     if not match:
