@@ -8,6 +8,7 @@ on:
       - '.github/workflows/v29-lighthouse.yml'
       - 'JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/style.css'
+      - 'JOO_Auezov_V27_Language_Fixed/site.js'
 
 permissions:
   contents: read
