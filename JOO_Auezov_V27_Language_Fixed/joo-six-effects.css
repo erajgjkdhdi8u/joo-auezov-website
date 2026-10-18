@@ -154,3 +154,21 @@
 .staff-grid .joo-team-portrait--poster small{display:block;min-height:2.6em;line-height:1.35}
 @media(max-width:980px){.staff-grid--teachers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.team-extra-top{margin-top:34px}.staff-grid--teachers{grid-template-columns:1fr}.staff-grid .joo-team-portrait--poster>img{height:420px}}
+
+
+/* V30: consistent teacher portraits; preserve full subject-poster artwork. */
+.staff-grid .joo-team-portrait{display:flex;flex-direction:column;min-width:0}
+.staff-grid .joo-team-portrait>img{
+ width:100%;height:clamp(310px,31vw,410px);object-fit:cover;
+ object-position:center top;flex:0 0 auto
+}
+.staff-grid .joo-team-portrait--poster>img{
+ height:clamp(310px,31vw,410px);object-fit:contain;
+ object-position:center center;background:#f9fbff
+}
+.staff-grid .joo-team-portrait>div{flex:1 1 auto}
+.staff-grid .joo-team-portrait h3{overflow-wrap:anywhere}
+@media(max-width:700px){
+ .staff-grid .joo-team-portrait>img,
+ .staff-grid .joo-team-portrait--poster>img{height:clamp(320px,95vw,430px)}
+}
