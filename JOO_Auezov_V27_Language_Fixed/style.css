@@ -77,3 +77,17 @@ body.menu-is-open{overflow:hidden}
 .footer__bottom .footer__credit{color:#bdcce2;white-space:nowrap;letter-spacing:.09em}
 .footer__bottom .footer__credit strong{color:var(--yellow);font-weight:800}
 @media(max-width:700px){.footer__bottom .footer__credit{white-space:normal}}
+
+/* V28 quality: keyboard access and transparent admissions workflow. */
+.skip-link{position:fixed;z-index:200000;left:16px;top:-120px;padding:12px 18px;background:#ffe05b;color:#071b3b;border:2px solid #071b3b;font-weight:800;text-decoration:none;border-radius:4px}
+.skip-link:focus,.skip-link:focus-visible{top:12px}
+:where(a,button,input,select,textarea,[role="button"]):focus-visible{outline:3px solid #ffe05b;outline-offset:4px}
+.enquiry-form__actions{display:flex;flex-direction:column;gap:12px}
+.enquiry-form__copy{background:transparent;border:1px solid rgba(255,255,255,.65);color:#fff;min-height:48px}
+.enquiry-form__copy:hover{background:rgba(255,255,255,.12)}
+.enquiry-form__notice{font-size:12px;line-height:1.65;color:#d8e6ff;letter-spacing:0}
+.enquiry-form__preview{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.65;color:#e6f0ff;background:rgba(5,25,55,.35);padding:16px;border-left:3px solid #ffe05b}
+.enquiry-form__preview:empty{display:none}
+.enquiry-form__feedback{min-height:1.4em;font-size:13px;line-height:1.5;color:#ffe05b}
+@media(max-width:600px){.enquiry-form{padding:26px 20px;gap:18px}.enquiry-form__actions{gap:10px}.enquiry-form__copy{font-size:12px;letter-spacing:.06em}.enquiry-form__preview{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
