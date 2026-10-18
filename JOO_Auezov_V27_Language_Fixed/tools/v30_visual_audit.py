@@ -96,7 +96,7 @@ for r in records:
         heights=r.get("portraitHeights",[])
         if len(heights)!=10 or max(heights,default=0)-min(heights,default=0)>3:
             problem.append("portraitHeights")
-        if r.get("portraitFit")!=["contain"]*3:
+        if r.get("portraitFit")!=["contain"]*6:
             problem.append("portraitFit")
     if r["page"]=="campus":
         thumbs=r.get("campusThumbs",[])
