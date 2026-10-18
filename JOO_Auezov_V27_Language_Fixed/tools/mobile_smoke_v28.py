@@ -59,6 +59,7 @@ with sync_playwright() as playwright:
                     page.locator('#enquiryForm [name="parent"]').fill("Ата-ана Тест")
                     page.locator('#enquiryForm [name="phone"]').fill("+7 777 123 45 67")
                     page.locator('#enquiryForm [name="grade"]').select_option("8")
+                    result["whatsappNoConsentRequired"] = page.locator("#enquiryForm").evaluate("(form) => form.checkValidity()")
                     page.locator('#enquiryForm [name="consent"]').check()
                     page.wait_for_timeout(200)
                     result["previewWorks"] = "Ата-ана Тест" in page.locator("#enquiryPreview").inner_text()
@@ -115,7 +116,8 @@ bad = [r for r in checks if r.get("exception") or r.get("http") != 200
        or r.get("mobileMenuWorks") is False
        or r.get("copyFeedbackWorks") is False
        or r.get("netlifySuccessUX") is False
-       or r.get("netlifyErrorUX") is False]
+       or r.get("netlifyErrorUX") is False
+       or r.get("whatsappNoConsentRequired") is False]
 print("V28 MOBILE AUDIT:", len(checks), "checks,", len(bad), "issues")
 if bad:
     print("ISSUES:", json.dumps(bad, ensure_ascii=False, indent=2))
