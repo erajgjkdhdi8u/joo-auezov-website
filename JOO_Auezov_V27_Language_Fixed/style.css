@@ -106,3 +106,7 @@ body.menu-is-open{overflow:hidden}
 .section-top:not(.section-top--dark)>span{color:#10498b}
 .editorial:not(.editorial--ink) .story__heading .eyebrow{color:#123d7a}
 .editorial:not(.editorial--ink) .story__heading>p{color:#30425a}
+
+/* V29 contrast corrections for dark navy panels. */
+.home-journey .section-top>span,.journey .section-top>span{color:#ffe05b}
+.editorial--ink .story__heading .eyebrow{color:#ffe05b}
