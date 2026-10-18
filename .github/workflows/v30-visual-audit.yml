@@ -1,0 +1,46 @@
+name: JOO V30 320px visual regression
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'JOO_Auezov_V27_Language_Fixed/academics.html'
+      - 'JOO_Auezov_V27_Language_Fixed/campus.html'
+      - 'JOO_Auezov_V27_Language_Fixed/team.html'
+      - 'JOO_Auezov_V27_Language_Fixed/results.html'
+      - 'JOO_Auezov_V27_Language_Fixed/ru/*.html'
+      - 'JOO_Auezov_V27_Language_Fixed/en/*.html'
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Chromium and Safari WebKit emulation
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium webkit
+      - name: Start local website
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 >/tmp/joo-v30-http.log 2>&1 &
+          sleep 2
+      - name: Audit 320 360 375 390px layouts in KK RU EN
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v30_visual_audit.py
+      - name: Upload visual report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v30-mobile-visual-evidence
+          path: |
+            JOO_Auezov_V27_Language_Fixed/v30-visual-audit.json
+            JOO_Auezov_V27_Language_Fixed/v30-visual-screenshots/
+          retention-days: 14
