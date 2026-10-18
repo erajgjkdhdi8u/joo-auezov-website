@@ -86,32 +86,3 @@ jobs:
             git pull --rebase origin main
             git push
           fi
-, '.webp', src) == re.sub(r'-(480|800|1200)\.webp
-          PY
-      - name: Commit verified quality improvements
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml' 'JOO_Auezov_V27_Language_Fixed/robots.txt' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html'
-          if ! git diff --cached --quiet; then
-            git commit -m "Polish V28 photo variety, SEO, image dimensions and keyboard access"
-            git pull --rebase origin main
-            git push
-          fi
-, '.webp', preview), (src, preview)
-          css = (root / 'style.css').read_text(encoding='utf-8')
-          assert '.poster-section .section-top>p{color:#30425a}' in css
-          print('PASS: 14 pages, SEO, dimensions, gallery preview matching, V30 contrast and accessibility')
-          PY
-      - name: Commit verified quality improvements
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml' 'JOO_Auezov_V27_Language_Fixed/robots.txt' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html'
-          if ! git diff --cached --quiet; then
-            git commit -m "Polish V28 photo variety, SEO, image dimensions and keyboard access"
-            git pull --rebase origin main
-            git push
-          fi
