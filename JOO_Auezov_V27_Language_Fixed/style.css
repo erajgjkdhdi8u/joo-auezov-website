@@ -100,3 +100,9 @@ body.menu-is-open{overflow:hidden}
 .enquiry-form__save:hover{filter:brightness(.96)}
 .enquiry-form__save:disabled{opacity:.55;cursor:wait}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}
+
+/* V29 WCAG contrast fixes based on axe-core audits (preserve navy/yellow identity). */
+.factrail span:first-child{color:#334761}
+.section-top:not(.section-top--dark)>span{color:#10498b}
+.editorial:not(.editorial--ink) .story__heading .eyebrow{color:#123d7a}
+.editorial:not(.editorial--ink) .story__heading>p{color:#30425a}
