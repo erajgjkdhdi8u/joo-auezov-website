@@ -64,7 +64,7 @@ with sync_playwright() as p:
                         })""")
                         axe_findings.append({"browser": label, "page": name,
                             "violations": [{"id": v["id"], "impact": v["impact"], "nodes": len(v["nodes"]),
-                                            "description": v["description"]} for v in result["violations"]]})
+                                            "description": v["description"], "targets": [{"selector": n["target"], "html": n["html"][:220]} for n in v["nodes"][:6]]} for v in result["violations"]]})
                     checks.append(record)
                 except Exception as exc:
                     record["exception"] = str(exc)
