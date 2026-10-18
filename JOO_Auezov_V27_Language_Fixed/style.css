@@ -134,3 +134,6 @@ body.menu-is-open{overflow:hidden}
  .section-top{margin-bottom:28px}
  .staff,.gallery-band,.results-intro,.results-chart,.poster-section{padding-block:62px}
 }
+
+/* V30 WebKit 320px: long Russian footer CTA must wrap inside the viewport. */
+@media(max-width:390px){.footer__intro h2{font-size:clamp(30px,9vw,36px);line-height:1.12;max-width:100%;overflow-wrap:anywhere}.footer__intro h2 span{overflow-wrap:anywhere}}
