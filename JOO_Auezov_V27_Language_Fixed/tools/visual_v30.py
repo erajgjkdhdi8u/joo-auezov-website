@@ -53,12 +53,12 @@ MAP = {
         19: "assets/images/corridor-800.webp",        # gallery
     },
     "campus": {
-        11: "assets/images/exterior-800.webp",        # EXTERIOR
-        12: "assets/images/hall-800.webp",            # HALL
-        13: "assets/images/classroom-800.webp",       # CLASSROOM
-        14: "assets/images/computerlab-800.webp",     # TECH LAB
-        15: "assets/images/assembly-800.webp",        # COMMUNITY
-        16: "assets/images/students-800.webp",        # STUDENT LIFE
+        12: "assets/images/exterior-800.webp",        # EXTERIOR
+        13: "assets/images/hall-800.webp",            # HALL
+        14: "assets/images/classroom-800.webp",       # CLASSROOM
+        15: "assets/images/computerlab-800.webp",     # TECH LAB
+        16: "assets/images/assembly-800.webp",        # COMMUNITY
+        17: "assets/images/students-800.webp",        # STUDENT LIFE
         21: "assets/images/v28/school-lounge.webp",   # chill zone
         23: "assets/images/v28/school-reception.webp",# safe school environment
         24: "assets/images/v28/school-gym.webp",      # gallery
@@ -76,7 +76,7 @@ def fix(page: str):
     if len(images) != EXPECTED_COUNTS[page]:
         raise RuntimeError(f"{page}: image count changed {len(images)}; review mapping before modifying")
     if page == "campus":
-        if len(re.findall(r'\bdata-fx-archive="\d+"', before)) != 5:
+        if len(re.findall(r'\bdata-fx-archive="\d+"', before)) != 6:
             raise RuntimeError("Campus interactive gallery changed: review thumbnails")
         for label in EXPECTED_DEPTH:
             if label not in before:
@@ -103,10 +103,10 @@ def fix(page: str):
             return m.group(1) + m.group(2) + replace_img(m.group(3), preview, decorative=True) + m.group(4)
         updated = THUMB.sub(align_thumb, updated)
         if thumbs != 5:
-            raise RuntimeError(f"Expected five synchronized gallery thumbnails, got {thumbs}")
+            raise RuntimeError(f"Expected six synchronized gallery thumbnails, got {thumbs}")
     if updated != before:
         path.write_text(updated, encoding="utf-8")
-    print(page, "real scene updates:", len(MAP[page]), "matched preview thumbnails:", 5 if page == "campus" else 0)
+    print(page, "real scene updates:", len(MAP[page]), "matched preview thumbnails:", 6 if page == "campus" else 0)
 
 if __name__ == "__main__":
     for name in MAP:
