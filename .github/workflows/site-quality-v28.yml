@@ -30,6 +30,7 @@ jobs:
       - name: Preserve V29 scene variety and localized SEO
         run: |
           python JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py
+          python JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py
           python JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
       - name: Verify site output
         shell: bash
