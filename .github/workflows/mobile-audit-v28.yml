@@ -7,6 +7,8 @@ on:
     paths:
       - '.github/workflows/mobile-audit-v28.yml'
       - 'JOO_Auezov_V27_Language_Fixed/tools/mobile_smoke_v28.py'
+      - 'JOO_Auezov_V27_Language_Fixed/site.js'
+      - 'JOO_Auezov_V27_Language_Fixed/admissions-v29.js'
 
 permissions:
   contents: read
