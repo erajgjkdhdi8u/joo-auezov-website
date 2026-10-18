@@ -24,3 +24,12 @@
 - тек өзгерген HTML файлдарын commit жасайды.
 
 GitHub Actions-қа репозиторийде **Read and write permissions** керек. Егер workflow commit жасай алмаса, GitHub → Settings → Actions → General → Workflow permissions бөлімін тексеріңіз. 11 сурет жүктелмесе, workflow HTML беттерін өзгертпейді.
+
+
+## Ең оңай жол: бір ZIP жүктеу
+
+**JOO_V28_11_Photos_For_GitHub.zip** файлын ашпай, репозиторийдің ең жоғарғы деңгейіне (main тармағына, README жанындағы деңгейге) GitHub → Add file → Upload files арқылы жүктеңіз. Жаңа [GitHub Actions workflow](../../.github/workflows/apply-v28.yml) ZIP ішіндегі 11 WebP суретті өзі шығарып, сайттың `assets/images/v28/` бумасына қосады және HTML-ды жаңартады. Мереке ұстаздың карточкасы қайта қосылмайды.
+
+Workflow орындалуын GitHub → Actions → **Apply JOO V28 photo update** бетінен тексеріңіз. Автоматты commit үшін GitHub Actions-қа **Read and write permissions** қажет. ZIP атауы дәл `JOO_V28_11_Photos_For_GitHub.zip` болуы керек.
+
+**Ескерту:** ZIP GitHub репозиторийіне жүктелмейінше, суреттер жарияланған сайтқа қосылмайды.
