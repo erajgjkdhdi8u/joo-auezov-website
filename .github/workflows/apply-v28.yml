@@ -1,0 +1,55 @@
+name: Apply JOO V28 photo update
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'JOO_Auezov_V27_Language_Fixed/assets/images/v28/**'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-v28:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check all eleven images are present
+        shell: bash
+        run: |
+          set -euo pipefail
+          d=JOO_Auezov_V27_Language_Fixed/assets/images/v28
+          for name in school-building school-classroom school-students school-reception school-gym school-corridor school-lounge school-cafeteria teacher-magzhan teacher-eldos teacher-balzhan; do
+            test -s "$d/$name.webp" || { echo "::error::Missing $d/$name.webp"; exit 1; }
+          done
+      - name: Preview V28 changes
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          python tools/apply_v28_photos.py --dry-run
+      - name: Apply V28 changes
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          python tools/apply_v28_photos.py
+      - name: Confirm Mereke profile is absent
+        shell: bash
+        run: |
+          if grep -Ei 'Мереке Ұстаз|mereke-ustaz' JOO_Auezov_V27_Language_Fixed/career.html; then
+            echo "::error::Mereke profile must remain removed"
+            exit 1
+          fi
+      - name: Commit updated HTML only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html'
+          if ! git diff --cached --quiet; then
+            git commit -m "Apply V28 school photos and teacher portraits"
+            git push
+          fi
