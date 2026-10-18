@@ -46,6 +46,13 @@ with sync_playwright() as playwright:
                     "overflowPx": overflow, "h1": data["h1"], "skip": data["skip"],
                     "brokenImages": data["imagesBroken"], "jsErrors": errors[:5]
                 }
+                page.keyboard.press("Tab")
+                result["keyboardSkipWorks"] = page.evaluate("() => document.activeElement?.classList.contains('skip-link') === true")
+                if viewport_name == "mobile":
+                    page.locator("#menuToggle").click(timeout=3000)
+                    result["mobileMenuWorks"] = (page.locator("#menuPanel").is_visible()
+                                                 and page.locator("#menuToggle").get_attribute("aria-expanded") == "true")
+                    page.locator("#menuClose").click(timeout=3000)
                 if name in ["index", "admissions", "career", "team", "campus", "contacts"]:
                     page.screenshot(path=str(SHOTS / (name + "-" + viewport_name + ".png")), full_page=False)
                 if name == "admissions":
@@ -55,6 +62,8 @@ with sync_playwright() as playwright:
                     page.wait_for_timeout(200)
                     result["previewWorks"] = "Ата-ана Тест" in page.locator("#enquiryPreview").inner_text()
                     result["copyButtonExists"] = page.locator("#enquiryCopy").count() == 1
+                    page.locator("#enquiryCopy").click()
+                    result["copyFeedbackWorks"] = bool(page.locator("#enquiryFeedback").inner_text().strip())
                 if name == "index":
                     page.locator('[data-lang="en"]').first.evaluate("(el) => el.click()")
                     result["englishSwitchWorks"] = page.locator("html").get_attribute("lang") == "en"
@@ -77,7 +86,10 @@ bad = [r for r in checks if r.get("exception") or r.get("http") != 200
        or r.get("jsErrors") or r.get("skip") != 1
        or r.get("previewWorks") is False
        or r.get("englishSwitchWorks") is False
-       or r.get("russianSwitchWorks") is False]
+       or r.get("russianSwitchWorks") is False
+       or r.get("keyboardSkipWorks") is False
+       or r.get("mobileMenuWorks") is False
+       or r.get("copyFeedbackWorks") is False]
 print("V28 MOBILE AUDIT:", len(checks), "checks,", len(bad), "issues")
 if bad:
     print("ISSUES:", json.dumps(bad, ensure_ascii=False, indent=2))
