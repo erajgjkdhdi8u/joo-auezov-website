@@ -110,3 +110,27 @@ body.menu-is-open{overflow:hidden}
 /* V29 contrast corrections for dark navy panels. */
 .home-journey .section-top>span,.journey .section-top>span{color:#ffe05b}
 .editorial--ink .story__heading .eyebrow{color:#ffe05b}
+
+
+/* V30 visual polish: readable results, consistent section rhythm, tiny screens. */
+.poster-section .section-top>p{color:#30425a}
+:root{--v30-section-space:clamp(72px,8vw,118px);--v30-card-gap:clamp(12px,1.4vw,18px)}
+.staff,.gallery-band,.results-intro,.results-chart,.poster-section{padding-block:var(--v30-section-space)}
+.staff-grid,.gallery-band__grid,.poster-grid{gap:var(--v30-card-gap)}
+.section-top{margin-bottom:clamp(30px,4vw,52px)}
+@media(max-width:390px){
+ .masthead{gap:8px;padding-inline:12px}
+ .wordmark{min-width:0;flex:1 1 auto}
+ .wordmark strong{font-size:32px}
+ .nav-actions{gap:7px;flex:0 0 auto}
+ .langs button{padding:7px 4px}
+ .menu-toggle{min-width:42px;width:42px}
+ .hero__title,.hero--index .hero__title,html[lang="en"] .hero__title{
+   font-size:clamp(35px,10.3vw,44px);line-height:1.05;overflow-wrap:anywhere;hyphens:auto
+ }
+ .section-top h2,.story__heading h2,.gallery-band__head h2{
+   font-size:clamp(32px,9vw,43px);line-height:1.08;overflow-wrap:anywhere
+ }
+ .section-top{margin-bottom:28px}
+ .staff,.gallery-band,.results-intro,.results-chart,.poster-section{padding-block:62px}
+}
