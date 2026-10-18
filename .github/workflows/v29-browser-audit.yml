@@ -1,0 +1,42 @@
+name: JOO V29 Safari Android and accessibility audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v29-browser-audit.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/v29_browser_audit.py'
+
+permissions:
+  contents: read
+
+jobs:
+  browser-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browsers and accessibility checker
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium firefox webkit
+          npm install --no-save axe-core@4
+      - name: Start local static website
+        shell: bash
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 > /tmp/joo-v29-http.log 2>&1 &
+          sleep 2
+      - name: Test three languages in four browser modes
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v29_browser_audit.py
+      - name: Upload audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v29-browser-wcag-report
+          path: JOO_Auezov_V27_Language_Fixed/v29-browser-audit.json
+          if-no-files-found: warn
