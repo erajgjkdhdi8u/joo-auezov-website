@@ -57,7 +57,7 @@ jobs:
                         'v30-campus': 'assets/images/exterior-480.webp',
                         'v30-academics': 'assets/images/v28/school-cafeteria.webp',
                         'v30-style': 'V30 WebKit 320px',
-                        'v30-portraits': 'V31: Eldos and Balzhan',
+                        'v30-portraits': 'V32: Teacher names stay visibly readable',
                         'ru-resources': 'На странице не приводятся',
                         'en-resources': 'This page avoids',
                       }[label]
