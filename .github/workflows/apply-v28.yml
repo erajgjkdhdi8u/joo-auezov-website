@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'JOO_Auezov_V27_Language_Fixed/assets/images/v28/**'
+      - 'JOO_Auezov_V27_Language_Fixed/assets/images/v28/*.webp'
 
 permissions:
   contents: write
