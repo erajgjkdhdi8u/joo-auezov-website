@@ -1,0 +1,79 @@
+name: JOO V29 localized pages and photos
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v29-localized-site.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Image reader
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Compile scripts
+        run: python -m py_compile JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
+      - name: Size images and preserve SEO basics
+        run: python JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py
+      - name: Reduce repeated school scenes
+        run: python JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py
+      - name: Generate indexable language pages
+        run: python JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
+      - name: Verify all 42 localized pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          root = Path('JOO_Auezov_V27_Language_Fixed')
+          names = ['index', 'about', 'academics', 'admissions', 'campus', 'career', 'contacts', 'news', 'parents', 'resources', 'results', 'student-life', 'team', 'wellbeing']
+          assert len(names) == 14
+          for lang in ('kk','ru','en'):
+              folder = root if lang == 'kk' else root / lang
+              for name in names:
+                  path = folder / (name+'.html')
+                  s = path.read_text(encoding='utf-8')
+                  assert 'lang="'+lang+'"' in s, path
+                  assert s.count('rel="canonical"') == 1, path
+                  assert s.count('hreflang=') == 4, path
+                  assert 'property="og:image"' in s, path
+                  assert 'Created by <strong>Kuralbaev Rasul</strong>' in s, path
+                  assert s.count('class="skip-link"') == 1, path
+                  assert not re.search(r'Мереке Ұстаз|mereke-ustaz', s, re.I), path
+                  for tag in re.findall(r'<img\b[^>]*>', s, flags=re.I | re.S):
+                      m = re.search(r'\bsrc="([^"]+)"', tag)
+                      if m and m.group(1).startswith('assets/images/'):
+                          assert (root / m.group(1)).is_file(), (path, m.group(1))
+                          assert re.search(r'\bwidth="\d+"', tag), path
+                          assert re.search(r'\bheight="\d+"', tag), path
+          admission = (root/'admissions.html').read_text(encoding='utf-8')
+          assert 'data-netlify="true"' in admission
+          assert 'name="form-name" value="joo-admissions"' in admission
+          assert 'name="consent"' in admission
+          assert (root/'admissions-v29.js').is_file()
+          xml = ET.parse(root/'sitemap.xml').getroot()
+          assert len(xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')) == 42
+          print('PASS: 42 language pages, localized SEO, sitemap, photos and admissions form')
+          PY
+      - name: Commit generated language pages and imagery
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml'
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish 42 trilingual pages and improve V29 school photo variety"
+            git push
+          fi
