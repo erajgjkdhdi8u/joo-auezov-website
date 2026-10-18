@@ -102,7 +102,7 @@ def fix(page: str):
                 preview = original
             return m.group(1) + m.group(2) + replace_img(m.group(3), preview, decorative=True) + m.group(4)
         updated = THUMB.sub(align_thumb, updated)
-        if thumbs != 5:
+        if thumbs != 6:
             raise RuntimeError(f"Expected six synchronized gallery thumbnails, got {thumbs}")
     if updated != before:
         path.write_text(updated, encoding="utf-8")
