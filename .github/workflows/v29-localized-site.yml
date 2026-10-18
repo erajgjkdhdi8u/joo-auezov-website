@@ -8,6 +8,7 @@ on:
       - '.github/workflows/v29-localized-site.yml'
       - 'JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py'
 
 permissions:
   contents: write
@@ -26,6 +27,8 @@ jobs:
         run: python -m py_compile JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
       - name: Size images and preserve SEO basics
         run: python JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py
+      - name: Optimize career poster image
+        run: python JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py
       - name: Reduce repeated school scenes
         run: python JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py
       - name: Generate indexable language pages
@@ -72,7 +75,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml'
+          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml' 'JOO_Auezov_V27_Language_Fixed/assets/images/career/dias-asanov-poster.webp'
           if ! git diff --cached --quiet; then
             git commit -m "Publish 42 trilingual pages and improve V29 school photo variety"
             git push
