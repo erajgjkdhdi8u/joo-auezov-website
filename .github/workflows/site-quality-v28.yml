@@ -8,6 +8,10 @@ on:
       - '.github/workflows/site-quality-v28.yml'
       - 'JOO_Auezov_V27_Language_Fixed/tools/site_quality_v28.py'
 
+concurrency:
+  group: joo-site-generation
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -69,5 +73,6 @@ jobs:
           git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml' 'JOO_Auezov_V27_Language_Fixed/robots.txt' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html'
           if ! git diff --cached --quiet; then
             git commit -m "Polish V28 photo variety, SEO, image dimensions and keyboard access"
+            git pull --rebase origin main
             git push
           fi
