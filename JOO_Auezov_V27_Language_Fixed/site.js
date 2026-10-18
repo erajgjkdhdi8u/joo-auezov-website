@@ -155,17 +155,21 @@
       if(navigator.clipboard?.writeText){
         await navigator.clipboard.writeText(message);
         copied = true;
-      } else {
-        const temp = document.createElement('textarea');
+      }
+    } catch(_) { copied = false; }
+    if(!copied){
+      let temp;
+      try {
+        temp = document.createElement('textarea');
         temp.value = message;
         temp.style.position = 'fixed';
         temp.style.opacity = '0';
         document.body.appendChild(temp);
         temp.select();
         copied = document.execCommand('copy');
-        temp.remove();
-      }
-    } catch(_) { copied = false; }
+      } catch(_) { copied = false; }
+      finally { temp?.remove(); }
+    }
     if(admissionFeedback) admissionFeedback.textContent = copied
       ? (root.lang==='ru'?'Сообщение скопировано.':root.lang==='en'?'Message copied.':'Хабарлама көшірілді.')
       : (root.lang==='ru'?'Не удалось скопировать. Выделите текст выше.':root.lang==='en'?'Could not copy. Select the message above.':'Көшіру мүмкін болмады. Жоғарыдағы мәтінді таңдаңыз.');
