@@ -11,6 +11,10 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
 
+concurrency:
+  group: joo-site-generation
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -81,5 +85,6 @@ jobs:
           git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/ru/*.html' 'JOO_Auezov_V27_Language_Fixed/en/*.html' 'JOO_Auezov_V27_Language_Fixed/sitemap.xml' 'JOO_Auezov_V27_Language_Fixed/assets/images/career/dias-asanov-poster.webp'
           if ! git diff --cached --quiet; then
             git commit -m "Publish 42 trilingual pages and improve V29 school photo variety"
+            git pull --rebase origin main
             git push
           fi
