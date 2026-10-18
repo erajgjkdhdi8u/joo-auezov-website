@@ -11,6 +11,7 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/translation_fixes_v29.py'
 
 concurrency:
   group: joo-site-generation
@@ -41,6 +42,8 @@ jobs:
         run: python JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py
       - name: Preload above-the-fold hero images
         run: python JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py
+      - name: Correct inherited untranslated page paragraphs
+        run: python JOO_Auezov_V27_Language_Fixed/tools/translation_fixes_v29.py
       - name: Generate indexable language pages
         run: python JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
       - name: Verify all 42 localized pages
