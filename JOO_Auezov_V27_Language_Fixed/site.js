@@ -135,6 +135,7 @@
   });
   admissionForm?.addEventListener('change', admissionUpdatePreview);
   admissionForm?.addEventListener('submit', e => {
+    if(e.submitter?.id === 'enquirySave') return; // Netlify Forms handled by admissions-v29.js
     e.preventDefault();
     if(!admissionValid()) return;
     const url = 'https://wa.me/77711230702?text='+encodeURIComponent(admissionMessage());
