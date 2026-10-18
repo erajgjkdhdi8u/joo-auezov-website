@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/v29-lighthouse.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/style.css'
 
 permissions:
   contents: read
@@ -51,7 +53,8 @@ jobs:
               scores={k: round(v['score']*100) if v.get('score') is not None else None for k,v in d['categories'].items()}
               row={'page':p.stem,'scores':scores,'labLCP_ms':audits.get('largest-contentful-paint',{}).get('numericValue'),
                    'labCLS':audits.get('cumulative-layout-shift',{}).get('numericValue'),
-                   'labTBT_ms':audits.get('total-blocking-time',{}).get('numericValue')}
+                   'labTBT_ms':audits.get('total-blocking-time',{}).get('numericValue'),
+                   'lcpElement': (audits.get('largest-contentful-paint-element',{}).get('details',{}).get('items') or [{}])[0].get('node',{}).get('snippet','')[:240]}
               rows.append(row)
           dest=Path('JOO_Auezov_V27_Language_Fixed/v29-lighthouse-summary.json')
           dest.write_text(json.dumps(rows,ensure_ascii=False,indent=2))
