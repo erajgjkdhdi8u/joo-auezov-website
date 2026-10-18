@@ -29,6 +29,9 @@ jobs:
             'ru': 'https://joo-auezov.netlify.app/ru/index.html',
             'en': 'https://joo-auezov.netlify.app/en/index.html',
             'sitemap': 'https://joo-auezov.netlify.app/sitemap.xml',
+            'career-webp': 'https://joo-auezov.netlify.app/assets/images/career/dias-asanov-poster.webp',
+            'ru-resources': 'https://joo-auezov.netlify.app/ru/resources.html',
+            'en-resources': 'https://joo-auezov.netlify.app/en/resources.html',
           }
           failures = []
           for label, url in urls.items():
@@ -44,8 +47,11 @@ jobs:
                         'ru': 'lang="ru"',
                         'en': 'lang="en"',
                         'sitemap': '<urlset',
+                        'career-webp': '',
+                        'ru-resources': 'На странице не приводятся',
+                        'en-resources': 'This page avoids',
                       }[label]
-                      success = status == 200 and marker in data
+                      success = status == 200 and (marker in data if marker else True)
                       print(label, 'HTTP', status, 'marker', marker, 'found', success)
                       if success: break
                   except Exception as exc:
