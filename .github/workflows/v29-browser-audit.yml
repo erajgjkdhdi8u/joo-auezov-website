@@ -9,6 +9,8 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/v29_browser_audit.py'
       - 'JOO_Auezov_V27_Language_Fixed/site.js'
       - 'JOO_Auezov_V27_Language_Fixed/admissions-v29.js'
+      - 'JOO_Auezov_V27_Language_Fixed/style.css'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
 
 permissions:
   contents: read
