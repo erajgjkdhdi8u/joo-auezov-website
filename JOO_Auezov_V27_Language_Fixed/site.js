@@ -47,9 +47,21 @@
     $$('[data-lang]').forEach(b=>{const on=b.dataset.lang===lang;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on));});
     try{localStorage.setItem('joo-language',lang);}catch(e){}
   }
-  let saved='kk';try{saved=localStorage.getItem('joo-language')||localStorage.getItem('joo-v24-language')||'kk';}catch(e){}
-  setLanguage(saved);
-  $$('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
+  // The URL determines the language for indexable /ru/ and /en/ entry pages.
+  // Navigation retains the current page instead of changing only the visible DOM.
+  const localeFromPath = location.pathname.startsWith('/ru/') ? 'ru'
+    : location.pathname.startsWith('/en/') ? 'en' : 'kk';
+  setLanguage(localeFromPath);
+  $('[data-lang]').forEach(b=>b.addEventListener('click',()=>{
+    const lang = b.dataset.lang;
+    if(!langs.includes(lang) || lang === root.lang) return;
+    const filename = location.pathname.split('/').filter(Boolean).pop() || 'index.html';
+    const slug = /^(index|about|academics|admissions|campus|career|contacts|news|parents|resources|results|student-life|team|wellbeing)\.html$/.test(filename)
+      ? filename : 'index.html';
+    const prefix = lang === 'kk' ? '' : '/'+lang;
+    const destination = prefix + (slug === 'index.html' ? '/' : '/'+slug) + location.hash;
+    location.assign(destination);
+  }));
   window.JOO_SET_LANGUAGE=setLanguage;
   /* One journey component can be used on the homepage and on Academics. */
   $$('.journey__tabs').forEach((tabs)=>{
