@@ -100,7 +100,7 @@ for r in records:
             problem.append("portraitFit")
     if r["page"]=="campus":
         thumbs=r.get("campusThumbs",[])
-        if len(thumbs)!=5:
+        if len(thumbs)!=6:
             problem.append("thumbCount")
         for t in thumbs:
             src=t.get("src","").split("/")[-1]
