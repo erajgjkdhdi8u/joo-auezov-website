@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joo-auezov.netlify.app/sitemap.xml
