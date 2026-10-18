@@ -1,0 +1,38 @@
+name: JOO V29 translation completeness audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v29-translation-audit.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/v29_translation_audit.py'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+      - name: Serve website
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 > /tmp/joo-translation-http.log 2>&1 &
+          sleep 2
+      - name: Inspect Russian and English visible text
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v29_translation_audit.py
+      - name: Upload untranslated text report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v29-translation-audit
+          path: JOO_Auezov_V27_Language_Fixed/v29-translation-audit.json
