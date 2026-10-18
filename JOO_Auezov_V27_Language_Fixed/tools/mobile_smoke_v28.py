@@ -59,6 +59,7 @@ with sync_playwright() as playwright:
                     page.locator('#enquiryForm [name="parent"]').fill("Ата-ана Тест")
                     page.locator('#enquiryForm [name="phone"]').fill("+7 777 123 45 67")
                     page.locator('#enquiryForm [name="grade"]').select_option("8")
+                    page.locator('#enquiryForm [name="consent"]').check()
                     page.wait_for_timeout(200)
                     result["previewWorks"] = "Ата-ана Тест" in page.locator("#enquiryPreview").inner_text()
                     result["copyButtonExists"] = page.locator("#enquiryCopy").count() == 1
@@ -67,8 +68,10 @@ with sync_playwright() as playwright:
                     result["copyFeedbackWorks"] = bool(page.locator("#enquiryFeedback").inner_text().strip())
                 if name == "index":
                     page.locator('[data-lang="en"]').first.evaluate("(el) => el.click()")
+                    page.wait_for_url("**/en/", timeout=10000)
                     result["englishSwitchWorks"] = page.locator("html").get_attribute("lang") == "en"
                     page.locator('[data-lang="ru"]').first.evaluate("(el) => el.click()")
+                    page.wait_for_url("**/ru/", timeout=10000)
                     result["russianSwitchWorks"] = page.locator("html").get_attribute("lang") == "ru"
                 checks.append(result)
                 print(json.dumps(result, ensure_ascii=False))
