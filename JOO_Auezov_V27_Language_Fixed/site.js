@@ -45,7 +45,11 @@
     });
     window.JOO_I18N?.apply(lang);
     // Image descriptions are useful to screen readers in the chosen language.
-    $('img[data-alt-kk]').forEach(img => {
+    $$('[data-aria-kk]').forEach(el => {
+      const label = el.getAttribute('data-aria-' + lang);
+      if(label !== null) el.setAttribute('aria-label', label);
+    });
+    $$('img[data-alt-kk]').forEach(img => {
       const description = img.getAttribute('data-alt-' + lang);
       if(description !== null) img.alt = description;
     });
@@ -61,7 +65,7 @@
   const localeFromPath = location.pathname.startsWith('/ru/') ? 'ru'
     : location.pathname.startsWith('/en/') ? 'en' : 'kk';
   setLanguage(localeFromPath);
-  $('[data-lang]').forEach(b=>b.addEventListener('click',()=>{
+  $$('[data-lang]').forEach(b=>b.addEventListener('click',()=>{
     const lang = b.dataset.lang;
     if(!langs.includes(lang) || lang === root.lang) return;
     const filename = location.pathname.split('/').filter(Boolean).pop() || 'index.html';
