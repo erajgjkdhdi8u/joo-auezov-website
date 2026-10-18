@@ -37,10 +37,11 @@ def improve(page):
     path = ROOT / (page + ".html")
     s = path.read_text(encoding="utf-8")
     # The visible wordmark already supplies a readable name; do not override it.
+    s = s.replace('aria-label="Мәзірді ашу" data-aria-kk="Мәзірді ашу" data-aria-ru="Открыть меню" data-aria-en="Open menu"', 'aria-label="MENU — Мәзірді ашу" data-aria-kk="MENU — Мәзірді ашу" data-aria-ru="MENU — Открыть меню" data-aria-en="MENU — Open menu"')
     s = s.replace('aria-label="JOO Auezov home" ', '')
     s = s.replace('aria-label="JOO. Auezov home" ', '')
     s = re.sub(r'(<button\b(?=[^>]*\bid="menuToggle")[^>]*)(>)',
-               lambda m: m.group(1) + (' aria-label="Мәзірді ашу" data-aria-kk="Мәзірді ашу" data-aria-ru="Открыть меню" data-aria-en="Open menu"' if 'data-aria-kk=' not in m.group(1) else '') + m.group(2),
+               lambda m: m.group(1) + (' aria-label="MENU — Мәзірді ашу" data-aria-kk="MENU — Мәзірді ашу" data-aria-ru="MENU — Открыть меню" data-aria-en="MENU — Open menu"' if 'data-aria-kk=' not in m.group(1) else '') + m.group(2),
                s, count=1)
     s = re.sub(r'(<button\b(?=[^>]*\bdata-joo-stage="\d+")[^>]*?)\saria-label="[^"]+"',
                lambda m: m.group(1), s)
