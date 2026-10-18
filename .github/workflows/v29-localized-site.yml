@@ -8,6 +8,7 @@ on:
       - '.github/workflows/v29-localized-site.yml'
       - 'JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/visual_v30.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py'
@@ -38,6 +39,8 @@ jobs:
         run: python JOO_Auezov_V27_Language_Fixed/tools/optimize_v29.py
       - name: Reduce repeated school scenes
         run: python JOO_Auezov_V27_Language_Fixed/tools/photos_v29.py
+      - name: Match campus photos to gallery labels and reduce repeated scenes
+        run: python JOO_Auezov_V27_Language_Fixed/tools/visual_v30.py
       - name: Add screen-reader tab semantics and translated photo descriptions
         run: python JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py
       - name: Preload above-the-fold hero images
