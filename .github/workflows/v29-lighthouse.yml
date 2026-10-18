@@ -1,0 +1,69 @@
+name: JOO V29 Lighthouse performance SEO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v29-lighthouse.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Lighthouse
+        run: npm install --no-save lighthouse@12
+      - name: Start local website
+        shell: bash
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 > /tmp/joo-v29-http.log 2>&1 &
+          sleep 2
+      - name: Lighthouse mobile on home admissions and campus
+        shell: bash
+        run: |
+          mkdir -p /tmp/joo-lighthouse
+          for path in index.html admissions.html campus.html; do
+            n="${path%.html}"
+            ./node_modules/.bin/lighthouse "http://127.0.0.1:8765/$path?intro=off" --quiet --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path="/tmp/joo-lighthouse/$n.json" --only-categories=performance,accessibility,best-practices,seo
+          done
+      - name: Summarize laboratory results
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for p in sorted(Path('/tmp/joo-lighthouse').glob('*.json')):
+              d=json.loads(p.read_text())
+              audits=d['audits']
+              scores={k: round(v['score']*100) if v.get('score') is not None else None for k,v in d['categories'].items()}
+              row={'page':p.stem,'scores':scores,'labLCP_ms':audits.get('largest-contentful-paint',{}).get('numericValue'),
+                   'labCLS':audits.get('cumulative-layout-shift',{}).get('numericValue'),
+                   'labTBT_ms':audits.get('total-blocking-time',{}).get('numericValue')}
+              rows.append(row)
+          dest=Path('JOO_Auezov_V27_Language_Fixed/v29-lighthouse-summary.json')
+          dest.write_text(json.dumps(rows,ensure_ascii=False,indent=2))
+          print(json.dumps(rows,ensure_ascii=False,indent=2))
+          print('These are simulated lab metrics, not field Core Web Vitals or INP.')
+          PY
+      - name: Save Lighthouse artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v29-lighthouse-reports
+          path: |
+            /tmp/joo-lighthouse/*.json
+            JOO_Auezov_V27_Language_Fixed/v29-lighthouse-summary.json
+          if-no-files-found: warn
