@@ -66,6 +66,26 @@ with sync_playwright() as playwright:
                     page.locator("#enquiryCopy").click()
                     page.wait_for_timeout(600)
                     result["copyFeedbackWorks"] = bool(page.locator("#enquiryFeedback").inner_text().strip())
+                    # Mock POST responses; never send real parent data during tests.
+                    status = {"code": 200}
+                    def mock_form_post(route):
+                        if route.request.method == "POST":
+                            route.fulfill(status=status["code"], body="test-response")
+                        else:
+                            route.continue_()
+                    page.route("**/", mock_form_post)
+                    page.locator("#enquirySave").click()
+                    page.wait_for_timeout(350)
+                    result["netlifySuccessUX"] = "жіберілді" in page.locator("#enquiryFeedback").inner_text()
+                    page.locator('#enquiryForm [name="parent"]').fill("Ата-ана Тест")
+                    page.locator('#enquiryForm [name="phone"]').fill("+7 777 123 45 67")
+                    page.locator('#enquiryForm [name="grade"]').select_option("8")
+                    page.locator('#enquiryForm [name="consent"]').check()
+                    status["code"] = 500
+                    page.locator("#enquirySave").click()
+                    page.wait_for_timeout(350)
+                    result["netlifyErrorUX"] = "мүмкін болмады" in page.locator("#enquiryFeedback").inner_text()
+                    page.unroute("**/", mock_form_post)
                 if name == "index":
                     page.locator('[data-lang="en"]').first.evaluate("(el) => el.click()")
                     page.wait_for_url("**/en/", timeout=10000)
@@ -93,7 +113,9 @@ bad = [r for r in checks if r.get("exception") or r.get("http") != 200
        or r.get("russianSwitchWorks") is False
        or r.get("keyboardSkipWorks") is False
        or r.get("mobileMenuWorks") is False
-       or r.get("copyFeedbackWorks") is False]
+       or r.get("copyFeedbackWorks") is False
+       or r.get("netlifySuccessUX") is False
+       or r.get("netlifyErrorUX") is False]
 print("V28 MOBILE AUDIT:", len(checks), "checks,", len(bad), "issues")
 if bad:
     print("ISSUES:", json.dumps(bad, ensure_ascii=False, indent=2))
