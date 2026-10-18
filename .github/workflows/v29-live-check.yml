@@ -1,0 +1,59 @@
+name: JOO V29 live Netlify verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v29-live-check.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/ru/index.html'
+      - 'JOO_Auezov_V27_Language_Fixed/en/index.html'
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check live Netlify pages without sending user data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import time
+          from urllib.request import Request, urlopen
+          urls = {
+            'home': 'https://joo-auezov.netlify.app/',
+            'admissions': 'https://joo-auezov.netlify.app/admissions.html',
+            'ru': 'https://joo-auezov.netlify.app/ru/index.html',
+            'en': 'https://joo-auezov.netlify.app/en/index.html',
+            'sitemap': 'https://joo-auezov.netlify.app/sitemap.xml',
+          }
+          failures = []
+          for label, url in urls.items():
+              success = False
+              for attempt in range(5):
+                  try:
+                      with urlopen(Request(url, headers={'User-Agent': 'JOO-V29-Live-Check/1.0'}), timeout=20) as response:
+                          data = response.read(500000).decode('utf-8', 'replace')
+                          status = response.status
+                      marker = {
+                        'home': 'Created by',
+                        'admissions': 'data-netlify="true"',
+                        'ru': 'lang="ru"',
+                        'en': 'lang="en"',
+                        'sitemap': '<urlset',
+                      }[label]
+                      success = status == 200 and marker in data
+                      print(label, 'HTTP', status, 'marker', marker, 'found', success)
+                      if success: break
+                  except Exception as exc:
+                      print(label, 'attempt', attempt+1, type(exc).__name__, str(exc)[:160])
+                  time.sleep(10)
+              if not success: failures.append(label)
+          if failures:
+              print('LIVE NOT VERIFIED:', failures)
+              raise SystemExit(1)
+          print('PASS: live Netlify home, admissions, RU, EN, sitemap')
+          PY
