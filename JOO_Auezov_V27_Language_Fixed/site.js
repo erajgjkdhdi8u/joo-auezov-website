@@ -90,20 +90,87 @@
   }));
   $('#posterClose')?.addEventListener('click',()=>dialog?.close());
   dialog?.addEventListener('click',(e)=>{if(e.target===dialog)dialog.close();});
-  /* Admission request: opens a prefilled message; never pretends to submit to a backend. */
-  $('#enquiryForm')?.addEventListener('submit',e=>{
-    e.preventDefault();const form=e.currentTarget;
-    if(!form.reportValidity())return;
-    const data=new FormData(form);
-    const parent=String(data.get('parent')||'').trim();
-    const phone=String(data.get('phone')||'').trim();
-    const grade=String(data.get('grade')||'');
-    const lang=root.lang;
-    const content=lang==='en' ? `Hello! I would like to learn about admission to JOO Auezov.\nParent: ${parent}\nPhone: ${phone}\nGrade: ${grade}\nPlease share information about school visits and admission requirements.`
-      : lang==='ru' ? `Здравствуйте! Я хочу узнать о поступлении в JOO Auezov.\nРодитель: ${parent}\nТелефон: ${phone}\nКласс: ${grade}\nПожалуйста, расскажите о визите в школу и условиях поступления.`
-      : `Сәлеметсіз бе! JOO Auezov мектебіне қабылдау туралы білгім келеді.\nАта-ана: ${parent}\nТелефон: ${phone}\nСынып: ${grade}\nМектепке келу және қабылдау шарттары туралы ақпарат жіберсеңіз.`;
-    window.open('https://wa.me/77711230702?text='+encodeURIComponent(content),'_blank','noopener,noreferrer');
+  /* Admission request: explicit WhatsApp handoff; no backend storage. */
+  const admissionForm = $('#enquiryForm');
+  const admissionCopy = $('#enquiryCopy');
+  const admissionPreview = $('#enquiryPreview');
+  const admissionFeedback = $('#enquiryFeedback');
+  function admissionMessage(){
+    if(!admissionForm) return '';
+    const data = new FormData(admissionForm);
+    const parent = String(data.get('parent') || '').trim();
+    const phone = String(data.get('phone') || '').trim();
+    const grade = String(data.get('grade') || '');
+    const lang = root.lang;
+    if(lang === 'en') return ['Hello! I would like to learn about admission to JOO Auezov.', 'Parent: '+parent, 'Phone: '+phone, 'Grade: '+grade, 'Please share information about school visits and admission requirements.'].join('\n');
+    if(lang === 'ru') return ['Здравствуйте! Я хочу узнать о поступлении в JOO Auezov.', 'Родитель: '+parent, 'Телефон: '+phone, 'Класс: '+grade, 'Пожалуйста, расскажите о визите в школу и условиях поступления.'].join('\n');
+    return ['Сәлеметсіз бе! JOO Auezov мектебіне қабылдау туралы білгім келеді.', 'Ата-ана: '+parent, 'Телефон: '+phone, 'Сынып: '+grade, 'Мектепке келу және қабылдау шарттары туралы ақпарат жіберсеңіз.'].join('\n');
+  }
+  function admissionValid(){
+    if(!admissionForm) return false;
+    const phone = admissionForm.querySelector('[name="phone"]');
+    if(phone) phone.setCustomValidity('');
+    if(!admissionForm.reportValidity()) return false;
+    const digits = String(phone?.value || '').replace(/\D/g, '');
+    if(digits.length < 10 || digits.length > 15){
+      if(phone){
+        phone.setCustomValidity(root.lang==='ru'?'Введите номер из 10–15 цифр.':root.lang==='en'?'Enter a phone number with 10–15 digits.':'10–15 цифрдан тұратын телефон нөмірін енгізіңіз.');
+        phone.reportValidity();
+      }
+      return false;
+    }
+    return true;
+  }
+  function admissionUpdatePreview(){
+    if(!admissionForm || !admissionPreview) return;
+    const parent = admissionForm.querySelector('[name="parent"]')?.value.trim();
+    const phone = admissionForm.querySelector('[name="phone"]')?.value.trim();
+    const grade = admissionForm.querySelector('[name="grade"]')?.value;
+    admissionPreview.textContent = parent && phone && grade ? admissionMessage() : '';
+    if(admissionFeedback) admissionFeedback.textContent = '';
+  }
+  admissionForm?.addEventListener('input', e => {
+    if(e.target?.name === 'phone') e.target.setCustomValidity('');
+    admissionUpdatePreview();
   });
+  admissionForm?.addEventListener('change', admissionUpdatePreview);
+  admissionForm?.addEventListener('submit', e => {
+    e.preventDefault();
+    if(!admissionValid()) return;
+    const url = 'https://wa.me/77711230702?text='+encodeURIComponent(admissionMessage());
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    if(admissionFeedback) admissionFeedback.textContent = root.lang==='ru'?'WhatsApp открыт. Отправку сообщения подтвердите самостоятельно.':root.lang==='en'?'WhatsApp opened. Please confirm sending the message yourself.':'WhatsApp ашылды. Хабарламаны жіберуді өзіңіз растаңыз.';
+  });
+  admissionCopy?.addEventListener('click', async () => {
+    if(!admissionValid()) return;
+    const message = admissionMessage();
+    let copied = false;
+    try {
+      if(navigator.clipboard?.writeText){
+        await navigator.clipboard.writeText(message);
+        copied = true;
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = message;
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        copied = document.execCommand('copy');
+        temp.remove();
+      }
+    } catch(_) { copied = false; }
+    if(admissionFeedback) admissionFeedback.textContent = copied
+      ? (root.lang==='ru'?'Сообщение скопировано.':root.lang==='en'?'Message copied.':'Хабарлама көшірілді.')
+      : (root.lang==='ru'?'Не удалось скопировать. Выделите текст выше.':root.lang==='en'?'Could not copy. Select the message above.':'Көшіру мүмкін болмады. Жоғарыдағы мәтінді таңдаңыз.');
+  });
+  $$('[data-lang]').forEach(button => button.addEventListener('click', admissionUpdatePreview));
   /* Editorial progress: passive indicator, not a floating control or a cursor. */
   const readingLine=document.createElement('div');
   readingLine.className='reading-line';readingLine.setAttribute('aria-hidden','true');
