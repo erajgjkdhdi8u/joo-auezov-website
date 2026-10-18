@@ -11,6 +11,9 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/admissions-v29.js'
       - 'JOO_Auezov_V27_Language_Fixed/style.css'
       - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/career.html'
+      - 'JOO_Auezov_V27_Language_Fixed/results.html'
+      - 'JOO_Auezov_V27_Language_Fixed/career-results-v27.css'
 
 permissions:
   contents: read
