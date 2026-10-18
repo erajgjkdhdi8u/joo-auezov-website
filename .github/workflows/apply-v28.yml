@@ -5,6 +5,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'JOO_V28_11_Photos_For_GitHub.zip'
       - 'JOO_Auezov_V27_Language_Fixed/assets/images/v28/*.webp'
 
 permissions:
@@ -20,6 +21,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Extract uploaded ZIP when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f JOO_V28_11_Photos_For_GitHub.zip ]; then
+            mkdir -p JOO_Auezov_V27_Language_Fixed/assets/images/v28
+            unzip -o -j JOO_V28_11_Photos_For_GitHub.zip '*.webp' -d JOO_Auezov_V27_Language_Fixed/assets/images/v28/
+          fi
       - name: Check all eleven images are present
         shell: bash
         run: |
@@ -43,12 +52,12 @@ jobs:
             echo "::error::Mereke profile must remain removed"
             exit 1
           fi
-      - name: Commit updated HTML only
+      - name: Commit updated HTML and image assets
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html'
+          git add -- 'JOO_Auezov_V27_Language_Fixed/*.html' 'JOO_Auezov_V27_Language_Fixed/assets/images/v28/*.webp'
           if ! git diff --cached --quiet; then
             git commit -m "Apply V28 school photos and teacher portraits"
             git push
