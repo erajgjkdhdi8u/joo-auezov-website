@@ -72,3 +72,7 @@
 @media(max-width:800px){.rg-head{grid-template-columns:minmax(0,1fr)}.rg-head h2{font-size:clamp(39px,9vw,64px)}.rg-feature,.rg-career-teaser{grid-template-columns:minmax(0,1fr)}.rg-primary-poster{max-height:450px}.rg-stories{grid-template-columns:minmax(0,1fr)}.rg-posters{grid-template-columns:repeat(2,minmax(0,1fr))}.rg-career-teaser__right{max-width:450px}}
 @media(max-width:540px){.rg-section{padding:68px var(--edge)}.rg-feature,.rg-grantee-grid,.rg-extra .rg-grantee-grid{grid-template-columns:minmax(0,1fr)}.rg-big>strong{font-size:clamp(65px,24vw,102px)}.rg-cities{gap:19px}.rg-list-tools{flex-wrap:wrap;gap:11px}.rg-list-tools label{flex-basis:100%;max-width:none}.rg-posters{gap:8px}.rg-posters img{height:190px}.rg-source-note{grid-template-columns:minmax(0,1fr)}.rg-career-teaser{margin-inline:var(--edge)}.rg-stories article{height:490px}}
 @media(prefers-reduced-motion:reduce){.grantee,.rg-posters a{transition:none}}
+
+/* V29: contrast on light results panels. */
+.results-chart .section-top>p{color:#30425a}
+.rg-cities__title span{color:#34465e}
