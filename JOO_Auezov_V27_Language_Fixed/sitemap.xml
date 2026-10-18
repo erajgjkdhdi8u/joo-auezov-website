@@ -1,17 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://joo-auezov.netlify.app/</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/about.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/academics.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/admissions.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/campus.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/career.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/contacts.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/news.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/parents.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/resources.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/results.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/student-life.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/team.html</loc></url>
-  <url><loc>https://joo-auezov.netlify.app/wellbeing.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://joo-auezov.netlify.app/</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/about.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/about.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/about.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/academics.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/academics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/academics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/academics.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/academics.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/academics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/academics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/academics.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/academics.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/academics.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/academics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/academics.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/admissions.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/admissions.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/admissions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/admissions.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/admissions.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/admissions.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/admissions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/admissions.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/admissions.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/admissions.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/admissions.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/admissions.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/campus.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/campus.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/campus.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/campus.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/campus.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/campus.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/campus.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/campus.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/campus.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/campus.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/campus.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/campus.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/career.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/career.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/career.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/career.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/career.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/career.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/career.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/career.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/career.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/career.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/career.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/career.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/contacts.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/contacts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/contacts.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/contacts.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/contacts.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/contacts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/contacts.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/contacts.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/contacts.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/contacts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/contacts.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/contacts.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/news.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/news.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/news.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/news.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/news.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/news.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/news.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/news.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/news.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/news.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/news.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/news.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/parents.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/parents.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/parents.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/parents.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/parents.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/parents.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/parents.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/parents.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/parents.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/parents.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/parents.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/parents.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/resources.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/resources.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/resources.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/resources.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/resources.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/resources.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/resources.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/results.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/results.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/results.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/results.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/results.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/results.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/results.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/results.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/results.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/results.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/results.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/results.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/student-life.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/student-life.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/student-life.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/student-life.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/student-life.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/student-life.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/student-life.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/student-life.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/student-life.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/student-life.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/student-life.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/student-life.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/team.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/team.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/team.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/team.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/team.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/team.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/team.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/team.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/team.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/team.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/team.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/team.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/wellbeing.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/wellbeing.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/wellbeing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/wellbeing.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/ru/wellbeing.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/wellbeing.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/wellbeing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/wellbeing.html"/>
+  </url>
+  <url><loc>https://joo-auezov.netlify.app/en/wellbeing.html</loc>
+    <xhtml:link rel="alternate" hreflang="kk" href="https://joo-auezov.netlify.app/wellbeing.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://joo-auezov.netlify.app/ru/wellbeing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://joo-auezov.netlify.app/en/wellbeing.html"/>
+  </url>
 </urlset>
