@@ -44,6 +44,15 @@
       }
     });
     window.JOO_I18N?.apply(lang);
+    // Image descriptions are useful to screen readers in the chosen language.
+    $('img[data-alt-kk]').forEach(img => {
+      const description = img.getAttribute('data-alt-' + lang);
+      if(description !== null) img.alt = description;
+    });
+    const parentField = $('#enquiryForm [name="parent"]');
+    if(parentField) parentField.placeholder = {
+      kk: 'Аты-жөніңіз', ru: 'Ваше имя и фамилия', en: 'Full name'
+    }[lang];
     $$('[data-lang]').forEach(b=>{const on=b.dataset.lang===lang;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on));});
     try{localStorage.setItem('joo-language',lang);}catch(e){}
   }
