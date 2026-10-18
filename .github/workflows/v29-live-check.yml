@@ -30,6 +30,8 @@ jobs:
             'en': 'https://joo-auezov.netlify.app/en/index.html',
             'sitemap': 'https://joo-auezov.netlify.app/sitemap.xml',
             'career-webp': 'https://joo-auezov.netlify.app/assets/images/career/dias-asanov-poster.webp',
+            'v30-campus': 'https://joo-auezov.netlify.app/campus.html',
+            'v30-academics': 'https://joo-auezov.netlify.app/academics.html',
             'ru-resources': 'https://joo-auezov.netlify.app/ru/resources.html',
             'en-resources': 'https://joo-auezov.netlify.app/en/resources.html',
           }
@@ -48,6 +50,8 @@ jobs:
                         'en': 'lang="en"',
                         'sitemap': '<urlset',
                         'career-webp': '',
+                        'v30-campus': 'assets/images/exterior-480.webp',
+                        'v30-academics': 'assets/images/v28/school-cafeteria.webp',
                         'ru-resources': 'На странице не приводятся',
                         'en-resources': 'This page avoids',
                       }[label]
