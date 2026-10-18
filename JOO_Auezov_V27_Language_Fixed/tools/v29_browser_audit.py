@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "http://127.0.0.1:8765"
 AXE = Path("node_modules/axe-core/axe.min.js")
-PAGES = ["index", "admissions", "career", "team", "campus", "results", "academics", "contacts"]
+PAGES = ["index", "about", "academics", "admissions", "campus", "career", "contacts", "news", "parents", "resources", "results", "student-life", "team", "wellbeing"]
 REPORT = ROOT / "v29-browser-audit.json"
 checks = []
 axe_findings = []
@@ -57,7 +57,7 @@ with sync_playwright() as p:
                             {"kk": "Сыныпты таңдаңыз", "ru": "Выберите класс", "en": "Choose a grade"}[lang])
                     if name == "index":
                         record["languageNav"] = page.locator('[data-lang="en"]').count() > 0
-                    if AXE.is_file() and label in ("android-chromium", "chromium-desktop") and lang == "kk" and name in ("index", "admissions", "team"):
+                    if AXE.is_file() and lang == "kk" and (label == "chromium-desktop" or (label == "android-chromium" and name in ("index", "admissions", "team"))):
                         page.add_script_tag(path=str(AXE))
                         result = page.evaluate("""async () => await axe.run(document, {
                             runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']}
