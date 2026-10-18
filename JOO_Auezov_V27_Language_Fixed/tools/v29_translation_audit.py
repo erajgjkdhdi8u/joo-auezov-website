@@ -30,7 +30,7 @@ with sync_playwright() as p:
               return [...new Set(out)];
             }""",lang)
             records.append({"lang":lang,"page":name,"count":len(items),"samples":items[:28]})
-            print(lang,name,len(items),"samples:",json.dumps(items[:12],ensure_ascii=False))
+            print(lang,name,len(items),"samples:",json.dumps(items[:40],ensure_ascii=False))
             page.close()
     browser.close()
 (ROOT/"v29-translation-audit.json").write_text(json.dumps(records,ensure_ascii=False,indent=2),encoding="utf-8")
