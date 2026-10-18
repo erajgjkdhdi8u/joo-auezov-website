@@ -72,7 +72,8 @@ jobs:
           for tag in thumbs:
               src = re.search(r'data-src="([^"]+)"', tag).group(1)
               preview = re.search(r'<img[^>]*src="([^"]+)"', tag).group(1)
-              assert re.sub(r'-(480|800|1200)\.webp
+              assert src.rsplit('-', 1)[0] == preview.rsplit('-', 1)[0], (src, preview)
+          print('PASS: 14 pages, SEO, image sizes, V30 gallery previews and contrast')
           PY
       - name: Commit verified quality improvements
         shell: bash
