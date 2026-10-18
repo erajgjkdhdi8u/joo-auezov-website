@@ -1,0 +1,45 @@
+name: JOO V28 mobile browser audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mobile-audit-v28.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/mobile_smoke_v28.py'
+
+permissions:
+  contents: read
+
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser tests
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium
+      - name: Start local website
+        shell: bash
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 > /tmp/joo-v28-http.log 2>&1 &
+          sleep 2
+      - name: Test 14 pages at mobile and desktop sizes
+        run: python JOO_Auezov_V27_Language_Fixed/tools/mobile_smoke_v28.py
+      - name: Save audit report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v28-mobile-audit
+          path: |
+            JOO_Auezov_V27_Language_Fixed/v28-mobile-audit.json
+            JOO_Auezov_V27_Language_Fixed/v28-audit-screenshots/
+          if-no-files-found: warn
