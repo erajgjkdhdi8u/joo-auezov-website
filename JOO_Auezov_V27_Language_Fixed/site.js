@@ -223,7 +223,8 @@
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce){
     root.classList.add('enhanced');
-    if(window.gsap && window.ScrollTrigger){
+    // Keep full cinematic GSAP motion on desktop; mobile uses lighter CSS effects.
+    if(window.gsap && window.ScrollTrigger && matchMedia('(min-width: 900px)').matches){
       gsap.registerPlugin(ScrollTrigger);
       $$('.section-top h2,.story__heading h2,.home-closing h2,.gallery-band__head h2').forEach(el=>{
         gsap.fromTo(el,{y:21},{y:0,duration:.78,ease:'power2.out',clearProps:'transform',scrollTrigger:{trigger:el,start:'top 94%',once:true}});
