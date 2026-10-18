@@ -7,6 +7,9 @@ on:
     paths:
       - '.github/workflows/v29-translation-audit.yml'
       - 'JOO_Auezov_V27_Language_Fixed/tools/v29_translation_audit.py'
+      - 'JOO_Auezov_V27_Language_Fixed/joo-i18n.js'
+      - 'JOO_Auezov_V27_Language_Fixed/resources.html'
+      - 'JOO_Auezov_V27_Language_Fixed/news.html'
 
 permissions:
   contents: read
