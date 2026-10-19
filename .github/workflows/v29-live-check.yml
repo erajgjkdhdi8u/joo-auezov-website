@@ -42,6 +42,10 @@ jobs:
             'v33-script': 'https://joo-auezov.netlify.app/v33-cinematic.js',
             'v33-ru-campus': 'https://joo-auezov.netlify.app/ru/campus.html',
             'v33-en-results': 'https://joo-auezov.netlify.app/en/results.html',
+            'v34-css': 'https://joo-auezov.netlify.app/v34-signature.css',
+            'v34-script': 'https://joo-auezov.netlify.app/v34-signature.js',
+            'v34-ru-campus': 'https://joo-auezov.netlify.app/ru/campus.html',
+            'v34-en-team': 'https://joo-auezov.netlify.app/en/team.html',
             'v33-kk-team': 'https://joo-auezov.netlify.app/team.html',
           }
           failures = []
@@ -69,6 +73,10 @@ jobs:
                         'v33-script': 'JOO V33 Cinematic Edition',
                         'v33-ru-campus': '05 / JOO AUEZOV',
                         'v33-en-results': 'v33-cinematic.js',
+                        'v34-css': 'JOO V34 SIGNATURE MOTION PACK',
+                        'v34-script': 'JOO V34 / Signature Motion Pack',
+                        'v34-ru-campus': 'v34-signature.css',
+                        'v34-en-team': 'v34-signature.js',
                         'v33-kk-team': 'v33-cinematic.css',
                       }[label]
                       success = status == 200 and (marker in data if marker else True)
