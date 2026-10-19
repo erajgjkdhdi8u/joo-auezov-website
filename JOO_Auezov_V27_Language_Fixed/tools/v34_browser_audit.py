@@ -43,6 +43,7 @@ with sync_playwright() as pw:
                 faults=[]
                 try:
                     res=page.goto("http://127.0.0.1:8765/"+prefix+name+".html?intro=off",wait_until="domcontentloaded",timeout=30000)
+                    page.wait_for_function('''() => [...document.querySelectorAll('link[rel="stylesheet"]')].filter(l => l.href.startsWith(location.origin)).every(l => !!l.sheet)''', timeout=12000)
                     page.wait_for_timeout(150)
                     state=page.evaluate("""() => {
                         const m=document.getElementById('menuPanel'),r=document.querySelector('.v34-marquee');
