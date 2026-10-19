@@ -70,7 +70,7 @@ with sync_playwright() as pw:
                         item["finalHighScore"]=page.locator("#scores .results-chart__aside>strong").inner_text().strip()
                     if lang=="kk":
                         page.screenshot(path=str(SCREEN/(browser_name+"-"+slug+".png")),
-                            full_page=True,animations="disabled",timeout=30000)
+                            full_page=(browser_name=="chromium-desktop"),animations="disabled",timeout=30000)
                 except Exception as exc:
                     item["exception"]=str(exc)
                 records.append(item)
