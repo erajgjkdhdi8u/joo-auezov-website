@@ -46,10 +46,6 @@ with sync_playwright() as pw:
                     page.wait_for_timeout(150)
                     state=page.evaluate("""() => {
                         const m=document.getElementById('menuPanel'),r=document.querySelector('.v34-marquee');
-                        const chapters=document.querySelector('.v34-chapters');
-                        const ids=[...document.querySelectorAll('main section[id]')]
-                          .filter(x=>x.id!=='top'&&x.id!=='interactive-gallery'&&
-                                     x.querySelector('h2,h3')&&x.offsetHeight>0).slice(0,10);
                         return {
                           lang:document.documentElement.lang,ready:document.body.dataset.v34Ready,
                           menuEnhanced:!!m?.classList.contains('v34-luxury'),
@@ -57,10 +53,7 @@ with sync_playwright() as pw:
                           marqueeCount:document.querySelectorAll('main .v34-marquee').length,
                           marqueePhrases:[...document.querySelectorAll('.v34-marquee__phrase')].map(x=>x.textContent),
                           marqueeHidden:r?.getAttribute('aria-hidden'),
-                          chaptersCount:ids.length,
-                          chapterLinks:chapters?.querySelectorAll('a[href^="#"]').length||0,
-                          chapterDisplay:chapters?getComputedStyle(chapters).display:null,
-                          chapterLabel:chapters?.getAttribute('aria-label'),
+                          chapterNavRemoved:document.querySelectorAll('.v34-chapters').length===0,
                           sceneCount:document.querySelectorAll('main .story__visual').length,
                           curtains:document.querySelectorAll('main .v34-curtain').length,
                           overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth)
@@ -76,10 +69,8 @@ with sync_playwright() as pw:
                     elif state["marqueePhrases"][0]!=state["marqueePhrases"][1] or {
                         "kk":"БІЛІМ","ru":"ЗНАНИЯ","en":"LEARN"}[lang] not in state["marqueePhrases"][0]:
                         faults.append("localized marquee")
-                    if state["chaptersCount"]>=4:
-                        if state["chapterLinks"]!=state["chaptersCount"]:faults.append("chapter links")
-                        if mode.endswith("desktop") and state["chapterDisplay"]=="none":faults.append("desktop chapter rail")
-                        if mode.endswith("mobile") and state["chapterDisplay"]!="none":faults.append("hidden mobile chapter rail")
+                    if not state["chapterNavRemoved"]:
+                        faults.append("chapter navigation unexpectedly present")
                     if mode.endswith("desktop") and state["sceneCount"]>0:
                         if state["curtains"]!=min(3,state["sceneCount"]):faults.append("curtain targets")
                         section=page.locator('main .story__visual').first
