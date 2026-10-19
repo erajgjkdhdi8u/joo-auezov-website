@@ -128,26 +128,36 @@ function scoreboard(){
    '<div class="quest-scoreboard__shots" role="group" aria-label="'+h(t.shotLabel)+'">'+hits.join('')+'</div></div></div></section>';
 }
 function scene(picked,made){
+ const chapter=questions[state.step][0];
+ const shot=state.activeShot;
  const tier=state.streak>=5?2:state.streak>=3?1:0;
  const fire=made||!picked?tier:0;
- const outcome='is-v5 '+(!picked?'is-ready':made?'is-made':'is-missed')+
+ const outcome='is-v5 is-v6 shot--'+shot+' '+(!picked?'is-ready':made?'is-made':'is-missed')+
    (fire?' is-fireball':'')+(fire===2?' is-inferno':'');
+ const arena=t.arenaNames[chapter];
  const label=picked?'<div class="quest-court__callout"><b>'+h(made?t.shotMade:t.shotMissed)+'</b><small>'+
-    (made?(fire?h(tier===2?t.fireMax:t.fireReady)+' · ':'')+'+10 JOO POINTS':'JOO ARENA / TRY AGAIN')+'</small></div>':'';
+   (made?(fire?h(tier===2?t.fireMax:t.fireReady)+' · ':'')+'+10 JOO POINTS':'JOO ARENA / TRY AGAIN')+'</small></div>':'';
  const flames=fire?'<span class="quest-ball__fire" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>':'';
  const slowLabel=(state.step===4||state.step===9)?'<div class="quest-arena-slow" aria-hidden="true">◉ '+h(t.slowmo)+'</div>':'';
  const stateLabel=fire?'<div class="quest-arena-fire-status" aria-hidden="true">'+(fire===2?'INFERNO':'FIREBALL')+' <span>×'+state.streak+'</span></div>':'';
- return '<div class="quest-court '+outcome+' arena-stage--'+(questions[state.step][0]+1)+'" aria-hidden="true">'+
- '<div class="quest-arena-sky"><div class="quest-arena-sky__stands"></div><div class="quest-arena-sky__lights"><i></i><i></i><i></i></div>'+
- '<div class="quest-arena-sky__banner">JOO <span>HIGH SCHOOL</span></div></div>'+
- '<div class="quest-court__camera"><div class="quest-court__grid"></div><div class="quest-court__floor"></div>'+
- '<div class="quest-court__lane"><span></span></div>'+
- '<div class="quest-hoop"><div class="quest-hoop__board"></div><div class="quest-hoop__support"></div><div class="quest-hoop__rim"></div>'+
- '<svg class="quest-hoop__net" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false" aria-hidden="true"><path d="M2 2 L98 2 M5 3 L22 96 M28 3 L40 97 M51 3 L50 98 M74 3 L61 97 M95 3 L78 96 M5 25 L94 25 M9 48 L89 48 M14 70 L84 70 M21 93 L79 93"/></svg>'+
- '<div class="quest-hoop__rim-front"></div></div><div class="quest-ball__shadow"></div>'+
- '<div class="quest-ball">'+flames+'</div>'+
- '<div class="quest-court__sparks"><i></i><i></i><i></i><i></i><i></i></div></div>'+
- '<div class="quest-court__hud"><span>JOO ARENA</span><span>SHOT '+String(state.step+1).padStart(2,'0')+' / 10</span></div>'+stateLabel+slowLabel+label+'</div>';
+ const architecture='<div class="quest-arena-architecture" aria-hidden="true">'+
+  '<span class="quest-arena-architecture__windows"></span>'+
+  '<span class="quest-arena-architecture__screen">JOO<span> 0'+(chapter+1)+'</span></span>'+
+  '<span class="quest-arena-architecture__arc"></span><span class="quest-arena-architecture__ring"></span>'+
+  '<span class="quest-arena-architecture__stars"><i></i><i></i><i></i><i></i><i></i></span></div>';
+ const tag='<div class="quest-shot-type shot-type--'+shot+'"><span>'+h(t.arenaLabel)+' 0'+(chapter+1)+'</span><strong>'+h(arena)+'</strong><small>'+h(t.shots[shotIndex()])+'</small></div>';
+ return '<div class="quest-court '+outcome+' arena-stage--'+(chapter+1)+'" data-shot="'+shot+'" aria-hidden="true">'+
+  architecture+'<div class="quest-arena-sky"><div class="quest-arena-sky__stands"></div><div class="quest-arena-sky__lights"><i></i><i></i><i></i></div>'+
+  '<div class="quest-arena-sky__banner">JOO <span>HIGH SCHOOL</span></div></div>'+
+  '<div class="quest-court__camera"><div class="quest-court__grid"></div><div class="quest-court__floor"></div>'+
+  '<div class="quest-court__lane"><span></span></div>'+
+  '<div class="quest-hoop"><div class="quest-hoop__board"></div><div class="quest-hoop__support"></div><div class="quest-hoop__rim"></div>'+
+  '<svg class="quest-hoop__net" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false" aria-hidden="true"><path d="M2 2 L98 2 M5 3 L22 96 M28 3 L40 97 M51 3 L50 98 M74 3 L61 97 M95 3 L78 96 M5 25 L94 25 M9 48 L89 48 M14 70 L84 70 M21 93 L79 93"/></svg>'+
+  '<div class="quest-hoop__rim-front"></div></div><div class="quest-ball__shadow"></div>'+
+  '<div class="quest-ball">'+flames+'</div>'+
+  '<div class="quest-court__sparks"><i></i><i></i><i></i><i></i><i></i></div></div>'+
+  '<div class="quest-court__hud"><span>JOO ARENA</span><span>SHOT '+String(state.step+1).padStart(2,'0')+' / 10</span></div>'+
+  tag+stateLabel+slowLabel+label+'</div>';
 }
 function soundControl(){
  return '<button id="questSound" type="button" class="quest-sound-toggle" aria-pressed="'+String(soundOn)+'" aria-label="'+h(soundOn?t.soundOn:t.soundOff)+'">'+
@@ -164,7 +174,7 @@ function question(){
   return '<button class="'+cls+'" type="button" data-answer="'+i+'"'+(picked?' disabled':'')+'><b aria-hidden="true">'+(i+1)+'</b><span>'+h(s)+'</span></button>';
  }).join('');
  const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p></div><button class="quest-button" id="nextQuestion"'+(state.shotReady?'':' disabled aria-disabled="true"')+'>'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
- view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'<div class="quest-picture-caption"><span>JOO / SCHOOL EXPERIENCE</span><strong>'+h(t.chapters[q[0]])+'</strong></div></div></section>','questionTitle');
+ view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'<div class="quest-picture-caption"><span>'+h(t.arenaLabel)+' 0'+(q[0]+1)+'</span><strong>'+h(t.arenaNames[q[0]])+'</strong></div></div></section>','questionTitle');
  root.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.answer))));
  $('questSound')?.addEventListener('click',()=>{
   soundOn=!soundOn;const b=$('questSound');
