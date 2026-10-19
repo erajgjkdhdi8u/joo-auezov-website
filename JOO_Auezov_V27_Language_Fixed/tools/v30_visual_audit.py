@@ -66,7 +66,16 @@ with sync_playwright() as playwright:
                                 campusDepth:[...document.querySelectorAll('.joo-depth-card')].map(e=>({
                                     label:e.querySelector('figcaption span')?.textContent.trim(),
                                     image:e.querySelector('img')?.getAttribute('src')
-                                }))
+                                })),
+                                v33Assets:!!document.querySelector('link[href="v33-cinematic.css"]') && !!document.querySelector('script[src="v33-cinematic.js"]'),
+                                v33Words:[...document.querySelectorAll('.hero--index .v33-word')].length,
+                                v33HeroAccessible:(()=>{const e=document.querySelector('.hero--index h1');return !e || e.getAttribute('aria-label')===e.getAttribute('data-'+document.documentElement.lang)})(),
+                                v33Bento:document.querySelectorAll('.gallery-band__grid.v33-bento figure').length,
+                                v33Scores:document.querySelectorAll('.results-chart .score-row').length,
+                                v33TeamNames:['9','10'].map(id=>{
+                                    const e=document.querySelector('.staff-grid .joo-team-portrait[data-joo-team="'+id+'"] h3');
+                                    return !!e && e.textContent.trim().length>2 && getComputedStyle(e).visibility==='visible' && getComputedStyle(e).display!=='none';
+                                })
                             };
                         }"""))
                         item["jsErrors"] = errors[:3]
@@ -92,6 +101,12 @@ for r in records:
     if r.get("brokenImages"): problem.append("brokenImages")
     if r.get("jsErrors"): problem.append("jsErrors")
     if r.get("h1Count")!=1: problem.append("h1Count")
+    if r["page"] in ("index","campus","results","team"):
+        if not r.get("v33Assets"): problem.append("v33Assets")
+        if r["page"]=="index" and (r.get("v33Words",0)<2 or not r.get("v33HeroAccessible")): problem.append("v33Hero")
+        if r["page"]=="campus" and r.get("v33Bento")!=5: problem.append("v33Bento")
+        if r["page"]=="results" and r.get("v33Scores")!=8: problem.append("v33Scores")
+        if r["page"]=="team" and r.get("v33TeamNames")!=[True,True]: problem.append("v33Names")
     if r["page"]=="team":
         heights=r.get("portraitHeights",[])
         if len(heights)!=10 or max(heights,default=0)-min(heights,default=0)>3:
