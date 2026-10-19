@@ -17,700 +17,988 @@ en:{back:'BACK TO SITE',skip:'Skip to content',eyebrow:'JOO HIGH SCHOOL / INTERA
    Question explanations cite sources; group-wide and branch-specific figures stay separate.
    Data shape: [chapter, image, correctIndex, translatedQuestion, translatedOptions, translatedExplanation, sourceURL]. */
 const questionBank={
-0:[
- [
-  0,
-  "school-building.webp",
-  1,
+ "0": [
   [
-   "JOO School Auezov Алматының қай көшесінде орналасқан?",
-   "На какой улице Алматы находится JOO School Auezov?",
-   "On which street in Almaty is JOO School Auezov located?"
-  ],
-  [
+   0,
+   "school-building.webp",
+   1,
    [
-    "Халиуллин көшесі",
-    "Цветочная көшесі",
-    "Төле би көшесі",
-    "Бәйдібек би даңғылы"
+    "JOO School Auezov Алматының қай көшесінде орналасқан?",
+    "На какой улице Алматы находится JOO School Auezov?",
+    "On which street in Almaty is JOO School Auezov located?"
    ],
    [
-    "Улица Халиуллина",
-    "Цветочная улица",
-    "Улица Толе би",
-    "Проспект Байдибек би"
+    [
+     "Халиуллин көшесі",
+     "Цветочная көшесі",
+     "Төле би көшесі",
+     "Бәйдібек би даңғылы"
+    ],
+    [
+     "Улица Халиуллина",
+     "Цветочная улица",
+     "Улица Толе би",
+     "Проспект Байдибек би"
+    ],
+    [
+     "Khaliullin Street",
+     "Tsvetochnaya Street",
+     "Tole Bi Street",
+     "Baidibek Bi Avenue"
+    ]
    ],
    [
-    "Khaliullin Street",
-    "Tsvetochnaya Street",
-    "Tole Bi Street",
-    "Baidibek Bi Avenue"
-   ]
-  ],
-  [
-   "Auezov филиалының мекенжайы: Алматы, Цветочная көшесі, 1/14.",
-   "Адрес филиала Auezov: Алматы, улица Цветочная, 1/14.",
-   "The Auezov branch address is 1/14 Tsvetochnaya Street, Almaty."
-  ],
-  "https://joo-schools.kz/"
- ],
- [
-  0,
-  "school-reception.webp",
-  2,
-  [
-   "JOO School Auezov қай жылы құрылған?",
-   "В каком году была основана JOO School Auezov?",
-   "In what year was JOO School Auezov founded?"
-  ],
-  [
-   [
-    "2018",
-    "2020",
-    "2022",
-    "2024"
+    "Auezov филиалының мекенжайы: Алматы, Цветочная көшесі, 1/14.",
+    "Адрес филиала Auezov: Алматы, улица Цветочная, 1/14.",
+    "The Auezov branch address is 1/14 Tsvetochnaya Street, Almaty."
    ],
-   [
-    "2018",
-    "2020",
-    "2022",
-    "2024"
-   ],
-   [
-    "2018",
-    "2020",
-    "2022",
-    "2024"
-   ]
-  ],
-  [
-   "Ауезов мектебінің ресми парағында негізі 2022 жылы қаланғаны жазылған.",
-   "Официальная страница школы указывает год основания — 2022.",
-   "The Auezov school’s official page states it was founded in 2022."
-  ],
-  "https://joohs.kz/jooauezov"
- ],
- [
-  0,
-  "school-students.webp",
-  1,
-  [
-   "JOO мектебінің ресми сипаттамасында форма ретінде не беріледі?",
-   "Какие предметы школьной формы указаны на официальной странице JOO?",
-   "Which uniform items does JOO list on its official page?"
-  ],
-  [
-   [
-    "Көйлек пен галстук",
-    "Поло мен бомбер",
-    "Костюм мен жилет",
-    "Бірдей спорт костюмі"
-   ],
-   [
-    "Рубашка и галстук",
-    "Поло и бомбер",
-    "Костюм и жилет",
-    "Одинаковый спортивный костюм"
-   ],
-   [
-    "Shirt and tie",
-    "Polo shirt and bomber jacket",
-    "Suit and vest",
-    "Matching tracksuit"
-   ]
-  ],
-  [
-   "Ресми FAQ бойынша мектеп формасы ретінде поло мен бомбер беріледі, ал күнделікті киім стилі — Smart Casual.",
-   "По официальному FAQ выдаются поло и бомбер; повседневный стиль одежды — Smart Casual.",
-   "The official FAQ lists a polo shirt and bomber jacket, with Smart Casual as the usual dress style."
-  ],
-  "https://joohs.kz/jooauezov"
- ],
- [
-  0,
-  "school-building.webp",
-  1,
-  [
-   "JOO Auezov мектебі қай қалада?",
-   "В каком городе находится школа JOO Auezov?",
-   "Which city is home to JOO Auezov?"
-  ],
-  [
-   [
-    "Астана",
-    "Алматы",
-    "Ақтау",
-    "Шымкент"
-   ],
-   [
-    "Астана",
-    "Алматы",
-    "Актау",
-    "Шымкент"
-   ],
-   [
-    "Astana",
-    "Almaty",
-    "Aktau",
-    "Shymkent"
-   ]
-  ],
-  [
-   "JOO Auezov мектебі Алматы қаласында орналасқан.",
-   "Школа JOO Auezov находится в Алматы.",
-   "JOO Auezov is located in Almaty."
-  ],
-  "https://joohs.kz/jooauezov"
- ],
- [
-  0,
-  "school-building.webp",
-  2,
-  [
-   "JOO Auezov мектебі Алматының қай ауданында?",
-   "В каком районе Алматы находится JOO Auezov?",
-   "Which Almaty district is JOO Auezov in?"
-  ],
-  [
-   [
-    "Медеу",
-    "Бостандық",
-    "Әуезов",
-    "Алатау"
-   ],
-   [
-    "Медеуский",
-    "Бостандыкский",
-    "Ауэзовский",
-    "Алатауский"
-   ],
-   [
-    "Medeu",
-    "Bostandyk",
-    "Auezov",
-    "Alatau"
-   ]
-  ],
-  [
-   "Мектептің Цветочная көшесіндегі ғимараты Әуезов ауданында орналасқан.",
-   "Здание школы на Цветочной улице находится в Ауэзовском районе.",
-   "The school building on Tsvetochnaya Street is in Auezov District."
-  ],
-  "/contacts.html"
- ],
- [
-  0,
-  "school-reception.webp",
-  0,
-  [
-   "JOO School Auezov қандай мектеп?",
-   "К какому типу относится JOO School Auezov?",
-   "What type of school is JOO School Auezov?"
-  ],
-  [
-   [
-    "Жекеменшік мектеп",
-    "Университет",
-    "Спорт кешені",
-    "Балабақша"
-   ],
-   [
-    "Частная школа",
-    "Университет",
-    "Спортивный комплекс",
-    "Детский сад"
-   ],
-   [
-    "Private school",
-    "University",
-    "Sports centre",
-    "Kindergarten"
-   ]
-  ],
-  [
-   "JOO School Auezov — жекеменшік мектеп.",
-   "JOO School Auezov — частная школа.",
-   "JOO School Auezov is a private school."
-  ],
-  "https://joohs.kz/jooauezov"
- ],
- [
-  0,
-  "school-students.webp",
-  2,
-  [
-   "JOO мектебінде күнделікті киім стилі қалай аталады?",
-   "Какой стиль повседневной одежды принят в JOO?",
-   "What is the everyday dress style at JOO?"
-  ],
-  [
-   [
-    "Black Tie",
-    "Military",
-    "Smart Casual",
-    "Formal Only"
-   ],
-   [
-    "Black Tie",
-    "Military",
-    "Smart Casual",
-    "Formal Only"
-   ],
-   [
-    "Black Tie",
-    "Military",
-    "Smart Casual",
-    "Formal Only"
-   ]
-  ],
-  [
-   "Ресми FAQ-да күнделікті киіну стилі Smart Casual екені жазылған.",
-   "В официальном FAQ указан повседневный стиль Smart Casual.",
-   "JOO's official FAQ describes the usual dress style as Smart Casual."
-  ],
-  "https://joohs.kz/jooauezov"
- ],
- [
-  0,
-  "school-classroom.webp",
-  1,
-  [
-   "Мектеп кампусында тыныш оқуға арналған қандай орын бар?",
-   "Какое пространство кампуса подходит для тихого чтения?",
-   "Which campus space is intended for quiet reading?"
-  ],
-  [
-   [
-    "Автотұрақ",
-    "Кітапхана",
-    "Ас үй",
-    "Тұрақты көрме"
-   ],
-   [
-    "Парковка",
-    "Библиотека",
-    "Кухня",
-    "Постоянная выставка"
-   ],
-   [
-    "Car park",
-    "Library",
-    "Kitchen",
-    "Permanent exhibition"
-   ]
-  ],
-  [
-   "Кампус туралы бөлімде кітапхана тыныш фокус нүктесі ретінде көрсетілген.",
-   "В разделе о кампусе библиотека описана как место для спокойной работы.",
-   "The Campus section describes the library as a quiet place for focused work."
-  ],
-  "/campus.html"
- ],
- [
-  0,
-  "/assets/images/computerlab-800.webp",
-  0,
-  [
-   "Мектеп сайтында қандай технологиялық оқу кеңістігі көрсетілген?",
-   "Какое технологическое учебное пространство показано на сайте?",
-   "Which technology-related learning space is shown on the website?"
-  ],
-  [
-   [
-    "Компьютерлік кабинет",
-    "Аэродром",
-    "Кинотеатр",
-    "Планетарий"
-   ],
-   [
-    "Компьютерный кабинет",
-    "Аэродром",
-    "Кинотеатр",
-    "Планетарий"
-   ],
-   [
-    "Computer lab",
-    "Airfield",
-    "Cinema",
-    "Planetarium"
-   ]
-  ],
-  [
-   "Кампус материалдарында компьютерлік кабинет пен технологиялық кеңістіктер көрсетілген.",
-   "На сайте показаны компьютерный кабинет и пространства для технологий.",
-   "The site features a computer lab and technology learning spaces."
-  ],
-  "/campus.html"
- ],
- [
-  0,
-  "school-reception.webp",
-  3,
-  [
-   "Мектепке түсу туралы ақпаратты қай бөлімнен табуға болады?",
-   "В каком разделе искать сведения о поступлении в школу?",
-   "Which website section explains how to apply to the school?"
-  ],
-  [
-   [
-    "Галерея",
-    "Нәтижелер",
-    "Жаңалықтар",
-    "Қабылдау"
-   ],
-   [
-    "Галерея",
-    "Результаты",
-    "Новости",
-    "Поступление"
-   ],
-   [
-    "Gallery",
-    "Results",
-    "News",
-    "Admissions"
-   ]
-  ],
-  [
-   "«Қабылдау» бөлімінде өтінім мен түсу тәртібі туралы ақпарат берілген.",
-   "В разделе «Поступление» указана информация о заявке и приёме.",
-   "The Admissions section explains applications and the entry process."
-  ],
-  "/admissions.html"
- ],
- [
-  0,
-  "school-students.webp",
-  2,
-  [
-   "JOO желісінің ресми сайтында мектептер Қазақстанның неше қаласында бар делінген?",
-   "В скольких городах Казахстана указаны школы сети JOO?",
-   "In how many Kazakhstani cities does JOO say it has schools?"
-  ],
-  [
-   [
-    "3",
-    "4",
-    "5",
-    "9"
-   ],
-   [
-    "3",
-    "4",
-    "5",
-    "9"
-   ],
-   [
-    "3",
-    "4",
-    "5",
-    "9"
-   ]
-  ],
-  [
-   "Ресми сайт JOO мектептерінің 5 қалада орналасқанын көрсетеді. Бұл жеке Ауезов филиалының саны емес.",
-   "На официальном сайте указано 5 городов сети JOO, а не филиалов Ауэзова.",
-   "The official site lists JOO schools in five cities; this is network-wide, not an Auezov-branch count."
-  ],
-  "https://joohs.kz/"
- ],
- [
-  0,
-  "school-students.webp",
-  1,
-  [
-   "Мектептегі еріктілік бастамасы қалай аталады?",
-   "Как называется волонтёрская инициатива школы?",
-   "What is the school's student volunteering initiative called?"
-  ],
-  [
-   [
-    "JOO E-SPORT",
-    "JOO AUEZ UMIT",
-    "JOO AIR",
-    "JOO FINANCE"
-   ],
-   [
-    "JOO E-SPORT",
-    "JOO AUEZ UMIT",
-    "JOO AIR",
-    "JOO FINANCE"
-   ],
-   [
-    "JOO E-SPORT",
-    "JOO AUEZ UMIT",
-    "JOO AIR",
-    "JOO FINANCE"
-   ]
-  ],
-  [
-   "«Мектеп өмірі» бөлімінде JOO AUEZ UMIT еріктілік бағыты көрсетілген.",
-   "В разделе «Школьная жизнь» описана инициатива JOO AUEZ UMIT.",
-   "JOO AUEZ UMIT is featured as a volunteering initiative in the School Life section."
-  ],
-  "/student-life.html"
- ]
-],
-1:[
- [
-  1,
-  "school-classroom.webp",
-  0,
-  [
-   "JOO Auezov-та 5–6 сыныптар үшін қандай пәндерге басымдық беріледі?",
-   "На каких предметах делают акцент в 5–6 классах JOO Auezov?",
-   "Which subjects are emphasized for grades 5–6 at JOO Auezov?"
-  ],
-  [
-   [
-    "Математика мен ағылшын тілі",
-    "Тек ҰБТ тесттері",
-    "Университет гранттары",
-    "Тек спорттық дайындық"
-   ],
-   [
-    "Математика и английский язык",
-    "Только тесты ЕНТ",
-    "Гранты университетов",
-    "Только спортивная подготовка"
-   ],
-   [
-    "Mathematics and English",
-    "Only UNT practice tests",
-    "University grants",
-    "Only sports training"
-   ]
-  ],
-  [
-   "5–6 сыныптарда математика мен ағылшын тіліне басымдық беріліп, НЗМ/БИЛ бағытындағы дайындық қарастырылған.",
-   "В 5–6 классах внимание уделяется математике, английскому и подготовке к НИШ/БИЛ.",
-   "Grades 5–6 focus on mathematics and English, including preparation for NIS/BIL entry."
-  ],
-  "https://joo-schools.kz/"
- ],
- [
-  1,
-  "school-students.webp",
-  3,
-  [
-   "JOO AUEZ UMIT жобасының негізгі бағыты қандай?",
-   "Чему посвящён проект JOO AUEZ UMIT?",
-   "What is the main purpose of JOO AUEZ UMIT?"
-  ],
-  [
-   [
-    "Спорттық рейтинг жасау",
-    "Мектепке құжат қабылдау",
-    "ҰБТ балын есептеу",
-    "Еріктілік пен қоғамға пайдалы іс"
-   ],
-   [
-    "Спортивный рейтинг",
-    "Приём документов",
-    "Подсчёт баллов ЕНТ",
-    "Волонтёрство и общественно полезные дела"
-   ],
-   [
-    "Sports rankings",
-    "Processing applications",
-    "Calculating UNT scores",
-    "Volunteering and community service"
-   ]
-  ],
-  [
-   "JOO AUEZ UMIT — оқушылардың жауапкершілігін дамытатын еріктілік және қоғамға пайдалы іс бағыты.",
-   "JOO AUEZ UMIT — направление волонтёрства и полезной для общества деятельности.",
-   "JOO AUEZ UMIT is a student volunteering and community service initiative."
-  ],
-  "/student-life.html"
- ],
- [
-  1,
-  "/assets/images/computerlab-800.webp",
-  2,
-  [
-   "JOO оқу бағдарламасындағы PBL әдісі қалай жүзеге асады?",
-   "Как проходит обучение по методу PBL в JOO?",
-   "How does JOO use the PBL approach?"
-  ],
-  [
-   [
-    "Тек дайын мәтінді жаттау",
-    "Тек дәріс тыңдау",
-    "Мәселені зерттеп, жоба жасап, қорғау",
-    "Сабаққа қатыспай тест тапсыру"
-   ],
-   [
-    "Только заучивать текст",
-    "Только слушать лекции",
-    "Исследовать проблему, создать и защитить проект",
-    "Сдавать тесты без занятий"
-   ],
-   [
-    "Only memorizing notes",
-    "Only listening to lectures",
-    "Researching problems, creating and presenting projects",
-    "Taking tests without lessons"
-   ]
-  ],
-  [
-   "PBL оқушыларды мәселені зерттеп, өз шешімін жоба түрінде жасап, оны қорғауға үйретеді.",
-   "PBL предполагает исследование проблемы, создание проекта и его защиту.",
-   "PBL involves investigating problems, developing a project and presenting the solution."
-  ],
-  "/academics.html"
- ],
- [
-  1,
-  "school-reception.webp",
-  1,
-  [
-   "Оқушыға мамандық пен оқу бағытын таңдауға JOO-да кім көмектеседі?",
-   "Кто помогает ученику JOO выбрать профессию и направление учёбы?",
-   "Who helps JOO students choose a career and study pathway?"
-  ],
-  [
-   [
-    "Спорт жаттықтырушысы",
-    "Профориентатор",
-    "Кітапханашы",
-    "Күзет қызметкері"
-   ],
-   [
-    "Спортивный тренер",
-    "Профориентатор",
-    "Библиотекарь",
-    "Сотрудник охраны"
-   ],
-   [
-    "Sports coach",
-    "Career guidance specialist",
-    "Librarian",
-    "Security officer"
-   ]
-  ],
-  [
-   "Мектептегі профориентаторлар оқушының қабілеті мен қызығушылығын ескеріп, мамандық таңдауға көмектеседі.",
-   "Профориентаторы помогают выбрать профессию с учётом способностей и интересов ученика.",
-   "Career guidance specialists help students choose paths based on their abilities and interests."
-  ],
-  "https://joohs.kz/jooauezov"
- ]
-],
-2:[
- [
-  2,
-  "school-classroom.webp",
-  1,
-  [
-   "JOO оқу бағдарламасында 10–11 сыныптағы 90 минуттық сабақ қалай бөлінеді?",
-   "Как в программе JOO делится 90-минутное занятие в 10–11 классах?",
-   "How does JOO divide a 90-minute lesson for grades 10–11?"
-  ],
-  [
-   [
-    "60 минут теория, 30 минут практика",
-    "45 минут теория, 45 минут практика",
-    "30 минут теория, 60 минут практика",
-    "90 минут тек теория"
-   ],
-   [
-    "60 минут теории, 30 практики",
-    "45 минут теории, 45 практики",
-    "30 минут теории, 60 практики",
-    "90 минут только теории"
-   ],
-   [
-    "60 minutes theory, 30 practice",
-    "45 minutes theory, 45 practice",
-    "30 minutes theory, 60 practice",
-    "90 minutes of theory only"
-   ]
-  ],
-  [
-   "JOO бағдарламасының сипаттамасында 90 минуттық сабақ 45 минут теория және 45 минут практикадан тұрады.",
-   "В описании программы JOO 90-минутный урок состоит из 45 минут теории и 45 минут практики.",
-   "JOO's program describes 90 minutes as 45 minutes of theory and 45 minutes of practice."
-  ],
-  "https://joo-schools.kz/"
- ],
- [
-  2,
-  "school-students.webp",
-  2,
-  [
-   "JOO Auezov сайтындағы грант қорытындысында қанша мемлекеттік грант көрсетілген?",
-   "Сколько государственных грантов показано в итогах JOO Auezov на сайте?",
-   "How many state grants are shown in the JOO Auezov website results?"
-  ],
-  [
-   [
-    "8",
-    "12",
-    "25",
-    "137"
-   ],
-   [
-    "8",
-    "12",
-    "25",
-    "137"
-   ],
-   [
-    "8",
-    "12",
-    "25",
-    "137"
-   ]
-  ],
-  [
-   "«Нәтижелер» бөлімінде 25 мемлекеттік грант бөлек жарияланған. Бұл көрсеткіш 8 ҰБТ постерінің статистикасымен шатастырылмайды.",
-   "Раздел «Результаты» отдельно показывает 25 государственных грантов — не путайте их со статистикой 8 постеров ЕНТ.",
-   "The Results section separately lists 25 state grants; this is a different dataset from the eight UNT posters."
-  ],
-  "/results.html"
- ],
- [
-  2,
-  "school-students.webp",
-  2,
-  [
-   "ҰБТ нәтижелеріне қатысты қай салыстыру дұрыс?",
-   "Какое сравнение результатов ЕНТ верное?",
-   "Which comparison of UNT results is correct?"
-  ],
-  [
-   [
-    "Ауезов постерлері мен бүкіл желіде ең жоғарысы — 121 балл",
-    "Ауезовтың 8 постері — 137, бүкіл желі — 121 балл",
-    "Ауезовтың 8 постері — 121, JOO желісі — 137 балл",
-    "Екі дереккөзде де ең жоғарысы — 137 балл"
-   ],
-   [
-    "Максимум в постерах Ауэзова и по сети — 121 балл",
-    "8 постеров Ауэзова — 137, вся сеть — 121 балл",
-    "8 постеров Ауэзова — 121, сеть JOO — 137 баллов",
-    "Оба источника показывают максимум 137 баллов"
-   ],
-   [
-    "Both the Auezov posters and network show 121",
-    "Auezov's eight posters show 137; the network shows 121",
-    "Auezov's eight posters show 121; the JOO network shows 137",
-    "Both sources show 137"
-   ]
-  ],
-  [
-   "Дұрыс: Ауезов сайтындағы 8 постердің максимумы — 121. JOO School желісі жариялаған 137 балл — жалпы желінің нәтижесі.",
-   "Верно: максимум среди 8 постеров Ауэзова — 121. Показатель 137 баллов опубликован по всей сети JOO School.",
-   "Correct: the eight Auezov posters peak at 121, while the JOO School network reports a separate 137-point result."
-  ],
-  [
-   "/results.html",
    "https://joo-schools.kz/"
+  ],
+  [
+   0,
+   "school-reception.webp",
+   2,
+   [
+    "JOO School Auezov қай жылы құрылған?",
+    "В каком году была основана JOO School Auezov?",
+    "In what year was JOO School Auezov founded?"
+   ],
+   [
+    [
+     "2018",
+     "2020",
+     "2022",
+     "2024"
+    ],
+    [
+     "2018",
+     "2020",
+     "2022",
+     "2024"
+    ],
+    [
+     "2018",
+     "2020",
+     "2022",
+     "2024"
+    ]
+   ],
+   [
+    "Ауезов мектебінің ресми парағында негізі 2022 жылы қаланғаны жазылған.",
+    "Официальная страница школы указывает год основания — 2022.",
+    "The Auezov school’s official page states it was founded in 2022."
+   ],
+   "https://joohs.kz/jooauezov"
+  ],
+  [
+   0,
+   "school-students.webp",
+   1,
+   [
+    "JOO мектебінің ресми сипаттамасында форма ретінде не беріледі?",
+    "Какие предметы школьной формы указаны на официальной странице JOO?",
+    "Which uniform items does JOO list on its official page?"
+   ],
+   [
+    [
+     "Көйлек пен галстук",
+     "Поло мен бомбер",
+     "Костюм мен жилет",
+     "Бірдей спорт костюмі"
+    ],
+    [
+     "Рубашка и галстук",
+     "Поло и бомбер",
+     "Костюм и жилет",
+     "Одинаковый спортивный костюм"
+    ],
+    [
+     "Shirt and tie",
+     "Polo shirt and bomber jacket",
+     "Suit and vest",
+     "Matching tracksuit"
+    ]
+   ],
+   [
+    "Ресми FAQ бойынша мектеп формасы ретінде поло мен бомбер беріледі, ал күнделікті киім стилі — Smart Casual.",
+    "По официальному FAQ выдаются поло и бомбер; повседневный стиль одежды — Smart Casual.",
+    "The official FAQ lists a polo shirt and bomber jacket, with Smart Casual as the usual dress style."
+   ],
+   "https://joohs.kz/jooauezov"
+  ],
+  [
+   0,
+   "school-building.webp",
+   1,
+   [
+    "JOO Auezov мектебі қай қалада?",
+    "В каком городе находится школа JOO Auezov?",
+    "Which city is home to JOO Auezov?"
+   ],
+   [
+    [
+     "Астана",
+     "Алматы",
+     "Ақтау",
+     "Шымкент"
+    ],
+    [
+     "Астана",
+     "Алматы",
+     "Актау",
+     "Шымкент"
+    ],
+    [
+     "Astana",
+     "Almaty",
+     "Aktau",
+     "Shymkent"
+    ]
+   ],
+   [
+    "JOO Auezov мектебі Алматы қаласында орналасқан.",
+    "Школа JOO Auezov находится в Алматы.",
+    "JOO Auezov is located in Almaty."
+   ],
+   "https://joohs.kz/jooauezov"
+  ],
+  [
+   0,
+   "school-building.webp",
+   2,
+   [
+    "JOO Auezov мектебі Алматының қай ауданында?",
+    "В каком районе Алматы находится JOO Auezov?",
+    "Which Almaty district is JOO Auezov in?"
+   ],
+   [
+    [
+     "Медеу",
+     "Бостандық",
+     "Әуезов",
+     "Алатау"
+    ],
+    [
+     "Медеуский",
+     "Бостандыкский",
+     "Ауэзовский",
+     "Алатауский"
+    ],
+    [
+     "Medeu",
+     "Bostandyk",
+     "Auezov",
+     "Alatau"
+    ]
+   ],
+   [
+    "Мектептің Цветочная көшесіндегі ғимараты Әуезов ауданында орналасқан.",
+    "Здание школы на Цветочной улице находится в Ауэзовском районе.",
+    "The school building on Tsvetochnaya Street is in Auezov District."
+   ],
+   "/contacts.html"
+  ],
+  [
+   0,
+   "school-reception.webp",
+   0,
+   [
+    "JOO School Auezov қандай мектеп?",
+    "К какому типу относится JOO School Auezov?",
+    "What type of school is JOO School Auezov?"
+   ],
+   [
+    [
+     "Жекеменшік мектеп",
+     "Университет",
+     "Спорт кешені",
+     "Балабақша"
+    ],
+    [
+     "Частная школа",
+     "Университет",
+     "Спортивный комплекс",
+     "Детский сад"
+    ],
+    [
+     "Private school",
+     "University",
+     "Sports centre",
+     "Kindergarten"
+    ]
+   ],
+   [
+    "JOO School Auezov — жекеменшік мектеп.",
+    "JOO School Auezov — частная школа.",
+    "JOO School Auezov is a private school."
+   ],
+   "https://joohs.kz/jooauezov"
+  ],
+  [
+   0,
+   "school-students.webp",
+   2,
+   [
+    "JOO мектебінде күнделікті киім стилі қалай аталады?",
+    "Какой стиль повседневной одежды принят в JOO?",
+    "What is the everyday dress style at JOO?"
+   ],
+   [
+    [
+     "Black Tie",
+     "Military",
+     "Smart Casual",
+     "Formal Only"
+    ],
+    [
+     "Black Tie",
+     "Military",
+     "Smart Casual",
+     "Formal Only"
+    ],
+    [
+     "Black Tie",
+     "Military",
+     "Smart Casual",
+     "Formal Only"
+    ]
+   ],
+   [
+    "Ресми FAQ-да күнделікті киіну стилі Smart Casual екені жазылған.",
+    "В официальном FAQ указан повседневный стиль Smart Casual.",
+    "JOO's official FAQ describes the usual dress style as Smart Casual."
+   ],
+   "https://joohs.kz/jooauezov"
+  ],
+  [
+   0,
+   "school-classroom.webp",
+   1,
+   [
+    "Мектеп кампусында тыныш оқуға арналған қандай орын бар?",
+    "Какое пространство кампуса подходит для тихого чтения?",
+    "Which campus space is intended for quiet reading?"
+   ],
+   [
+    [
+     "Автотұрақ",
+     "Кітапхана",
+     "Ас үй",
+     "Тұрақты көрме"
+    ],
+    [
+     "Парковка",
+     "Библиотека",
+     "Кухня",
+     "Постоянная выставка"
+    ],
+    [
+     "Car park",
+     "Library",
+     "Kitchen",
+     "Permanent exhibition"
+    ]
+   ],
+   [
+    "Кампус туралы бөлімде кітапхана тыныш фокус нүктесі ретінде көрсетілген.",
+    "В разделе о кампусе библиотека описана как место для спокойной работы.",
+    "The Campus section describes the library as a quiet place for focused work."
+   ],
+   "/campus.html"
+  ],
+  [
+   0,
+   "/assets/images/computerlab-800.webp",
+   0,
+   [
+    "Мектеп сайтында қандай технологиялық оқу кеңістігі көрсетілген?",
+    "Какое технологическое учебное пространство показано на сайте?",
+    "Which technology-related learning space is shown on the website?"
+   ],
+   [
+    [
+     "Компьютерлік кабинет",
+     "Аэродром",
+     "Кинотеатр",
+     "Планетарий"
+    ],
+    [
+     "Компьютерный кабинет",
+     "Аэродром",
+     "Кинотеатр",
+     "Планетарий"
+    ],
+    [
+     "Computer lab",
+     "Airfield",
+     "Cinema",
+     "Planetarium"
+    ]
+   ],
+   [
+    "Кампус материалдарында компьютерлік кабинет пен технологиялық кеңістіктер көрсетілген.",
+    "На сайте показаны компьютерный кабинет и пространства для технологий.",
+    "The site features a computer lab and technology learning spaces."
+   ],
+   "/campus.html"
+  ],
+  [
+   0,
+   "school-reception.webp",
+   3,
+   [
+    "Мектепке түсу туралы ақпаратты қай бөлімнен табуға болады?",
+    "В каком разделе искать сведения о поступлении в школу?",
+    "Which website section explains how to apply to the school?"
+   ],
+   [
+    [
+     "Галерея",
+     "Нәтижелер",
+     "Жаңалықтар",
+     "Қабылдау"
+    ],
+    [
+     "Галерея",
+     "Результаты",
+     "Новости",
+     "Поступление"
+    ],
+    [
+     "Gallery",
+     "Results",
+     "News",
+     "Admissions"
+    ]
+   ],
+   [
+    "«Қабылдау» бөлімінде өтінім мен түсу тәртібі туралы ақпарат берілген.",
+    "В разделе «Поступление» указана информация о заявке и приёме.",
+    "The Admissions section explains applications and the entry process."
+   ],
+   "/admissions.html"
+  ],
+  [
+   0,
+   "school-students.webp",
+   2,
+   [
+    "JOO желісінің ресми сайтында мектептер Қазақстанның неше қаласында бар делінген?",
+    "В скольких городах Казахстана указаны школы сети JOO?",
+    "In how many Kazakhstani cities does JOO say it has schools?"
+   ],
+   [
+    [
+     "3",
+     "4",
+     "5",
+     "9"
+    ],
+    [
+     "3",
+     "4",
+     "5",
+     "9"
+    ],
+    [
+     "3",
+     "4",
+     "5",
+     "9"
+    ]
+   ],
+   [
+    "Ресми сайт JOO мектептерінің 5 қалада орналасқанын көрсетеді. Бұл жеке Ауезов филиалының саны емес.",
+    "На официальном сайте указано 5 городов сети JOO, а не филиалов Ауэзова.",
+    "The official site lists JOO schools in five cities; this is network-wide, not an Auezov-branch count."
+   ],
+   "https://joohs.kz/"
+  ],
+  [
+   0,
+   "school-students.webp",
+   1,
+   [
+    "Мектептегі еріктілік бастамасы қалай аталады?",
+    "Как называется волонтёрская инициатива школы?",
+    "What is the school's student volunteering initiative called?"
+   ],
+   [
+    [
+     "JOO E-SPORT",
+     "JOO AUEZ UMIT",
+     "JOO AIR",
+     "JOO FINANCE"
+    ],
+    [
+     "JOO E-SPORT",
+     "JOO AUEZ UMIT",
+     "JOO AIR",
+     "JOO FINANCE"
+    ],
+    [
+     "JOO E-SPORT",
+     "JOO AUEZ UMIT",
+     "JOO AIR",
+     "JOO FINANCE"
+    ]
+   ],
+   [
+    "«Мектеп өмірі» бөлімінде JOO AUEZ UMIT еріктілік бағыты көрсетілген.",
+    "В разделе «Школьная жизнь» описана инициатива JOO AUEZ UMIT.",
+    "JOO AUEZ UMIT is featured as a volunteering initiative in the School Life section."
+   ],
+   "/student-life.html"
+  ]
+ ],
+ "1": [
+  [
+   1,
+   "school-classroom.webp",
+   0,
+   [
+    "JOO Auezov-та 5–6 сыныптар үшін қандай пәндерге басымдық беріледі?",
+    "На каких предметах делают акцент в 5–6 классах JOO Auezov?",
+    "Which subjects are emphasized for grades 5–6 at JOO Auezov?"
+   ],
+   [
+    [
+     "Математика мен ағылшын тілі",
+     "Тек ҰБТ тесттері",
+     "Университет гранттары",
+     "Тек спорттық дайындық"
+    ],
+    [
+     "Математика и английский язык",
+     "Только тесты ЕНТ",
+     "Гранты университетов",
+     "Только спортивная подготовка"
+    ],
+    [
+     "Mathematics and English",
+     "Only UNT practice tests",
+     "University grants",
+     "Only sports training"
+    ]
+   ],
+   [
+    "5–6 сыныптарда математика мен ағылшын тіліне басымдық беріліп, НЗМ/БИЛ бағытындағы дайындық қарастырылған.",
+    "В 5–6 классах внимание уделяется математике, английскому и подготовке к НИШ/БИЛ.",
+    "Grades 5–6 focus on mathematics and English, including preparation for NIS/BIL entry."
+   ],
+   "https://joo-schools.kz/"
+  ],
+  [
+   1,
+   "school-students.webp",
+   3,
+   [
+    "JOO AUEZ UMIT жобасының негізгі бағыты қандай?",
+    "Чему посвящён проект JOO AUEZ UMIT?",
+    "What is the main purpose of JOO AUEZ UMIT?"
+   ],
+   [
+    [
+     "Спорттық рейтинг жасау",
+     "Мектепке құжат қабылдау",
+     "ҰБТ балын есептеу",
+     "Еріктілік пен қоғамға пайдалы іс"
+    ],
+    [
+     "Спортивный рейтинг",
+     "Приём документов",
+     "Подсчёт баллов ЕНТ",
+     "Волонтёрство и общественно полезные дела"
+    ],
+    [
+     "Sports rankings",
+     "Processing applications",
+     "Calculating UNT scores",
+     "Volunteering and community service"
+    ]
+   ],
+   [
+    "JOO AUEZ UMIT — оқушылардың жауапкершілігін дамытатын еріктілік және қоғамға пайдалы іс бағыты.",
+    "JOO AUEZ UMIT — направление волонтёрства и полезной для общества деятельности.",
+    "JOO AUEZ UMIT is a student volunteering and community service initiative."
+   ],
+   "/student-life.html"
+  ],
+  [
+   1,
+   "/assets/images/computerlab-800.webp",
+   2,
+   [
+    "JOO оқу бағдарламасындағы PBL әдісі қалай жүзеге асады?",
+    "Как проходит обучение по методу PBL в JOO?",
+    "How does JOO use the PBL approach?"
+   ],
+   [
+    [
+     "Тек дайын мәтінді жаттау",
+     "Тек дәріс тыңдау",
+     "Мәселені зерттеп, жоба жасап, қорғау",
+     "Сабаққа қатыспай тест тапсыру"
+    ],
+    [
+     "Только заучивать текст",
+     "Только слушать лекции",
+     "Исследовать проблему, создать и защитить проект",
+     "Сдавать тесты без занятий"
+    ],
+    [
+     "Only memorizing notes",
+     "Only listening to lectures",
+     "Researching problems, creating and presenting projects",
+     "Taking tests without lessons"
+    ]
+   ],
+   [
+    "PBL оқушыларды мәселені зерттеп, өз шешімін жоба түрінде жасап, оны қорғауға үйретеді.",
+    "PBL предполагает исследование проблемы, создание проекта и его защиту.",
+    "PBL involves investigating problems, developing a project and presenting the solution."
+   ],
+   "/academics.html"
+  ],
+  [
+   1,
+   "school-reception.webp",
+   1,
+   [
+    "Оқушыға мамандық пен оқу бағытын таңдауға JOO-да кім көмектеседі?",
+    "Кто помогает ученику JOO выбрать профессию и направление учёбы?",
+    "Who helps JOO students choose a career and study pathway?"
+   ],
+   [
+    [
+     "Спорт жаттықтырушысы",
+     "Профориентатор",
+     "Кітапханашы",
+     "Күзет қызметкері"
+    ],
+    [
+     "Спортивный тренер",
+     "Профориентатор",
+     "Библиотекарь",
+     "Сотрудник охраны"
+    ],
+    [
+     "Sports coach",
+     "Career guidance specialist",
+     "Librarian",
+     "Security officer"
+    ]
+   ],
+   [
+    "Мектептегі профориентаторлар оқушының қабілеті мен қызығушылығын ескеріп, мамандық таңдауға көмектеседі.",
+    "Профориентаторы помогают выбрать профессию с учётом способностей и интересов ученика.",
+    "Career guidance specialists help students choose paths based on their abilities and interests."
+   ],
+   "https://joohs.kz/jooauezov"
+  ],
+  [
+   1,
+   "school-classroom.webp",
+   1,
+   [
+    "JOO Auezov сайтында 5–6 сынып кезеңі қалай аталады?",
+    "Как на сайте JOO Auezov называется этап 5–6 классов?",
+    "What is the grades 5–6 stage called on JOO Auezov's website?"
+   ],
+   [
+    [
+     "START",
+     "FOUNDATION",
+     "EXPLORE",
+     "LAUNCH"
+    ],
+    [
+     "START",
+     "FOUNDATION",
+     "EXPLORE",
+     "LAUNCH"
+    ],
+    [
+     "START",
+     "FOUNDATION",
+     "EXPLORE",
+     "LAUNCH"
+    ]
+   ],
+   [
+    "Сайттағы екінші кезең — 5–6 сыныптарға арналған FOUNDATION.",
+    "На сайте второй этап — FOUNDATION для 5–6 классов.",
+    "The site's second stage is FOUNDATION for grades 5–6."
+   ],
+   "/academics.html"
+  ],
+  [
+   1,
+   "school-students.webp",
+   2,
+   [
+    "EXPLORE кезеңі қай сыныптарға қатысты?",
+    "Для каких классов на сайте указан этап EXPLORE?",
+    "Which grades does the website associate with EXPLORE?"
+   ],
+   [
+    [
+     "2–4",
+     "5–6",
+     "7–9",
+     "10–11"
+    ],
+    [
+     "2–4",
+     "5–6",
+     "7–9",
+     "10–11"
+    ],
+    [
+     "2–4",
+     "5–6",
+     "7–9",
+     "10–11"
+    ]
+   ],
+   [
+    "Сайттағы EXPLORE кезеңі — 7–9 сыныптардағы ғылым, IT және жобалар.",
+    "Этап EXPLORE на сайте — 7–9 классы, наука, IT и проекты.",
+    "EXPLORE is the website's grades 7–9 stage for science, IT and projects."
+   ],
+   "/academics.html"
+  ],
+  [
+   1,
+   "school-classroom.webp",
+   3,
+   [
+    "Жоғары сыныптағы LAUNCH кезеңінің негізгі бағыттары қандай?",
+    "На что направлен этап LAUNCH в старших классах?",
+    "What does the upper-grades LAUNCH stage focus on?"
+   ],
+   [
+    [
+     "Тек спорт",
+     "Тек бастауыш тақырыптар",
+     "Тек өнер байқаулары",
+     "Профиль, ҰБТ, IELTS және келесі оқу бағыты"
+    ],
+    [
+     "Только спорт",
+     "Только начальные предметы",
+     "Только конкурсы искусств",
+     "Профиль, ЕНТ, IELTS и дальнейшая учёба"
+    ],
+    [
+     "Only sports",
+     "Only primary-level topics",
+     "Only arts competitions",
+     "Specializations, UNT, IELTS and next studies"
+    ]
+   ],
+   [
+    "LAUNCH кезеңі 10–11 сыныптардағы ҰБТ, IELTS және жоғары оқу орны бағытымен байланысты.",
+    "LAUNCH в 10–11 классах связан с ЕНТ, IELTS и дальнейшим обучением.",
+    "LAUNCH in grades 10–11 relates to UNT, IELTS and future studies."
+   ],
+   "/academics.html"
+  ],
+  [
+   1,
+   "school-students.webp",
+   0,
+   [
+    "GSED моделінде оқушы негізгі мектебінде оқуды қалай жалғастырады?",
+    "Как ученик продолжает обучение по модели GSED?",
+    "How does the GSED model fit alongside regular school?"
+   ],
+   [
+    [
+     "Негізгі мектепте оқып, қосымша ағылшын онлайн курстарын өтеді",
+     "Барлық сабақ тек шетелде өтеді",
+     "Негізгі пәндер тоқтатылады",
+     "Тек спортқа көшеді"
+    ],
+    [
+     "Учится в своей школе и проходит дополнительные онлайн-курсы на английском",
+     "Учится только за рубежом",
+     "Прекращает основные предметы",
+     "Переходит только на спорт"
+    ],
+    [
+     "Stays in regular school and takes additional online courses in English",
+     "Studies only abroad",
+     "Stops regular subjects",
+     "Switches to sports only"
+    ]
+   ],
+   [
+    "GSED моделі негізгі мектептегі оқу мен онлайн курстарды ұштастырады. Қолданыстағы шарттарды мектептен нақтылау қажет.",
+    "GSED сочетает обычную школу с онлайн-курсами; актуальные условия нужно уточнять.",
+    "GSED combines regular school with online courses; current conditions require confirmation."
+   ],
+   "/academics.html"
+  ],
+  [
+   1,
+   "school-reception.webp",
+   1,
+   [
+    "Сайттағы қабылдау тесті 5-сыныптан бастап қай үш пәннен өтеді?",
+    "Какие три предмета указаны для теста при поступлении с 5 класса?",
+    "Which subjects are listed for entrance testing from grade 5?"
+   ],
+   [
+    [
+     "Физика, химия, биология",
+     "Математика, қазақ тілі, ағылшын тілі",
+     "Тарих, география, әдебиет",
+     "Дене шынықтыру, музыка, сурет"
+    ],
+    [
+     "Физика, химия, биология",
+     "Математика, казахский, английский",
+     "История, география, литература",
+     "Физкультура, музыка, рисование"
+    ],
+    [
+     "Physics, chemistry, biology",
+     "Mathematics, Kazakh, English",
+     "History, geography, literature",
+     "PE, music, art"
+    ]
+   ],
+   [
+    "«Қабылдау» бетінде жазбаша тест үшін математика, қазақ тілі және ағылшын тілі көрсетілген.",
+    "В разделе «Поступление» указаны математика, казахский и английский языки.",
+    "The Admissions page lists mathematics, Kazakh and English for written entry testing."
+   ],
+   "/admissions.html"
+  ],
+  [
+   1,
+   "school-classroom.webp",
+   2,
+   [
+    "PBL жобасы аяқталған соң қандай әрекет маңызды?",
+    "Что важно сделать после презентации PBL-проекта?",
+    "What matters after presenting a PBL project?"
+   ],
+   [
+    [
+     "Жобаны жасыру",
+     "Қателерді талқыламау",
+     "Кері байланыс арқылы жетілдіру",
+     "Тек баға күту"
+    ],
+    [
+     "Скрыть проект",
+     "Не обсуждать ошибки",
+     "Улучшить с учётом обратной связи",
+     "Только ждать оценку"
+    ],
+    [
+     "Hide the project",
+     "Ignore errors",
+     "Improve using feedback",
+     "Only wait for a grade"
+    ]
+   ],
+   [
+    "«Мектеп туралы» бөлімінде нәтиже мен кері байланыс негізінде жобаны жетілдіру сипатталған.",
+    "В разделе «О школе» описано улучшение проекта после обратной связи.",
+    "The About page describes improving work based on feedback."
+   ],
+   "/about.html"
+  ],
+  [
+   1,
+   "school-students.webp",
+   0,
+   [
+    "Ортақ мектеп кеңістіктері оқушыға не үшін пайдалы?",
+    "Для чего полезны общие пространства школы?",
+    "How do shared school spaces help students?"
+   ],
+   [
+    [
+     "Топтық жұмыс, презентация және іс-шара үшін",
+     "Тек зат сақтау үшін",
+     "Тек бақылау жұмысы үшін",
+     "Сабақты өткізбеу үшін"
+    ],
+    [
+     "Для командной работы, презентаций и событий",
+     "Только для хранения вещей",
+     "Только для контрольных",
+     "Для пропуска уроков"
+    ],
+    [
+     "Teamwork, presentations and events",
+     "Only storage",
+     "Only exams",
+     "Skipping lessons"
+    ]
+   ],
+   [
+    "Кампус бөлімі ортақ кеңістіктерді команда, презентация және мектеп қауымдастығымен байланыстырады.",
+    "Раздел кампуса связывает общие зоны с командной работой и событиями.",
+    "The Campus page links shared spaces to teamwork and school events."
+   ],
+   "/campus.html"
+  ],
+  [
+   1,
+   "school-reception.webp",
+   3,
+   [
+    "Мектеп пен ата-ана байланысы нені түсіндіруі тиіс?",
+    "Что должна объяснять связь школы с родителями?",
+    "What should school-parent communication explain?"
+   ],
+   [
+    [
+     "Тек мерекелерді",
+     "Тек форма түсін",
+     "Тек демалысты",
+     "Прогресс, келесі басымдық және қажет қолдауды"
+    ],
+    [
+     "Только праздники",
+     "Только цвет формы",
+     "Только каникулы",
+     "Прогресс, следующие приоритеты и поддержку"
+    ],
+    [
+     "Only holidays",
+     "Only uniform colours",
+     "Only holidays and breaks",
+     "Progress, priorities and needed support"
+    ]
+   ],
+   [
+    "Сайт ата-анамен байланыста оқу прогресін, келесі қадамды және қажет қолдауды атап өтеді.",
+    "Сайт подчёркивает прогресс, следующий шаг и необходимую поддержку.",
+    "The site emphasizes progress, next priorities and support needs."
+   ],
+   "/parents.html"
+  ]
+ ],
+ "2": [
+  [
+   2,
+   "school-classroom.webp",
+   1,
+   [
+    "JOO оқу бағдарламасында 10–11 сыныптағы 90 минуттық сабақ қалай бөлінеді?",
+    "Как в программе JOO делится 90-минутное занятие в 10–11 классах?",
+    "How does JOO divide a 90-minute lesson for grades 10–11?"
+   ],
+   [
+    [
+     "60 минут теория, 30 минут практика",
+     "45 минут теория, 45 минут практика",
+     "30 минут теория, 60 минут практика",
+     "90 минут тек теория"
+    ],
+    [
+     "60 минут теории, 30 практики",
+     "45 минут теории, 45 практики",
+     "30 минут теории, 60 практики",
+     "90 минут только теории"
+    ],
+    [
+     "60 minutes theory, 30 practice",
+     "45 minutes theory, 45 practice",
+     "30 minutes theory, 60 practice",
+     "90 minutes of theory only"
+    ]
+   ],
+   [
+    "JOO бағдарламасының сипаттамасында 90 минуттық сабақ 45 минут теория және 45 минут практикадан тұрады.",
+    "В описании программы JOO 90-минутный урок состоит из 45 минут теории и 45 минут практики.",
+    "JOO's program describes 90 minutes as 45 minutes of theory and 45 minutes of practice."
+   ],
+   "https://joo-schools.kz/"
+  ],
+  [
+   2,
+   "school-students.webp",
+   2,
+   [
+    "JOO Auezov сайтындағы грант қорытындысында қанша мемлекеттік грант көрсетілген?",
+    "Сколько государственных грантов показано в итогах JOO Auezov на сайте?",
+    "How many state grants are shown in the JOO Auezov website results?"
+   ],
+   [
+    [
+     "8",
+     "12",
+     "25",
+     "137"
+    ],
+    [
+     "8",
+     "12",
+     "25",
+     "137"
+    ],
+    [
+     "8",
+     "12",
+     "25",
+     "137"
+    ]
+   ],
+   [
+    "«Нәтижелер» бөлімінде 25 мемлекеттік грант бөлек жарияланған. Бұл көрсеткіш 8 ҰБТ постерінің статистикасымен шатастырылмайды.",
+    "Раздел «Результаты» отдельно показывает 25 государственных грантов — не путайте их со статистикой 8 постеров ЕНТ.",
+    "The Results section separately lists 25 state grants; this is a different dataset from the eight UNT posters."
+   ],
+   "/results.html"
+  ],
+  [
+   2,
+   "school-students.webp",
+   2,
+   [
+    "ҰБТ нәтижелеріне қатысты қай салыстыру дұрыс?",
+    "Какое сравнение результатов ЕНТ верное?",
+    "Which comparison of UNT results is correct?"
+   ],
+   [
+    [
+     "Ауезов постерлері мен бүкіл желіде ең жоғарысы — 121 балл",
+     "Ауезовтың 8 постері — 137, бүкіл желі — 121 балл",
+     "Ауезовтың 8 постері — 121, JOO желісі — 137 балл",
+     "Екі дереккөзде де ең жоғарысы — 137 балл"
+    ],
+    [
+     "Максимум в постерах Ауэзова и по сети — 121 балл",
+     "8 постеров Ауэзова — 137, вся сеть — 121 балл",
+     "8 постеров Ауэзова — 121, сеть JOO — 137 баллов",
+     "Оба источника показывают максимум 137 баллов"
+    ],
+    [
+     "Both the Auezov posters and network show 121",
+     "Auezov's eight posters show 137; the network shows 121",
+     "Auezov's eight posters show 121; the JOO network shows 137",
+     "Both sources show 137"
+    ]
+   ],
+   [
+    "Дұрыс: Ауезов сайтындағы 8 постердің максимумы — 121. JOO School желісі жариялаған 137 балл — жалпы желінің нәтижесі.",
+    "Верно: максимум среди 8 постеров Ауэзова — 121. Показатель 137 баллов опубликован по всей сети JOO School.",
+    "Correct: the eight Auezov posters peak at 121, while the JOO School network reports a separate 137-point result."
+   ],
+   [
+    "/results.html",
+    "https://joo-schools.kz/"
+   ]
   ]
  ]
-]
-};
+}
 let questions=[];
 
 const state={step:0,correct:0,selected:null,screen:'intro',streak:0,bestStreak:0,chapterCorrect:[0,0,0],shots:[],shotReady:true,activeShot:'jump',newAchievements:[]},points=()=>state.correct*10;
