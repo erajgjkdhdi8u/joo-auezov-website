@@ -103,8 +103,9 @@ function setup(){
 function view(html,id){root.innerHTML=html;$(id)?.focus({preventScroll:true});}
 function intro(){
  state.screen='intro';state.step=0;state.correct=0;state.selected=null;state.streak=0;state.bestStreak=0;state.chapterCorrect=[0,0,0];state.shots=[];state.shotReady=true;state.activeShot='jump';state.newAchievements=[];
- view('<section class="quest-intro" aria-labelledby="introTitle"><div class="quest-intro-copy"><div class="quest-kicker">'+h(t.eyebrow)+'</div><h1 id="introTitle" tabindex="-1" class="quest-display">'+h(t.big)+'<span>'+h(t.accent)+'</span></h1><p class="quest-lead">'+h(t.lead)+'</p><button class="quest-button" id="startQuest">'+h(t.start)+' <span aria-hidden="true">↗</span></button><div class="quest-micro">'+t.meta.map(s=>'<span>'+h(s)+'</span>').join('')+'</div></div><div class="quest-intro-art"><img src="/assets/images/v28/school-lounge.webp" width="1448" height="1086" alt="'+h(t.alt)+'"><div class="quest-photo-caption"><span>JOO AUEZOV / ALMATY</span><b>01—10</b></div></div></section>','introTitle');
+ view('<section class="quest-intro" aria-labelledby="introTitle"><div class="quest-intro-copy"><div class="quest-kicker">'+h(t.eyebrow)+'</div><h1 id="introTitle" tabindex="-1" class="quest-display">'+h(t.big)+'<span>'+h(t.accent)+'</span></h1><p class="quest-lead">'+h(t.lead)+'</p><button class="quest-button" id="startQuest">'+h(t.start)+' <span aria-hidden="true">↗</span></button><button class="quest-collection-trigger" id="openGallery" type="button">✦ '+h(t.achButton)+' <span>'+readAchievements().size+' / '+achievementDefs.length+'</span></button><div class="quest-micro">'+t.meta.map(s=>'<span>'+h(s)+'</span>').join('')+'</div></div><div class="quest-intro-art"><img src="/assets/images/v28/school-lounge.webp" width="1448" height="1086" alt="'+h(t.alt)+'"><div class="quest-photo-caption"><span>JOO AUEZOV / ALMATY</span><b>01—10</b></div></div></section>','introTitle');
  $('startQuest').addEventListener('click',()=>{state.screen='question';state.activeShot=selectShot();question();});
+ $('openGallery').addEventListener('click',gallery);
 }
 
 /* No external audio files: synthesize a low-volume throw, net swish and rim clang. */
@@ -205,15 +206,13 @@ function soundControl(){
 function question(){
  state.screen='question';
  const q=questions[state.step],picked=state.selected!==null,made=picked&&state.selected===q[2];
- const stageUnlock=(!picked&&(state.step===3||state.step===7))?
-  '<div class="quest-stage-transition"><span aria-hidden="true">✦</span><small>'+h(t.arenaOpen)+'</small><strong>'+h(t.arenaNames[q[0]])+'</strong></div>':'';
  const choices=L(q[4]).map((s,i)=>{
   let cls='quest-option';
   if(picked)cls+=i===q[2]?' is-correct':i===state.selected?' is-wrong':' is-dimmed';
   return '<button class="'+cls+'" type="button" data-answer="'+i+'"'+(picked?' disabled':'')+'><b aria-hidden="true">'+(i+1)+'</b><span>'+h(s)+'</span></button>';
  }).join('');
  const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p></div><button class="quest-button" id="nextQuestion"'+(state.shotReady?'':' disabled aria-disabled="true"')+'>'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
- view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div>'+stageUnlock+'<h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'</div></section>','questionTitle');
+ view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'</div></section>','questionTitle');
  root.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.answer))));
  $('questSound')?.addEventListener('click',()=>{
   soundOn=!soundOn;const b=$('questSound');
@@ -356,10 +355,44 @@ function choose(n){
  else state.streak=0;
  question();runShot(made);
 }
+/* Chapter-change presentation after questions 3 and 7 only.
+   Skippable immediately; reduced-motion users get a manual Continue. */
+function intermission(){
+ const nextChapter=questions[state.step][0],completedChapter=nextChapter-1;
+ const count=[3,4,3][completedChapter],correct=state.chapterCorrect[completedChapter];
+ const newArena=t.arenaNames[nextChapter];
+ state.screen='intermission';
+ const beams=Array.from({length:7},(_,i)=>'<i style="--beam:'+i+'"></i>').join('');
+ view('<section class="quest-intermission arena-stage--'+(nextChapter+1)+'" aria-labelledby="halftimeTitle">'+
+  '<div class="quest-intermission__lights" aria-hidden="true">'+beams+'</div>'+
+  '<div class="quest-intermission__header"><span>JOO ARENA / 7.0</span><span>0'+(nextChapter+1)+' / 03</span></div>'+
+  '<div class="quest-intermission__stage"><div class="quest-intermission__eyebrow">'+h(t.half)+'</div>'+
+   '<div class="quest-intermission__finish">'+h(t.halfEnd)+'</div>'+
+   '<div class="quest-intermission__stats"><div><span>'+h(t.halfProgress)+'</span><strong>'+correct+' / '+count+'</strong></div>'+
+   '<div><span>'+h(t.halfTotal)+'</span><strong>'+points()+' / 100</strong></div></div>'+
+   '<div class="quest-intermission__divider"><span>✦</span></div>'+
+   '<p class="quest-intermission__next">'+h(t.halfNext)+'</p>'+
+   '<h1 id="halftimeTitle" tabindex="-1">'+h(newArena)+'</h1>'+
+   '<div class="quest-intermission__arena" aria-hidden="true"><div class="quest-intermission__court"></div><div class="quest-intermission__ball"></div><div class="quest-intermission__hoop"></div></div>'+
+   '<button class="quest-button" id="continueHalftime">'+h(t.halfContinue)+' →</button>'+
+  '</div></section>','halftimeTitle');
+ const nextStep=state.step;
+ const advance=()=>{
+  if(state.screen!=='intermission'||state.step!==nextStep)return;
+  state.activeShot=selectShot();question();
+ };
+ $('continueHalftime').addEventListener('click',advance);
+ try{
+  if(!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)
+   window.setTimeout(advance,4100);
+ }catch(_){/* Manual continue is always available. */}
+}
 function next(){
  if(state.screen!=='question'||state.selected===null||!state.shotReady)return;
  if(state.step===9){result();return;}
- state.step++;state.selected=null;state.shotReady=true;state.activeShot=selectShot();question();
+ state.step++;state.selected=null;state.shotReady=true;state.activeShot=selectShot();
+ if(state.step===3||state.step===7){intermission();return;}
+ question();
 }
 const level=()=>points()>=90?3:points()>=70?2:points()>=50?1:0;
 const ranks=['JOO ROOKIE','JOO EXPLORER','JOO EXPERT','JOO LEGEND'];
