@@ -154,7 +154,7 @@ function scene(picked,made){
   '<div class="quest-hoop"><div class="quest-hoop__board"></div><div class="quest-hoop__support"></div><div class="quest-hoop__rim"></div>'+
   '<svg class="quest-hoop__net" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false" aria-hidden="true"><path d="M2 2 L98 2 M5 3 L22 96 M28 3 L40 97 M51 3 L50 98 M74 3 L61 97 M95 3 L78 96 M5 25 L94 25 M9 48 L89 48 M14 70 L84 70 M21 93 L79 93"/></svg>'+
   '<div class="quest-hoop__rim-front"></div></div><div class="quest-ball__shadow"></div>'+
-  '<div class="quest-ball">'+flames+'</div>'+
+  '<div class="quest-ball"><span class="quest-ball__trail"></span>'+flames+'</div>'+
   '<div class="quest-court__sparks"><i></i><i></i><i></i><i></i><i></i></div></div>'+
   '<div class="quest-court__hud"><span>JOO ARENA</span><span>SHOT '+String(state.step+1).padStart(2,'0')+' / 10</span></div>'+
   tag+stateLabel+slowLabel+label+'</div>';
@@ -168,13 +168,15 @@ function soundControl(){
 function question(){
  state.screen='question';
  const q=questions[state.step],picked=state.selected!==null,made=picked&&state.selected===q[2];
+ const stageUnlock=(!picked&&(state.step===3||state.step===7))?
+  '<div class="quest-stage-transition"><span aria-hidden="true">✦</span><small>'+h(t.arenaOpen)+'</small><strong>'+h(t.arenaNames[q[0]])+'</strong></div>':'';
  const choices=L(q[4]).map((s,i)=>{
   let cls='quest-option';
   if(picked)cls+=i===q[2]?' is-correct':i===state.selected?' is-wrong':' is-dimmed';
   return '<button class="'+cls+'" type="button" data-answer="'+i+'"'+(picked?' disabled':'')+'><b aria-hidden="true">'+(i+1)+'</b><span>'+h(s)+'</span></button>';
  }).join('');
  const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p></div><button class="quest-button" id="nextQuestion"'+(state.shotReady?'':' disabled aria-disabled="true"')+'>'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
- view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'<div class="quest-picture-caption"><span>'+h(t.arenaLabel)+' 0'+(q[0]+1)+'</span><strong>'+h(t.arenaNames[q[0]])+'</strong></div></div></section>','questionTitle');
+ view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div>'+stageUnlock+'<h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'<div class="quest-picture-caption"><span>'+h(t.arenaLabel)+' 0'+(q[0]+1)+'</span><strong>'+h(t.arenaNames[q[0]])+'</strong></div></div></section>','questionTitle');
  root.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.answer))));
  $('questSound')?.addEventListener('click',()=>{
   soundOn=!soundOn;const b=$('questSound');
