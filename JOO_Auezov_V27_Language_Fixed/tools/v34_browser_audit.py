@@ -56,7 +56,11 @@ with sync_playwright() as pw:
                           chapterNavRemoved:document.querySelectorAll('.v34-chapters').length===0,
                           sceneCount:document.querySelectorAll('main .story__visual').length,
                           curtains:document.querySelectorAll('main .v34-curtain').length,
-                          overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth)
+                          overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),
+                          overflowOffenders:[...document.querySelectorAll('body *')].filter(el=>{
+                            const rect=el.getBoundingClientRect(),style=getComputedStyle(el);
+                            return rect.width && rect.right > innerWidth+6 && style.position!=='fixed' && style.visibility!=='hidden';
+                          }).slice(0,10).map(el=>({node:el.tagName.toLowerCase(),classes:String(el.className).slice(0,110),width:Math.round(el.getBoundingClientRect().width),right:Math.round(el.getBoundingClientRect().right)}))
                         };
                     }""")
                     item.update(state)
