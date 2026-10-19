@@ -196,14 +196,18 @@ function question(){
 }
 /* JOO ARENA 5.0: measured, responsive shot arcs and rim rebounds.
    Ball + hoop are in the same court coordinate system; WAAPI is a progressive enhancement. */
+/* JOO ARENA 6.0: 3 distinct trajectories in the same court coordinates.
+   The physics transform is WAAPI-only, with instant reduced-motion fallback. */
 function runShot(made){
  const court=root.querySelector('.quest-court');
  const ball=court?.querySelector('.quest-ball');
  const rim=court?.querySelector('.quest-hoop__rim');
  const camera=court?.querySelector('.quest-court__camera');
+ const shot=state.activeShot;
  const slow=state.step===4||state.step===9;
  const reduced=Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
- const duration=slow?2150:1450;
+ const impact=shot==='dunk'?.68:shot==='three'?.81:.75;
+ const duration=slow?(shot==='three'?2600:2450):shot==='three'?2000:shot==='dunk'?1720:1450;
  const activeQuestion=state.step;
  let done=false;
  function finish(){
@@ -218,8 +222,8 @@ function runShot(made){
   if(nextButton){nextButton.disabled=false;nextButton.removeAttribute('aria-disabled');nextButton.focus({preventScroll:true});}
  }
  if(slow)court?.classList.add('is-slowmo');
- if(court)court.style.setProperty('--shot-impact-delay',Math.round(duration*.75)+'ms');
- playShot(made,reduced?440:duration);
+ if(court)court.style.setProperty('--shot-impact-delay',Math.round(duration*impact)+'ms');
+ playShot(made,reduced?440:duration,impact,shot);
  if(reduced||!ball?.animate||!rim?.getBoundingClientRect){finish();return;}
  try{
   const ballRect=ball.getBoundingClientRect();
@@ -229,32 +233,49 @@ function runShot(made){
   const dx=(rimRect.left+rimRect.width*.5)-(ballRect.left+ballRect.width*.5);
   const dy=(rimRect.top+rimRect.height*.5)-(ballRect.top+ballRect.height*.5);
   const height=courtRect.height;
-  const apex=Math.max(90,Math.min(225,height*.58));
-  const keyframes=[];
-  const beforeImpact=[0,.15,.30,.45,.60,.75];
-  for(const t of beforeImpact){
-   const u=t/.75;
-   const x=dx*u;
+  const apex=shot==='three'?Math.max(155,Math.min(330,height*.85)):
+     shot==='dunk'?Math.max(95,Math.min(190,height*.47)):
+     Math.max(90,Math.min(225,height*.58));
+  const offsets=shot==='dunk'?[0,.13,.27,.42,.54,impact]:
+    shot==='three'?[0,.15,.31,.47,.64,impact]:
+    [0,.15,.30,.45,.60,impact];
+  const keyframes=offsets.map(t=>{
+   const u=t/impact;
+   const x=shot==='dunk'?dx*(1-Math.pow(1-u,2.5)):
+     shot==='three'?dx*Math.pow(u,1.08):dx*u;
    const y=dy*u-4*apex*u*(1-u);
-   keyframes.push({offset:t,transform:'translate3d('+x+'px,'+y+'px,0) rotate('+(u*540-20)+'deg) scale('+(1-u*.35)+')',opacity:1});
-  }
+   const scale=shot==='three'?(.86-u*.26):shot==='dunk'?(1.06-u*.30):(1-u*.35);
+   return {offset:t,transform:'translate3d('+x+'px,'+y+'px,0) rotate('+(u*(shot==='dunk'?280:shot==='three'?790:540)-20)+'deg) scale('+scale+')',opacity:1};
+  });
   if(made){
-   keyframes.push({offset:.83,transform:'translate3d('+(dx+2)+'px,'+(dy+ballRect.height*.75)+'px,0) rotate(620deg) scale(.58)',opacity:1});
-   keyframes.push({offset:1,transform:'translate3d('+(dx+6)+'px,'+(dy+ballRect.height*2.5)+'px,0) rotate(810deg) scale(.47)',opacity:0});
+   keyframes.push({offset:Math.min(.94,impact+.085),transform:'translate3d('+(dx+2)+'px,'+(dy+ballRect.height*.75)+'px,0) rotate('+(shot==='dunk'?390:800)+'deg) scale(.59)',opacity:1});
+   keyframes.push({offset:1,transform:'translate3d('+(dx+5)+'px,'+(dy+ballRect.height*2.5)+'px,0) rotate(880deg) scale(.45)',opacity:0});
   }else{
-   keyframes.push({offset:.84,transform:'translate3d('+(dx+43)+'px,'+(dy-36)+'px,0) rotate(630deg) scale(.63)',opacity:1});
-   keyframes.push({offset:1,transform:'translate3d('+(dx+Math.max(110,courtRect.width*.3))+'px,'+(dy+Math.max(120,height*.42))+'px,0) rotate(830deg) scale(.54)',opacity:0});
+   const bounce=shot==='dunk'?[-63,-44]:shot==='three'?[66,-53]:[43,-36];
+   keyframes.push({offset:Math.min(.94,impact+.08),transform:'translate3d('+(dx+bounce[0])+'px,'+(dy+bounce[1])+'px,0) rotate(670deg) scale(.67)',opacity:1});
+   keyframes.push({offset:1,transform:'translate3d('+(dx+Math.max(130,courtRect.width*.31))+'px,'+(dy+Math.max(145,height*.48))+'px,0) rotate(980deg) scale(.51)',opacity:0});
   }
-  const anim=ball.animate(keyframes,{duration,easing:'linear',fill:'forwards'});
+  const animation=ball.animate(keyframes,{duration,easing:'linear',fill:'forwards'});
   if(camera?.animate){
-   const points=made
-    ?[{transform:'scale(1) translate3d(0,0,0)',offset:0},{transform:'scale(1.035) translate3d(-1%,0,0)',offset:.52},{transform:'scale(1.11) translate3d(-3%,-1%,0)',offset:.77},{transform:'scale(1.075) translate3d(-2%,0,0)',offset:1}]
-    :[{transform:'scale(1)',offset:0},{transform:'scale(1.03) translate3d(-1%,0,0)',offset:.75},{transform:'scale(1.015) translate3d(1%,0,0)',offset:.86},{transform:'scale(1)',offset:1}];
-   camera.animate(points,{duration,fill:'forwards',easing:'ease-in-out'});
+   const base={transform:'scale(1) translate3d(0,0,0)',offset:0};
+   let motion;
+   if(shot==='three')motion=[base,
+      {offset:.44,transform:'scale(.95) translate3d(2%,0,0)'},
+      {offset:impact,transform:'scale(1.075) translate3d(-2%,-1%,0)'},
+      {offset:1,transform:'scale(1.04) translate3d(-1%,0,0)'}];
+   else if(shot==='dunk')motion=[base,
+      {offset:.43,transform:'scale(1.09) translate3d(-2%,-1%,0)'},
+      {offset:impact,transform:'scale(1.17) translate3d(-5%,-2%,0)'},
+      {offset:Math.min(.94,impact+.08),transform:'scale(1.14) translate3d(-4%,1%,0)'},
+      {offset:1,transform:'scale(1.08) translate3d(-2%,0,0)'}];
+   else motion=[base,{offset:.52,transform:'scale(1.035) translate3d(-1%,0,0)'},
+      {offset:impact,transform:'scale(1.11) translate3d(-3%,-1%,0)'},
+      {offset:1,transform:'scale(1.075) translate3d(-2%,0,0)'}];
+   camera.animate(motion,{duration,fill:'forwards',easing:'ease-in-out'});
   }
-  anim.finished.then(finish,finish);
-  // Browser throttling, hidden tabs and animation cancellation must not trap the player.
-  window.setTimeout(finish,duration+150);
+  animation.finished.then(finish,finish);
+  // Page throttling or canceled animations cannot leave the game locked.
+  window.setTimeout(finish,duration+180);
  }catch(_){finish();}
 }
 function choose(n){
