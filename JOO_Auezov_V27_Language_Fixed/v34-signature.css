@@ -106,13 +106,12 @@
     animation:v35-hero-timeline 6.5s linear 1 both;
   }
   @keyframes v35-hero-timeline{to{transform:scaleX(1)}}
+  html[lang="ru"] body[data-page="index"] .hero.v35-hero .hero__title{
+    font-size:clamp(52px,5.1vw,88px);
+  }
 }
-/* Current split-screen homepage stays intact on touch/tablet layouts. */
-@media(max-width:900px){
-  body[data-page="index"] .hero.v35-hero{grid-template-columns:1fr}
-  body[data-page="index"] .hero.v35-hero .hero__photo{position:relative}
-  body[data-page="index"] .hero.v35-hero .hero__info{position:relative}
-}
+/* At 900px and below, retain the original responsive split/stack rules.
+   Hero slideshow is disabled in script on these devices. */
 
 /* 2. Chapter-to-chapter visual rhythm. Does not duplicate existing h2/GSAP reveals. */
 main>section.v35-chapter{position:relative;isolation:isolate}
