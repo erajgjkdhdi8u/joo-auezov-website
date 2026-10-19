@@ -59,7 +59,8 @@
     let last='';
     try{
       const pathname=new URL(a.getAttribute('href'),document.baseURI).pathname;
-      last=pathname.split('/').filter(Boolean).pop() || 'index.html';
+      last=pathname.endsWith('/') ? 'index.html'
+        : (pathname.split('/').pop() || 'index.html');
     }catch(_){return;}
     if(last===activePage)a.setAttribute('aria-current','page');
     else a.removeAttribute('aria-current');
