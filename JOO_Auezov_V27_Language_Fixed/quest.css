@@ -537,3 +537,91 @@ button,a{font:inherit}button{cursor:pointer}a{color:inherit}
 @media(max-width:360px){
   .quest-court.is-v6 .quest-shot-type{left:auto;right:7px;bottom:7px;max-width:59%}
 }
+
+
+/* JOO ARENA 7.0 — Halftime Show + Trophy Collection.
+   Pure CSS effects, no external media or libraries. */
+.quest-collection-trigger{margin:12px 0 21px;display:inline-flex;align-items:center;justify-content:space-between;gap:15px;padding:12px 16px;max-width:100%;background:#0a2846;border:1px solid #ac955f;color:#ffdfa0;font-size:11px;line-height:1.45;letter-spacing:.07em;font-weight:900;text-align:left;cursor:pointer;transition:background .18s,border-color .18s}
+.quest-collection-trigger:hover,.quest-collection-trigger:focus-visible{background:#204363;border-color:#ffe0a5}
+.quest-collection-trigger span{white-space:nowrap;color:#f3f7ff;font-variant-numeric:tabular-nums}
+.quest-intermission{position:relative;isolation:isolate;min-height:min(730px,85svh);padding:clamp(19px,4vw,34px);overflow:hidden;border:1px solid #9a7b47;background:radial-gradient(ellipse at 50% 30%,#4b4163,#132641 65%,#071326 100%);text-align:center;animation:q-7-intro .5s ease-out both;--half-accent:#e9d28a;--half-halo:#deb46275}
+.quest-intermission.arena-stage--2{background:radial-gradient(ellipse at 50% 26%,#28517b,#0e3356 50%,#061629 100%);--half-accent:#89e5f8;--half-halo:#40ccf877}
+.quest-intermission.arena-stage--3{background:radial-gradient(ellipse at 50% 26%,#604566,#242445 56%,#080f29 100%);--half-accent:#ffe0a4;--half-halo:#f5bc657c}
+.quest-intermission::before{content:"";position:absolute;inset:-20% -30% 0;z-index:-2;background:radial-gradient(ellipse at 50% 10%,var(--half-halo),transparent 58%);pointer-events:none}
+.quest-intermission::after{content:"";position:absolute;left:-15%;right:-15%;bottom:-22%;height:43%;z-index:-1;border-radius:50%;border:2px solid #f3d39455;background:repeating-linear-gradient(90deg,#f3d39408 0 58px,#f3d39424 60px 61px);transform:perspective(510px) rotateX(57deg);box-shadow:0 0 90px var(--half-halo)}
+.quest-intermission__header{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:10px;color:#d6e3ef;font:900 10px Inter,Arial,sans-serif;letter-spacing:.13em}
+.quest-intermission__lights{position:absolute;inset:0;pointer-events:none;z-index:-1}
+.quest-intermission__lights i{position:absolute;top:-12%;left:calc(var(--beam)*16% - 7%);width:17%;height:81%;clip-path:polygon(50% 0,65% 0,100% 100%,0 100%);background:linear-gradient(180deg,var(--half-halo),transparent);filter:blur(7px);opacity:.32;transform-origin:50% 0;animation:q-7-lights 3.1s ease-in-out infinite alternate;animation-delay:calc(var(--beam)*-.31s)}
+.quest-intermission__stage{position:relative;z-index:2;max-width:790px;margin:auto;padding:clamp(44px,8vw,75px) 0 clamp(25px,4vw,40px);display:flex;align-items:center;flex-direction:column}
+.quest-intermission__eyebrow{font:900 11px Inter,Arial,sans-serif;letter-spacing:.29em;color:var(--half-accent);margin:0 0 12px}
+.quest-intermission__finish{font:600 clamp(25px,3.4vw,46px)/1 Oswald,Impact,sans-serif;color:#fff;text-transform:uppercase}
+.quest-intermission__stats{margin:24px auto 6px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,460px);gap:12px}
+.quest-intermission__stats>div{padding:15px 18px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:8px;background:#091c34bc;border:1px solid #bbd1de4e;backdrop-filter:blur(8px)}
+.quest-intermission__stats span{font:900 9px Inter,Arial,sans-serif;color:#ccdeeb;letter-spacing:.13em;line-height:1.4}
+.quest-intermission__stats strong{font:600 34px/1 Oswald,Impact,sans-serif;color:var(--half-accent);font-variant-numeric:tabular-nums}
+.quest-intermission__divider{display:flex;align-items:center;justify-content:center;gap:15px;width:min(100%,430px);margin:15px 0}
+.quest-intermission__divider::before,.quest-intermission__divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--half-accent),transparent)}
+.quest-intermission__divider span{color:var(--half-accent);font-size:22px}
+.quest-intermission__next{margin:0 0 8px;font:900 11px Inter,Arial,sans-serif;letter-spacing:.14em;color:#d5e4f0}
+.quest-intermission h1{max-width:760px;margin:0;color:#fff5d9;font:600 clamp(48px,8vw,98px)/.95 Oswald,Impact,sans-serif;letter-spacing:-.025em;text-transform:uppercase;text-wrap:balance;text-shadow:0 8px 40px #03152b}
+.quest-intermission__arena{position:relative;width:min(100%,460px);height:112px;margin:10px auto 16px}
+.quest-intermission__court{position:absolute;inset:28% 8% 5%;border:2px solid var(--half-accent);border-radius:50%;transform:perspective(360px) rotateX(61deg);box-shadow:0 0 30px var(--half-halo)}
+.quest-intermission__court::before{content:"";position:absolute;inset:30% 32%;border:2px solid var(--half-accent);border-radius:50%}
+.quest-intermission__ball{position:absolute;left:8%;bottom:12%;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 27% 25%,#ffdda3,#ee9849 45%,#923f18);box-shadow:inset -6px -7px 9px #49280b,0 0 20px #f2a85677;animation:q-7-ball 3.1s .5s cubic-bezier(.18,.3,.25,1) both}
+.quest-intermission__hoop{position:absolute;right:14%;top:2%;width:72px;height:9px;border:5px solid #f5b466;border-radius:50%;transform:rotateX(42deg);box-shadow:0 0 15px #ffb878a6}
+.quest-intermission__hoop::after{content:"";position:absolute;top:4px;left:14%;width:72%;height:33px;border-left:2px solid #eee;border-right:2px solid #eee;border-bottom:1px solid #fff9;transform:perspective(120px) rotateX(15deg) skewX(-5deg);opacity:.8}
+.quest-intermission .quest-button{margin-top:0;gap:24px;box-shadow:0 10px 30px #06152b6b}
+@keyframes q-7-intro{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes q-7-lights{from{opacity:.16;transform:rotate(-10deg)}to{opacity:.43;transform:rotate(10deg)}}
+@keyframes q-7-ball{0%{opacity:0;transform:translate(0,0) rotate(0)}13%{opacity:1}38%{transform:translate(120px,-60px) rotate(230deg)}67%{transform:translate(295px,-44px) rotate(570deg)}82%{opacity:1;transform:translate(328px,-6px) rotate(660deg) scale(.68)}100%{opacity:0;transform:translate(328px,65px) rotate(820deg) scale(.5)}}
+.quest-gallery{background:linear-gradient(130deg,#102c4a,#06182e);border:1px solid #506c88;padding:clamp(22px,5vw,60px);min-height:540px;animation:q-enter .45s ease-out}
+.quest-gallery h1{font:600 clamp(47px,7vw,92px)/1 Oswald,Impact,sans-serif;color:#fff1c9;margin:17px 0 10px;text-wrap:balance}
+.quest-gallery__meta{color:#bed4e4;font-size:11px;letter-spacing:.13em;font-weight:900;margin:0 0 26px}
+.quest-gallery .quest-button{margin-top:25px}
+.quest-awards{margin:28px 0 9px;max-width:660px}
+.quest-awards__heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.quest-awards__heading h2{font:900 11px Inter,Arial,sans-serif;letter-spacing:.11em;color:#f6d588;margin:0}
+.quest-awards__heading span{font:600 24px Oswald,Impact,sans-serif;color:#ffdf9c;white-space:nowrap}
+.quest-achievements{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quest-achievement{display:flex;align-items:flex-start;gap:11px;position:relative;padding:13px;min-height:105px;border:1px solid #566c80;background:linear-gradient(140deg,#1a3b57,#0a1e35);min-width:0}
+.quest-achievement__icon{width:39px;height:39px;flex:0 0 39px;border:1px solid #c5a7658c;background:#f2c26915;display:grid;place-items:center;font-size:22px;line-height:1}
+.quest-achievement__copy{flex:1;min-width:0;padding-right:1px}
+.quest-achievement__copy strong{display:block;color:#fff0bf;font:600 18px/1.1 Oswald,Impact,sans-serif;overflow-wrap:anywhere;letter-spacing:.025em}
+.quest-achievement__copy p{font:500 11px/1.45 Inter,Arial,sans-serif;margin:6px 0 16px;color:#cbdbe7}
+.quest-achievement__state{position:absolute;right:10px;bottom:8px;font:900 9px Inter,Arial,sans-serif;letter-spacing:.07em;color:#b6f1d7}
+.quest-achievement.is-locked{opacity:.7;background:linear-gradient(140deg,#203146,#111d2f);border-color:#3c5065}
+.quest-achievement.is-locked .quest-achievement__icon{background:#263a4c;border-color:#53647a;filter:grayscale(1)}
+.quest-achievement.is-locked .quest-achievement__copy strong{color:#aebdcc}
+.quest-achievement.is-locked .quest-achievement__state{color:#91a9bd}
+.quest-achievement.is-new{border-color:#e1bd6d;box-shadow:inset 0 0 26px #e5b25e23}
+.quest-achievement.is-new .quest-achievement__state{color:#ffe19d}
+@media(max-width:980px){
+ .quest-intermission{min-height:660px}
+ .quest-result .quest-awards{width:100%;text-align:left}
+ .quest-achievement{text-align:left}
+}
+@media(max-width:590px){
+ .quest-collection-trigger{margin:10px 0 18px;padding:10px 12px;font-size:10px}
+ .quest-intermission{min-height:590px;padding:17px}
+ .quest-intermission__stage{padding:60px 0 34px}
+ .quest-intermission__finish{font-size:29px}
+ .quest-intermission__eyebrow{font-size:10px}
+ .quest-intermission__stats{gap:7px;margin:20px auto 8px}
+ .quest-intermission__stats>div{padding:13px 8px}
+ .quest-intermission__stats span{font-size:9px;letter-spacing:.06em}
+ .quest-intermission__stats strong{font-size:29px}
+ .quest-intermission h1{font-size:clamp(42px,11.5vw,67px)}
+ .quest-intermission__arena{height:99px;max-width:340px}
+ .quest-intermission__ball{width:33px;height:33px;animation-name:q-7-ball-small}
+ .quest-intermission__hoop{right:10%;width:63px}
+ .quest-achievements{grid-template-columns:1fr;gap:8px}
+ .quest-achievement{min-height:89px;padding:10px}
+ .quest-achievement__copy p{margin-bottom:16px}
+ .quest-gallery h1{font-size:clamp(39px,10vw,65px)}
+ .quest-gallery{min-height:450px}
+}
+@keyframes q-7-ball-small{0%{opacity:0;transform:translate(0,0) rotate(0)}13%{opacity:1}38%{transform:translate(85px,-40px) rotate(230deg)}67%{transform:translate(180px,-34px) rotate(570deg)}82%{opacity:1;transform:translate(221px,-5px) rotate(660deg) scale(.68)}100%{opacity:0;transform:translate(221px,50px) rotate(820deg) scale(.5)}}
+@media(prefers-reduced-motion:reduce){
+ .quest-intermission,.quest-gallery,.quest-intermission__lights i,.quest-intermission__ball{animation:none}
+ .quest-intermission__ball{opacity:1;left:28%;transform:none}
+}
