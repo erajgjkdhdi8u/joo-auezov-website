@@ -11,19 +11,7 @@
   if(hero){
     const frame=hero.querySelector('.hero__photo');
     if(frame && pointer && !reduce){
-      const pointerMove=rafGate((e)=>{
-        const r=frame.getBoundingClientRect();
-        const nx=clamp((e.clientX-r.left)/Math.max(1,r.width))*2-1;
-        const ny=clamp((e.clientY-r.top)/Math.max(1,r.height))*2-1;
-        frame.style.setProperty('--joo-hero-x',`${(-nx*10).toFixed(1)}px`);
-        frame.style.setProperty('--joo-hero-y',`${(-ny*10).toFixed(1)}px`);
-        frame.style.setProperty('--joo-hud-x',`${(nx*8).toFixed(1)}px`);
-        frame.style.setProperty('--joo-hud-y',`${(ny*8).toFixed(1)}px`);
-      });
-      frame.addEventListener('pointermove',pointerMove,{passive:true});
-      frame.addEventListener('pointerleave',()=>{
-        for(const [k,v] of Object.entries({'--joo-hero-x':'0px','--joo-hero-y':'0px','--joo-hud-x':'0px','--joo-hud-y':'0px'})) frame.style.setProperty(k,v);
-      });
+      // Keep the original scroll depth; the homepage no longer reacts to pointer position.
       const scrollHero=rafGate(()=>{
         const y=clamp(window.scrollY/Math.max(hero.offsetHeight,1));
         if(y>.97)return;
