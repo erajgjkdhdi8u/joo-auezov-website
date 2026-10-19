@@ -113,7 +113,7 @@ body[data-page="results"].v36-armed .rg-meter.v36-bar-in i{
   body[data-page="results"] .results-progress .progress-card,
   body[data-page="results"] #students .poster,
   body[data-page="results"] #grantee-list .grantee{
-    opacity:1!important;translate:none!important;clip-path:none!important;
+    opacity:1!important;translate:none!important;transform:none!important;clip-path:none!important;
     animation:none!important;transition:none!important;
   }
   body[data-page="results"] .joo-achieve__card{transform:none!important}
