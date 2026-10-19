@@ -8,9 +8,9 @@
   const mobile=matchMedia('(max-width:760px)').matches;
   const lang=root.lang==='ru'?'ru':root.lang==='en'?'en':'kk';
   const dict={
-    kk:{chapters:'Бөлімдер бойынша навигация',section:'Бөлім',learn:'БІЛІМ',grow:'ӨСУ',lead:'БОЛАШАҚ'},
-    ru:{chapters:'Навигация по разделам',section:'Раздел',learn:'ЗНАНИЯ',grow:'РАЗВИТИЕ',lead:'БУДУЩЕЕ'},
-    en:{chapters:'Chapter navigation',section:'Chapter',learn:'LEARN',grow:'GROW',lead:'LEAD'}
+    kk:{learn:'БІЛІМ',grow:'ӨСУ',lead:'БОЛАШАҚ'},
+    ru:{learn:'ЗНАНИЯ',grow:'РАЗВИТИЕ',lead:'БУДУЩЕЕ'},
+    en:{learn:'LEARN',grow:'GROW',lead:'LEAD'}
   }[lang];
   // The existing real full-screen menu and all 14 links remain functional.
   const menu=doc.getElementById('menuPanel');
@@ -39,51 +39,6 @@
   }
   const main=doc.querySelector('main');
   if(!main)return;
-  // Small unobtrusive right-hand chapter navigation on desktop.
-  const chapters=[...main.querySelectorAll('section[id]')]
-    .filter(section=>section.id!=='top' && section.id!=='interactive-gallery' &&
-      (section.querySelector('h2')||section.querySelector('h3')) && section.offsetHeight>0)
-    .slice(0,10);
-  if(chapters.length>=4){
-    const nav=doc.createElement('nav');
-    nav.className='v34-chapters';
-    nav.setAttribute('aria-label',dict.chapters);
-    const label=doc.createElement('span');label.className='v34-chapters__label';
-    label.textContent='01 / '+String(chapters.length).padStart(2,'0');nav.appendChild(label);
-    const divider=doc.createElement('span');divider.className='v34-chapters__bar';
-    divider.setAttribute('aria-hidden','true');nav.appendChild(divider);
-    const dots=doc.createElement('div');dots.className='v34-chapters__dots';
-    const anchors=chapters.map((section,index)=>{
-      const a=doc.createElement('a');a.className='v34-chapters__dot';
-      a.href='#'+encodeURIComponent(section.id);
-      const title=section.querySelector('h2,h3');
-      const heading=title?.getAttribute('data-'+lang)||title?.textContent?.trim()||'';
-      a.setAttribute('aria-label',dict.section+' '+(index+1)+': '+heading.slice(0,90));
-      a.title=heading.slice(0,90);
-      if(index===0){a.classList.add('v34-active');a.setAttribute('aria-current','location');}
-      dots.appendChild(a);return a;
-    });
-    nav.appendChild(dots);
-    const track=doc.createElement('span');track.className='v34-chapters__track';
-    track.setAttribute('aria-hidden','true');
-    const fill=doc.createElement('span');fill.className='v34-chapters__fill';
-    track.appendChild(fill);nav.appendChild(track);body.appendChild(nav);
-    let frame=0;
-    const sync=()=>{
-      frame=0;let active=0;const threshold=innerHeight*.37;
-      chapters.forEach((section,index)=>{if(section.getBoundingClientRect().top<=threshold)active=index;});
-      label.textContent=String(active+1).padStart(2,'0')+' / '+String(chapters.length).padStart(2,'0');
-      anchors.forEach((a,index)=>{
-        a.classList.toggle('v34-active',index===active);
-        if(index===active)a.setAttribute('aria-current','location');
-        else a.removeAttribute('aria-current');
-      });
-      track.style.setProperty('--v34-progress',Math.round((active+1)/chapters.length*100)+'%');
-    };
-    const request=()=>{if(!frame)frame=requestAnimationFrame(sync);};
-    addEventListener('scroll',request,{passive:true});addEventListener('resize',request,{passive:true});
-    sync();
-  }
   // Curtain uses two CSS pseudo-elements and never replaces the authentic photo.
   if(!reduced&&!mobile&&'IntersectionObserver' in window){
     const observer=new IntersectionObserver(entries=>{
