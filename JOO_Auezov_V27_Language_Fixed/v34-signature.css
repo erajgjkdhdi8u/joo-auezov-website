@@ -46,3 +46,183 @@
  .v34-curtain:before,.v34-curtain:after{display:none!important}
  .v34-marquee__track{animation:none!important;transform:none!important;will-change:auto!important}
 }
+
+
+/* JOO V35 — Cinematic Editorial System. Enhances existing real photos / headings,
+   preserves all markup, and degrades to the V34 layout with CSS or JS disabled. */
+:root{--v35-amber:#f0ca77;--v35-night:#061a38;--v35-ease:cubic-bezier(.2,.8,.2,1)}
+
+/* 1. Cinematic Hero 2.0: full-bleed, real school imagery on wide viewports.
+   The original eager-loaded hero img always stays in the DOM as LCP/fallback. */
+@media(min-width:901px){
+  body[data-page="index"] .hero.v35-hero{
+    display:grid;grid-template-columns:minmax(0,1fr);
+    min-height:clamp(670px,calc(100svh - var(--head,78px)),970px);
+    isolation:isolate;overflow:hidden;
+  }
+  body[data-page="index"] .hero.v35-hero .hero__photo{
+    position:absolute;inset:0;width:100%;height:100%;min-height:0;
+    order:initial;z-index:0;overflow:hidden;
+  }
+  body[data-page="index"] .hero.v35-hero .hero__photo::after{
+    z-index:2;
+    background:linear-gradient(90deg,#06182ff5 0%,#06182fcf 25%,#06182f84 48%,#06182f15 82%),
+      linear-gradient(0deg,#06172eab,transparent 40%);
+  }
+  body[data-page="index"] .hero.v35-hero .hero__info{
+    z-index:4;position:relative;order:initial;width:min(740px,67%);
+    min-height:670px;max-width:100%;padding-block:clamp(86px,11vh,135px);
+    padding-right:clamp(20px,4vw,65px);overflow:visible;justify-self:start;
+  }
+  body[data-page="index"] .hero.v35-hero .hero__info::after{display:none}
+  body[data-page="index"] .hero.v35-hero .hero__eyebrow{color:#d7e4f5}
+  body[data-page="index"] .hero.v35-hero .hero__title{
+    font-size:clamp(62px,6.6vw,114px);text-shadow:0 4px 32px #05142788;
+  }
+  body[data-page="index"] .hero.v35-hero .hero__dek{
+    color:#e0e8f6;text-shadow:0 2px 16px #071b3b90;
+  }
+  body[data-page="index"] .hero.v35-hero .joo-hero-hud{z-index:3}
+  body[data-page="index"] .hero.v35-hero .hero__photo-marker{z-index:4}
+  body[data-page="index"] .hero.v35-hero .hero__photo>img.v35-hero__slide{
+    z-index:1;opacity:0;pointer-events:none;
+    transform:scale(1.075)!important;transition:opacity 1.25s ease!important;
+    filter:none!important;object-fit:cover;
+  }
+  body[data-page="index"] .hero.v35-hero .hero__photo>img.v35-hero__slide.is-visible{opacity:1}
+  body[data-page="index"] .hero.v35-hero .hero__photo>img.v35-hero__slide.is-leaving{opacity:0}
+  body[data-page="index"] .hero.v35-hero .joo-hero-flares{opacity:.85}
+  /* A discreet cinematic progress rule. This is decoration, not page navigation. */
+  body[data-page="index"] .hero.v35-hero .v35-hero-progress{
+    position:absolute;bottom:clamp(26px,4vh,56px);left:var(--edge,40px);
+    height:2px;width:clamp(115px,17vw,230px);z-index:6;
+    background:#ffffff3d;overflow:hidden;pointer-events:none;
+  }
+  body[data-page="index"] .hero.v35-hero .v35-hero-progress::before{
+    content:"";position:absolute;inset:0;background:var(--v35-amber);
+    transform:scaleX(0);transform-origin:left center;
+  }
+  body[data-page="index"] .hero.v35-hero .v35-hero-progress.is-playing::before{
+    animation:v35-hero-timeline 6.5s linear 1 both;
+  }
+  @keyframes v35-hero-timeline{to{transform:scaleX(1)}}
+}
+/* Current split-screen homepage stays intact on touch/tablet layouts. */
+@media(max-width:900px){
+  body[data-page="index"] .hero.v35-hero{grid-template-columns:1fr}
+  body[data-page="index"] .hero.v35-hero .hero__photo{position:relative}
+  body[data-page="index"] .hero.v35-hero .hero__info{position:relative}
+}
+
+/* 2. Chapter-to-chapter visual rhythm. Does not duplicate existing h2/GSAP reveals. */
+main>section.v35-chapter{position:relative;isolation:isolate}
+main>section.v35-chapter::before{
+  content:"";position:absolute;top:0;left:var(--edge,4vw);
+  width:clamp(60px,12vw,160px);height:2px;z-index:7;
+  background:var(--v35-amber);opacity:.74;transform-origin:left center;pointer-events:none;
+}
+main>section.v35-chapter.v35-chapter--dark::before{background:#f4d591}
+main>section.v35-chapter.v35-chapter--light::before{background:#1d61ba}
+@media(prefers-reduced-motion:no-preference){
+  main>section.v35-chapter.v35-in::before{
+    animation:v35-chapter-rule 1s var(--v35-ease) both;
+  }
+  main>section.v35-chapter.v35-in .v35-chapter-label{
+    animation:v35-label-enter .74s var(--v35-ease) both;
+  }
+  @keyframes v35-chapter-rule{from{transform:scaleX(.05);opacity:.1}to{transform:scaleX(1);opacity:.82}}
+  @keyframes v35-label-enter{from{opacity:.35;translate:0 10px}to{opacity:1;translate:0 0}}
+}
+
+/* 3. Editorial Photo Layout: asymmetric mosaic of *existing* three images. */
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento){
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-template-rows:repeat(2,clamp(190px,18vw,300px));gap:clamp(8px,1vw,14px);
+  align-items:stretch;background:transparent;
+}
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure{
+  margin:0;height:auto;min-height:0;position:relative;isolation:isolate;
+  border:1px solid #ffffff2f;overflow:hidden;background:#092449;
+}
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:first-child{
+  grid-column:span 7;grid-row:span 2;
+}
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:nth-child(2),
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:nth-child(3){
+  grid-column:span 5;grid-row:span 1;
+}
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure img{
+  display:block;width:100%;height:100%;object-fit:cover;filter:none!important;
+  transition:transform .8s var(--v35-ease);
+}
+.gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure figcaption{
+  z-index:2;max-width:calc(100% - 20px);line-height:1.45;
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:hover img{
+    transform:scale(1.045);
+  }
+}
+/* Homepage campus triptych: one large authentic photo, two contextual details. */
+@media(min-width:901px){
+  body[data-page="index"] .campus-strip.v35-photo-editorial .campus-strip__photos{
+    display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    grid-template-rows:repeat(2,minmax(0,1fr));gap:7px;min-height:470px;
+  }
+  body[data-page="index"] .campus-strip.v35-photo-editorial .campus-strip__photos>img:first-child{
+    grid-column:1;grid-row:1 / span 2;
+  }
+  body[data-page="index"] .campus-strip.v35-photo-editorial .campus-strip__photos>img:nth-child(2),
+  body[data-page="index"] .campus-strip.v35-photo-editorial .campus-strip__photos>img:nth-child(3){
+    grid-column:2;
+  }
+  body[data-page="index"] .campus-strip.v35-photo-editorial .campus-strip__photos>img:nth-child(2){grid-row:1}
+  body[data-page="index"] .campus-strip.v35-photo-editorial .campus-strip__photos>img:nth-child(3){grid-row:2}
+}
+/* 4. Interactive Navigation Preview: adds editorial chapter index to existing photo preview.
+   The existing link targets, keyboard focus and menu close behavior are unchanged. */
+.menu-panel.joo-mega-enabled .joo-mega-showcase__photograph{isolation:isolate}
+.menu-panel.joo-mega-enabled .v35-menu-preview-index{
+  position:absolute;z-index:5;bottom:22px;left:22px;
+  padding:8px 13px;background:#071a38d9;border:1px solid #f0ca77bd;
+  color:#ffdea0;font:800 12px/1.4 Inter,Arial,sans-serif;
+  letter-spacing:.18em;pointer-events:none;
+}
+.menu-panel.joo-mega-enabled .joo-mega-showcase__bottom strong{
+  line-height:1.08;max-width:26ch;overflow-wrap:anywhere;
+  font-size:clamp(20px,2.1vw,31px);
+}
+.menu-panel.joo-mega-enabled .joo-mega-showcase__photograph::before{
+  content:"";position:absolute;inset:0;z-index:2;
+  border:1px solid #ffdc845b;pointer-events:none;
+}
+@media(max-width:900px){
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento){
+    grid-template-rows:repeat(2,clamp(180px,25vw,260px));
+  }
+}
+@media(max-width:700px){
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento){
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:clamp(240px,64vw,350px) clamp(150px,40vw,220px);gap:9px;
+  }
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:first-child{
+    grid-column:1 / -1;grid-row:1;
+  }
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:nth-child(2){
+    grid-column:1;grid-row:2;
+  }
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure:nth-child(3){
+    grid-column:2;grid-row:2;
+  }
+  .gallery-band.v35-photo-editorial .gallery-band__grid:not(.v33-bento)>figure figcaption{
+    padding:8px 9px;font-size:9px;letter-spacing:.01em;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body[data-page="index"] .hero.v35-hero .v35-hero-progress{display:none!important}
+  body[data-page="index"] .hero.v35-hero .hero__photo>img.v35-hero__slide{display:none!important}
+  main>section.v35-chapter.v35-in::before{animation:none!important;transform:none!important}
+  main>section.v35-chapter.v35-in .v35-chapter-label{animation:none!important;translate:none!important}
+  .gallery-band.v35-photo-editorial .gallery-band__grid figure img{transform:none!important;transition:none!important}
+}
