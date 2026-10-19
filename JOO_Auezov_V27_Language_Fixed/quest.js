@@ -375,7 +375,10 @@ const questions=[
    "Верно: максимум среди 8 постеров Ауэзова — 121. Показатель 137 баллов опубликован по всей сети JOO School.",
    "Correct: the eight Auezov posters peak at 121, while the JOO School network reports a separate 137-point result."
   ],
-  "/results.html"
+  [
+   "/results.html",
+   "https://joo-schools.kz/"
+  ]
  ]
 ];
 const state={step:0,correct:0,selected:null,screen:'intro',streak:0,bestStreak:0,chapterCorrect:[0,0,0],shots:[],shotReady:true,activeShot:'jump',newAchievements:[]},points=()=>state.correct*10;
@@ -534,8 +537,12 @@ function question(){
   if(picked)cls+=i===q[2]?' is-correct':i===state.selected?' is-wrong':' is-dimmed';
   return '<button class="'+cls+'" type="button" data-answer="'+i+'"'+(picked?' disabled':'')+'><b aria-hidden="true">'+(i+1)+'</b><span>'+h(s)+'</span></button>';
  }).join('');
- const source=q[6].startsWith('/')?(lang==='kk'?q[6]:'/'+lang+q[6]):q[6];
- const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p><a class="quest-fact-source" href="'+h(source)+'" target="_blank" rel="noopener noreferrer">'+h(t.sourceText)+' ↗</a></div><button class="quest-button" id="nextQuestion"'+(state.shotReady?'':' disabled aria-disabled="true"')+'>'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
+ const sourceList=Array.isArray(q[6])?q[6]:[q[6]];
+ const sourceLinks=sourceList.map((u,i)=>{
+  const link=u.startsWith('/')?(lang==='kk'?u:'/'+lang+u):u;
+  return '<a class="quest-fact-source" href="'+h(link)+'" target="_blank" rel="noopener noreferrer">'+h(t.sourceText)+(sourceList.length>1?' '+(i+1):'')+' ↗</a>';
+ }).join('');
+ const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p><div class="quest-fact-sources">'+sourceLinks+'</div></div><button class="quest-button" id="nextQuestion"'+(state.shotReady?'':' disabled aria-disabled="true"')+'>'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
  view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+' <span class="quest-difficulty quest-difficulty--'+q[0]+'">'+h(t.difficulties[q[0]])+'</span></div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'</div></section>','questionTitle');
  root.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.answer))));
  $('questSound')?.addEventListener('click',()=>{
