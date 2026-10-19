@@ -16,7 +16,8 @@ en:{back:'BACK TO SITE',skip:'Skip to content',eyebrow:'JOO HIGH SCHOOL / INTERA
 /* Difficulty progression: EASY (1–3), MEDIUM (4–7), HARD (8–10).
    Question explanations cite sources; group-wide and branch-specific figures stay separate.
    Data shape: [chapter, image, correctIndex, translatedQuestion, translatedOptions, translatedExplanation, sourceURL]. */
-const questions=[
+const questionBank={
+0:[
  [
   0,
   "school-building.webp",
@@ -125,6 +126,332 @@ const questions=[
   ],
   "https://joohs.kz/jooauezov"
  ],
+ [
+  0,
+  "school-building.webp",
+  1,
+  [
+   "JOO Auezov мектебі қай қалада?",
+   "В каком городе находится школа JOO Auezov?",
+   "Which city is home to JOO Auezov?"
+  ],
+  [
+   [
+    "Астана",
+    "Алматы",
+    "Ақтау",
+    "Шымкент"
+   ],
+   [
+    "Астана",
+    "Алматы",
+    "Актау",
+    "Шымкент"
+   ],
+   [
+    "Astana",
+    "Almaty",
+    "Aktau",
+    "Shymkent"
+   ]
+  ],
+  [
+   "JOO Auezov мектебі Алматы қаласында орналасқан.",
+   "Школа JOO Auezov находится в Алматы.",
+   "JOO Auezov is located in Almaty."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  0,
+  "school-building.webp",
+  2,
+  [
+   "JOO Auezov мектебі Алматының қай ауданында?",
+   "В каком районе Алматы находится JOO Auezov?",
+   "Which Almaty district is JOO Auezov in?"
+  ],
+  [
+   [
+    "Медеу",
+    "Бостандық",
+    "Әуезов",
+    "Алатау"
+   ],
+   [
+    "Медеуский",
+    "Бостандыкский",
+    "Ауэзовский",
+    "Алатауский"
+   ],
+   [
+    "Medeu",
+    "Bostandyk",
+    "Auezov",
+    "Alatau"
+   ]
+  ],
+  [
+   "Мектептің Цветочная көшесіндегі ғимараты Әуезов ауданында орналасқан.",
+   "Здание школы на Цветочной улице находится в Ауэзовском районе.",
+   "The school building on Tsvetochnaya Street is in Auezov District."
+  ],
+  "/contacts.html"
+ ],
+ [
+  0,
+  "school-reception.webp",
+  0,
+  [
+   "JOO School Auezov қандай мектеп?",
+   "К какому типу относится JOO School Auezov?",
+   "What type of school is JOO School Auezov?"
+  ],
+  [
+   [
+    "Жекеменшік мектеп",
+    "Университет",
+    "Спорт кешені",
+    "Балабақша"
+   ],
+   [
+    "Частная школа",
+    "Университет",
+    "Спортивный комплекс",
+    "Детский сад"
+   ],
+   [
+    "Private school",
+    "University",
+    "Sports centre",
+    "Kindergarten"
+   ]
+  ],
+  [
+   "JOO School Auezov — жекеменшік мектеп.",
+   "JOO School Auezov — частная школа.",
+   "JOO School Auezov is a private school."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  0,
+  "school-students.webp",
+  2,
+  [
+   "JOO мектебінде күнделікті киім стилі қалай аталады?",
+   "Какой стиль повседневной одежды принят в JOO?",
+   "What is the everyday dress style at JOO?"
+  ],
+  [
+   [
+    "Black Tie",
+    "Military",
+    "Smart Casual",
+    "Formal Only"
+   ],
+   [
+    "Black Tie",
+    "Military",
+    "Smart Casual",
+    "Formal Only"
+   ],
+   [
+    "Black Tie",
+    "Military",
+    "Smart Casual",
+    "Formal Only"
+   ]
+  ],
+  [
+   "Ресми FAQ-да күнделікті киіну стилі Smart Casual екені жазылған.",
+   "В официальном FAQ указан повседневный стиль Smart Casual.",
+   "JOO's official FAQ describes the usual dress style as Smart Casual."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  0,
+  "school-classroom.webp",
+  1,
+  [
+   "Мектеп кампусында тыныш оқуға арналған қандай орын бар?",
+   "Какое пространство кампуса подходит для тихого чтения?",
+   "Which campus space is intended for quiet reading?"
+  ],
+  [
+   [
+    "Автотұрақ",
+    "Кітапхана",
+    "Ас үй",
+    "Тұрақты көрме"
+   ],
+   [
+    "Парковка",
+    "Библиотека",
+    "Кухня",
+    "Постоянная выставка"
+   ],
+   [
+    "Car park",
+    "Library",
+    "Kitchen",
+    "Permanent exhibition"
+   ]
+  ],
+  [
+   "Кампус туралы бөлімде кітапхана тыныш фокус нүктесі ретінде көрсетілген.",
+   "В разделе о кампусе библиотека описана как место для спокойной работы.",
+   "The Campus section describes the library as a quiet place for focused work."
+  ],
+  "/campus.html"
+ ],
+ [
+  0,
+  "/assets/images/computerlab-800.webp",
+  0,
+  [
+   "Мектеп сайтында қандай технологиялық оқу кеңістігі көрсетілген?",
+   "Какое технологическое учебное пространство показано на сайте?",
+   "Which technology-related learning space is shown on the website?"
+  ],
+  [
+   [
+    "Компьютерлік кабинет",
+    "Аэродром",
+    "Кинотеатр",
+    "Планетарий"
+   ],
+   [
+    "Компьютерный кабинет",
+    "Аэродром",
+    "Кинотеатр",
+    "Планетарий"
+   ],
+   [
+    "Computer lab",
+    "Airfield",
+    "Cinema",
+    "Planetarium"
+   ]
+  ],
+  [
+   "Кампус материалдарында компьютерлік кабинет пен технологиялық кеңістіктер көрсетілген.",
+   "На сайте показаны компьютерный кабинет и пространства для технологий.",
+   "The site features a computer lab and technology learning spaces."
+  ],
+  "/campus.html"
+ ],
+ [
+  0,
+  "school-reception.webp",
+  3,
+  [
+   "Мектепке түсу туралы ақпаратты қай бөлімнен табуға болады?",
+   "В каком разделе искать сведения о поступлении в школу?",
+   "Which website section explains how to apply to the school?"
+  ],
+  [
+   [
+    "Галерея",
+    "Нәтижелер",
+    "Жаңалықтар",
+    "Қабылдау"
+   ],
+   [
+    "Галерея",
+    "Результаты",
+    "Новости",
+    "Поступление"
+   ],
+   [
+    "Gallery",
+    "Results",
+    "News",
+    "Admissions"
+   ]
+  ],
+  [
+   "«Қабылдау» бөлімінде өтінім мен түсу тәртібі туралы ақпарат берілген.",
+   "В разделе «Поступление» указана информация о заявке и приёме.",
+   "The Admissions section explains applications and the entry process."
+  ],
+  "/admissions.html"
+ ],
+ [
+  0,
+  "school-students.webp",
+  2,
+  [
+   "JOO желісінің ресми сайтында мектептер Қазақстанның неше қаласында бар делінген?",
+   "В скольких городах Казахстана указаны школы сети JOO?",
+   "In how many Kazakhstani cities does JOO say it has schools?"
+  ],
+  [
+   [
+    "3",
+    "4",
+    "5",
+    "9"
+   ],
+   [
+    "3",
+    "4",
+    "5",
+    "9"
+   ],
+   [
+    "3",
+    "4",
+    "5",
+    "9"
+   ]
+  ],
+  [
+   "Ресми сайт JOO мектептерінің 5 қалада орналасқанын көрсетеді. Бұл жеке Ауезов филиалының саны емес.",
+   "На официальном сайте указано 5 городов сети JOO, а не филиалов Ауэзова.",
+   "The official site lists JOO schools in five cities; this is network-wide, not an Auezov-branch count."
+  ],
+  "https://joohs.kz/"
+ ],
+ [
+  0,
+  "school-students.webp",
+  1,
+  [
+   "Мектептегі еріктілік бастамасы қалай аталады?",
+   "Как называется волонтёрская инициатива школы?",
+   "What is the school's student volunteering initiative called?"
+  ],
+  [
+   [
+    "JOO E-SPORT",
+    "JOO AUEZ UMIT",
+    "JOO AIR",
+    "JOO FINANCE"
+   ],
+   [
+    "JOO E-SPORT",
+    "JOO AUEZ UMIT",
+    "JOO AIR",
+    "JOO FINANCE"
+   ],
+   [
+    "JOO E-SPORT",
+    "JOO AUEZ UMIT",
+    "JOO AIR",
+    "JOO FINANCE"
+   ]
+  ],
+  [
+   "«Мектеп өмірі» бөлімінде JOO AUEZ UMIT еріктілік бағыты көрсетілген.",
+   "В разделе «Школьная жизнь» описана инициатива JOO AUEZ UMIT.",
+   "JOO AUEZ UMIT is featured as a volunteering initiative in the School Life section."
+  ],
+  "/student-life.html"
+ ]
+],
+1:[
  [
   1,
   "school-classroom.webp",
@@ -268,7 +595,9 @@ const questions=[
    "Career guidance specialists help students choose paths based on their abilities and interests."
   ],
   "https://joohs.kz/jooauezov"
- ],
+ ]
+],
+2:[
  [
   2,
   "school-classroom.webp",
@@ -380,7 +709,10 @@ const questions=[
    "https://joo-schools.kz/"
   ]
  ]
-];
+]
+};
+let questions=[];
+
 const state={step:0,correct:0,selected:null,screen:'intro',streak:0,bestStreak:0,chapterCorrect:[0,0,0],shots:[],shotReady:true,activeShot:'jump',newAchievements:[]},points=()=>state.correct*10;
 const url=l=>l==='kk'?'/quest.html':'/'+l+'/quest.html';
 const ACH_KEY='joo-arena-achievements-v1';
