@@ -55,6 +55,8 @@ body[data-page="team"] .staff-grid .joo-team-portrait--poster>img{object-fit:con
  body[data-page="campus"] .v33-bento figcaption{font-size:9px;letter-spacing:.045em;padding:8px 9px;left:8px;bottom:8px}
  body[data-page="index"] .hero__info:after{position:static;display:block;margin-top:25px}
  body[data-page="results"] .results-chart .score-row{border-inline-start-width:2px}}
+/* Avoid long Russian results headlines exceeding 320px Safari width. */
+@media(max-width:390px){body[data-page="results"] .joo-result-experience__top h2{font-size:clamp(27px,8.3vw,34px);line-height:1.08;max-width:100%;overflow-wrap:anywhere}}
 @media(prefers-reduced-motion:reduce){
  .v33-type .v33-word,.v33-type.v33-hero-armed:not(.v33-hero-play) .v33-word{transform:none!important;animation:none!important;opacity:1!important}
  body[data-page="results"].v33-motion .results-chart .score-row__track i{transform:none!important;transition:none!important}
