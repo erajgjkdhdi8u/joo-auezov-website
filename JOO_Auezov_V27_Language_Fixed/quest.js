@@ -1612,9 +1612,35 @@ function scene(picked,made){
   tag+stateLabel+slowLabel+label+'</div>';
 }
 function soundControl(){
- return '<button id="questSound" type="button" class="quest-sound-toggle" aria-pressed="'+String(soundOn)+'" aria-label="'+h(soundOn?t.soundOn:t.soundOff)+'">'+
+ return '<div class="quest-audio-toolbar" role="group" aria-label="'+h(t.audioMode)+'">'+
+ '<button id="questSound" type="button" class="quest-sound-toggle" aria-pressed="'+String(soundOn)+'" aria-label="'+h(soundOn?t.soundOn:t.soundOff)+'">'+
  '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9H2v6h3l5 4V5z"/><path class="quest-sound-waves" d="M14 9c1.5 2 1.5 4 0 6M17 6c3 3.5 3 8.5 0 12"/><path class="quest-sound-strike" d="M14 9l7 7m0-7l-7 7"/></svg>'+
- '<span class="quest-sound-title">'+h(soundOn?t.soundOn:t.soundOff)+'</span></button>';
+ '<span class="quest-sound-title">'+h(soundOn?t.soundOn:t.soundOff)+'</span></button>'+
+ '<button id="questSoundStyle" type="button" class="quest-sound-style" aria-pressed="'+String(soundStyle==='arcade')+'" aria-label="'+h(t.audioMode+': '+(soundStyle==='court'?t.audioCourt:t.audioArcade))+'">'+
+ '<span aria-hidden="true">♫</span><span class="quest-sound-style-title">'+h(soundStyle==='court'?t.audioCourt:t.audioArcade)+'</span><span aria-hidden="true" class="quest-sound-style-arrows">↔</span></button></div>';
+}
+function bindSoundControl(){
+ $('questSound')?.addEventListener('click',()=>{
+  soundOn=!soundOn;storeSound();
+  if(audioMaster){
+   try{audioMaster.gain.setValueAtTime(soundOn?.48:0,audio.currentTime);}catch(_){audioMaster.gain.value=soundOn?.48:0;}
+  }
+  const button=$('questSound');
+  button?.setAttribute('aria-pressed',String(soundOn));
+  button?.setAttribute('aria-label',soundOn?t.soundOn:t.soundOff);
+  const label=button?.querySelector('.quest-sound-title');
+  if(label)label.textContent=soundOn?t.soundOn:t.soundOff;
+  if(soundOn)playSfx('tap');
+ });
+ $('questSoundStyle')?.addEventListener('click',()=>{
+  soundStyle=soundStyle==='court'?'arcade':'court';storeSound();
+  const button=$('questSoundStyle'),current=soundStyle==='court'?t.audioCourt:t.audioArcade;
+  button?.setAttribute('aria-pressed',String(soundStyle==='arcade'));
+  button?.setAttribute('aria-label',t.audioMode+': '+current);
+  const label=button?.querySelector('.quest-sound-style-title');
+  if(label)label.textContent=current;
+  playSfx('tap');
+ });
 }
 
 function question(){
@@ -1633,13 +1659,7 @@ function question(){
  const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p><div class="quest-fact-sources">'+sourceLinks+'</div></div><button class="quest-button" id="nextQuestion"'+(state.shotReady?'':' disabled aria-disabled="true"')+'>'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
  view(scoreboard()+'<div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+(picked&&!state.shotReady?' quest-question--shooting':'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+' <span class="quest-difficulty quest-difficulty--'+q[0]+'">'+h(t.difficulties[q[0]])+'</span></div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'</div></section>','questionTitle');
  root.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.answer))));
- $('questSound')?.addEventListener('click',()=>{
-  soundOn=!soundOn;const b=$('questSound');
-  b?.setAttribute('aria-pressed',String(soundOn));
-  b?.setAttribute('aria-label',soundOn?t.soundOn:t.soundOff);
-  const label=b?.querySelector('.quest-sound-title');
-  if(label)label.textContent=soundOn?t.soundOn:t.soundOff;
- });
+ bindSoundControl();
  if(picked){
   $('nextQuestion').addEventListener('click',next);
   if(state.shotReady)$('nextQuestion').focus({preventScroll:true});
