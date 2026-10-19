@@ -503,3 +503,37 @@ button,a{font:inherit}button{cursor:pointer}a{color:inherit}
  .quest-court.is-v6.is-made .quest-arena-sky__lights i,
  .quest-court.is-v6.is-missed .quest-arena-sky__lights i{animation:none}
 }
+
+/* JOO ARENA 6.2: keep the single arena/shot caption unobtrusively at the edge,
+   away from the middle of the court and the ball's starting position. */
+.quest-court.is-v6 .quest-shot-type{
+  left:auto;
+  right:clamp(9px,2.5%,20px);
+  top:auto;
+  bottom:clamp(9px,2.5%,16px);
+  width:max-content;
+  max-width:min(56%,280px);
+  align-items:flex-end;
+  text-align:right;
+  gap:2px;
+  padding:7px 10px;
+  border-left:0;
+  border-right:3px solid var(--arena-accent);
+  background:linear-gradient(270deg,#061a31ed,#07192bad 84%,#07192b30);
+  border-radius:5px 0 0 5px;
+  box-shadow:0 5px 15px #02112470;
+}
+.quest-court.is-v6 .quest-shot-type strong{font-size:clamp(15px,1.7vw,22px);line-height:1.13;overflow-wrap:anywhere}
+.quest-court.is-v6 .quest-shot-type small{font-size:9px}
+@media(max-width:980px){
+  .quest-court.is-v6 .quest-shot-type{left:auto;right:12px;bottom:12px;max-width:56%}
+}
+@media(max-width:590px){
+  .quest-court.is-v6 .quest-shot-type{left:auto;right:9px;bottom:9px;max-width:57%;padding:6px 8px}
+  .quest-court.is-v6 .quest-shot-type strong{font-size:clamp(14px,4.2vw,18px)}
+  .quest-court.is-v6 .quest-shot-type span{font-size:8px}
+  .quest-court.is-v6 .quest-shot-type small{font-size:8px}
+}
+@media(max-width:360px){
+  .quest-court.is-v6 .quest-shot-type{left:auto;right:7px;bottom:7px;max-width:59%}
+}
