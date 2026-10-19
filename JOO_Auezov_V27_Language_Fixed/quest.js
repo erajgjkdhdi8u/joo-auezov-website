@@ -398,6 +398,12 @@ const level=()=>points()>=90?3:points()>=70?2:points()>=50?1:0;
 const ranks=['JOO ROOKIE','JOO EXPLORER','JOO EXPERT','JOO LEGEND'];
 function result(){
  state.screen='result';
+ // Only completed games can unlock trophies; old records remain in this browser.
+ savedAchievements=readAchievements();
+ const inThisGame=achievementDefs.filter(a=>a.check()).map(a=>a.id);
+ state.newAchievements=inThisGame.filter(id=>!savedAchievements.has(id));
+ for(const id of inThisGame)savedAchievements.add(id);
+ saveAchievements();
  const chapterSizes=[3,4,3];
  const chapterRows=chapterSizes.map((size,i)=>{
   const correct=state.chapterCorrect[i];
@@ -406,6 +412,9 @@ function result(){
  }).join('');
  const recap='<div class="quest-recap" aria-label="'+h(t.chaptersResult)+'">'+
    '<div class="quest-recap-head">'+h(t.chaptersResult)+'</div>'+chapterRows+'</div>';
+ const trophies='<section class="quest-awards" aria-label="'+h(t.achTitle)+'">'+
+  '<div class="quest-awards__heading"><h2>'+h(t.achNow)+'</h2><span>'+inThisGame.length+' / '+achievementDefs.length+'</span></div>'+
+  '<div class="quest-achievements">'+awardCards(new Set(inThisGame),new Set(state.newAchievements))+'</div></section>';
  const trophy=points()>=90?t.mvp:points()>=70?t.allStar:points()>=50?t.rising:t.rookie;
  const ceremony='<div class="quest-mvp-ceremony" role="group" aria-label="'+h(t.award)+'">'+
   '<div class="quest-mvp-ceremony__confetti" aria-hidden="true">'+Array.from({length:18},(_,i)=>'<i style="--piece:'+i+'"></i>').join('')+'</div>'+
@@ -413,7 +422,7 @@ function result(){
   '<small>'+h(t.award)+'</small><strong>'+h(trophy)+'</strong><p>'+h(t.awardDesc)+'</p></div>';
  view('<section class="quest-result" aria-labelledby="resultTitle"><div><div class="quest-kicker">'+h(t.done)+'</div><h1 id="resultTitle" tabindex="-1">'+h(t.result)+'<br><em>'+h(t.result2)+'</em></h1><p>'+h(t.desc)+'</p><div class="quest-badge">'+ranks[level()]+'</div>'+
  ceremony+'<div class="quest-result-numbers"><div><span>'+h(t.accuracy)+'</span><strong>'+points()+'%</strong></div><div><span>'+h(t.best)+'</span><strong>×'+state.bestStreak+'</strong></div></div>'+
- recap+
+ recap+trophies+
  '<div class="quest-result-actions"><button class="quest-button" id="saveResult">'+h(t.save)+' ↓</button><button class="quest-button quest-button--outline" id="shareResult">'+h(t.share)+' ↗</button><button class="quest-button quest-button--outline" id="replayQuest">'+h(t.again)+' ↺</button></div></div><div><div class="quest-score-ring" style="--score:'+points()+'" role="img" aria-label="'+points()+' '+h(t.out)+'"><div class="quest-score-center"><strong>'+points()+'</strong><small>'+h(t.out)+'</small></div></div><div class="quest-result-stat">'+state.correct+' '+h(t.count)+'</div></div></section>','resultTitle');
  $('replayQuest').addEventListener('click',intro);$('shareResult').addEventListener('click',share);$('saveResult').addEventListener('click',save);
 }
