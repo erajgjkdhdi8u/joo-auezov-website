@@ -454,3 +454,52 @@ button,a{font:inherit}button{cursor:pointer}a{color:inherit}
  .quest-court.is-v6 .quest-ball{will-change:auto}
  .quest-ball__trail{display:none!important}
 }
+
+
+/* Arena 6.1 visual refinement: calibrated mobile staging, light and impact reactions. */
+.quest-picture:has(.quest-court.is-v6)>img{opacity:.15;filter:saturate(.8) contrast(1.12)}
+.quest-court.is-v6 .quest-arena-sky::after{background:radial-gradient(ellipse at 66% 20%,var(--arena-glow),transparent 58%);opacity:.85}
+.quest-court.is-v6.arena-stage--1 .quest-arena-sky::after{background:radial-gradient(ellipse at 65% 24%,#facb8a6b,transparent 57%)}
+.quest-court.is-v6.arena-stage--2 .quest-arena-sky::after{background:radial-gradient(ellipse at 69% 24%,#59e5ff6b,transparent 53%)}
+.quest-court.is-v6.arena-stage--3 .quest-arena-sky::after{background:radial-gradient(ellipse at 65% 22%,#ffca8c80,transparent 55%)}
+.quest-court.is-v6 .quest-court__camera .quest-court__floor::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 72% 30%,var(--arena-accent),transparent 58%);opacity:.13;pointer-events:none}
+.quest-court.is-v6 .quest-ball{background:radial-gradient(circle at 28% 19%,#ffe8b8 0%,#f6a450 19%,#d77c2b 47%,#9d4b17 79%,#633015 100%);box-shadow:inset -9px -11px 16px #4621088c,inset 4px 5px 10px #fff5,0 10px 22px #0008,0 0 12px #ffbd7950}
+.quest-court.is-v6 .quest-hoop__board{border-color:#e9f6ff;box-shadow:0 0 14px #b6d7f6a1,6px 9px 20px #0009}
+.quest-court.is-v6 .quest-hoop__rim{border-color:#ff8d4b;box-shadow:0 0 12px #f9945987,0 2px 5px #0006}
+.quest-court.is-v6.is-made .quest-arena-sky__lights i{animation:q-arena-lights-made .6s var(--shot-impact-delay,1050ms) ease-out both}
+.quest-court.is-v6.is-missed .quest-arena-sky__lights i{animation:q-arena-lights-missed .48s var(--shot-impact-delay,1050ms) ease-out both}
+@keyframes q-arena-lights-made{0%,100%{filter:brightness(1)}30%{filter:brightness(2.05)}}
+@keyframes q-arena-lights-missed{0%,100%{filter:brightness(1)}35%{filter:brightness(.6)}}
+.quest-court.is-v6 .quest-court__callout{max-width:52%;left:6%;top:15%}
+.quest-court.is-v6 .quest-arena-architecture__screen{box-shadow:0 0 14px var(--arena-glow)}
+.quest-shot-type strong,.quest-shot-type small{text-shadow:0 2px 8px #061326}
+.quest-scoreboard__round{overflow-wrap:anywhere;line-height:1.5}
+.quest-scoreboard__head{min-height:43px}
+@media(min-width:591px) and (max-width:980px){
+ .quest-question>.quest-picture{height:clamp(330px,50vw,400px);min-height:330px}
+ .quest-court.is-v6 .quest-shot-type{bottom:24%;max-width:56%}
+}
+@media(max-width:590px){
+ .quest-question>.quest-picture{height:clamp(285px,90vw,340px);min-height:285px}
+ .quest-scoreboard__head{min-height:46px}
+ .quest-scoreboard__live{gap:5px}
+ .quest-scoreboard__round{font-size:10px;max-width:61%;letter-spacing:0}
+ .quest-board-cell>small{font-size:10px}
+ .quest-shot-type span{font-size:10px}
+ .quest-shot-type small{font-size:10px;letter-spacing:0}
+ .quest-court.is-v6 .quest-court__callout{max-width:58%;top:16%}
+ .quest-court.is-v6 .quest-court__callout b{font-size:clamp(29px,9vw,40px)}
+ .quest-court.is-v6 .quest-shot-type{bottom:24%;max-width:60%}
+ .quest-court.is-v6 .quest-arena-architecture__screen{top:12%;right:7%}
+}
+@media(max-width:360px){
+ .quest-scoreboard__round{max-width:55%;font-size:9px}
+ .quest-board-cell{padding:11px 8px}
+ .quest-board-cell strong{font-size:31px}
+ .quest-court.is-v6 .quest-shot-type{max-width:62%;bottom:22%}
+ .quest-court.is-v6 .quest-arena-fire-status{right:4%;top:16%}
+}
+@media(prefers-reduced-motion:reduce){
+ .quest-court.is-v6.is-made .quest-arena-sky__lights i,
+ .quest-court.is-v6.is-missed .quest-arena-sky__lights i{animation:none}
+}
