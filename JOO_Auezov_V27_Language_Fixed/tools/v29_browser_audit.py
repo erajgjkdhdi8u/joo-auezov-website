@@ -46,6 +46,23 @@ with sync_playwright() as p:
                         alternate: document.querySelectorAll('link[rel=alternate][hreflang]').length,
                         brokenImages: [...document.images].filter(i => i.complete && i.naturalWidth === 0 && i.getAttribute('src')).map(i => i.getAttribute('src')).slice(0,5)
                     })"""))
+                    # WebKit occasionally reports a transient enormous scrollWidth
+                    # during initial font/image layout. Recheck settled geometry;
+                    # retain both readings and fail only if overflow persists.
+                    if record.get("overflowPx", 0) > 3:
+                        first = record["overflowPx"]
+                        page.wait_for_timeout(450)
+                        second = page.evaluate("Math.max(0,document.documentElement.scrollWidth - innerWidth)")
+                        record["overflowSamplesPx"] = [first, second]
+                        record["overflowPx"] = second
+                        if second > 3:
+                            record["overflowSuspects"] = page.evaluate("""() =>
+                                [...document.querySelectorAll('body *')].filter(e => {
+                                    const r=e.getBoundingClientRect(),s=getComputedStyle(e);
+                                    return s.display!=='none' && s.visibility!=='hidden' &&
+                                           r.width>0 && r.right>innerWidth+12;
+                                }).slice(0,8).map(e=>({tag:e.tagName,class:e.className?.toString().slice(0,85),right:Math.round(e.getBoundingClientRect().right)}))
+                            """)
                     record["jsErrors"] = errors[:5]
                     if name == "admissions":
                         form = page.locator("#enquiryForm")
