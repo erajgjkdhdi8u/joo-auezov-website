@@ -13,6 +13,12 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/accessibility_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/tools/translation_fixes_v29.py'
+      - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.css'
+      - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.js'
+      - 'JOO_Auezov_V27_Language_Fixed/index.html'
+      - 'JOO_Auezov_V27_Language_Fixed/campus.html'
+      - 'JOO_Auezov_V27_Language_Fixed/results.html'
+      - 'JOO_Auezov_V27_Language_Fixed/team.html'
 
 concurrency:
   group: joo-site-generation
@@ -84,6 +90,15 @@ jobs:
           assert (root/'admissions-v29.js').is_file()
           xml = ET.parse(root/'sitemap.xml').getroot()
           assert len(xml.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')) == 42
+          for lang in ('kk','ru','en'):
+              folder = root if lang == 'kk' else root / lang
+              for page in ('index','campus','results','team'):
+                  html = (folder/(page+'.html')).read_text(encoding='utf-8')
+                  assert 'v33-cinematic.css' in html and 'v33-cinematic.js' in html, (lang,page)
+              campus = (folder/'campus.html').read_text(encoding='utf-8')
+              gallery = campus.split('<div class="gallery-band__grid">',1)[1].split('</div>',1)[0]
+              assert gallery.count('<figure>') == 5, (lang,'gallery frames')
+          print('PASS: V33 cinematic visual features published in KK, RU and EN')
           print('PASS: 42 language pages, localized SEO, sitemap, photos and admissions form')
           PY
       - name: Commit generated language pages and imagery
