@@ -8,9 +8,9 @@ const lang=location.pathname.startsWith('/ru/')?'ru':location.pathname.startsWit
 document.documentElement.lang=lang;
 const li={kk:0,ru:1,en:2}[lang], L=a=>a[li], h=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const t={
-kk:{back:'САЙТҚА ҚАЙТУ',skip:'Негізгі мазмұнға өту',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'МЕКТЕПТІ',accent:'ТАНЫ.',lead:'JOO әлеміне кір. 10 сұраққа жауап бер, мектеп туралы қызықты деректерді аш және өз деңгейіңді біл.',start:'КВЕСТТІ БАСТАУ',meta:['10 СҰРАҚ','3 КЕЗЕҢ','≈ 3 МИНУТ'],step:'СҰРАҚ',pts:'ҰПАЙ',chapters:['МЕКТЕППЕН ТАНЫСУ','ОҚУ ЖОЛЫ','НӘТИЖЕ МЕН МҮМКІНДІК'],correct:'ДҰРЫС ЖАУАП!',wrong:'КЕЛЕСІДЕ СӘТТІЛІК!',next:'КЕЛЕСІ СҰРАҚ',finish:'НӘТИЖЕНІ КӨРУ',hint:'Жауапты таңда. 1–4 пернелерін де пайдалануға болады.',done:'МИССИЯ АЯҚТАЛДЫ',result:'СЕНІҢ',result2:'НӘТИЖЕҢ',desc:'Сен JOO High School туралы көбірек білдің. Жаңа білім — жаңа мүмкіндіктердің бастауы.',out:'100 ҰПАЙДАН',count:'дұрыс жауап / 10',again:'ҚАЙТА ОЙНАУ',share:'БӨЛІСУ',save:'КАРТОЧКАНЫ САҚТАУ',copied:'Нәтиже көшірілді!',failed:'Бөлісу мүмкін болмады.',saveFailed:'Суретті сақтау мүмкін болмады.',shareText:'Мен JOO QUEST орындадым!',caption:'МЕКТЕПТІ ҚАНШАЛЫҚТЫ БІЛЕСІҢ?',alt:'JOO High School мектебінің нақты фотосы'},
-ru:{back:'НА САЙТ',skip:'Перейти к содержимому',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'ОТКРОЙ',accent:'JOO.',lead:'Отправляйся в мир JOO. Ответь на 10 вопросов, узнай больше о школе и открой свой уровень.',start:'НАЧАТЬ КВЕСТ',meta:['10 ВОПРОСОВ','3 ЭТАПА','≈ 3 МИНУТЫ'],step:'ВОПРОС',pts:'БАЛЛЫ',chapters:['ЗНАКОМСТВО СО ШКОЛОЙ','ПУТЬ УЧЕНИКА','РЕЗУЛЬТАТЫ И ВОЗМОЖНОСТИ'],correct:'ВЕРНО!',wrong:'В СЛЕДУЮЩИЙ РАЗ ПОЛУЧИТСЯ!',next:'СЛЕДУЮЩИЙ ВОПРОС',finish:'МОЙ РЕЗУЛЬТАТ',hint:'Выбери ответ. Можно использовать клавиши 1–4.',done:'МИССИЯ ЗАВЕРШЕНА',result:'ТВОЙ',result2:'РЕЗУЛЬТАТ',desc:'Теперь ты знаешь больше о JOO High School. Новые знания открывают возможности.',out:'ИЗ 100 БАЛЛОВ',count:'верных ответов / 10',again:'ИГРАТЬ СНОВА',share:'ПОДЕЛИТЬСЯ',save:'СОХРАНИТЬ КАРТОЧКУ',copied:'Результат скопирован!',failed:'Не удалось поделиться.',saveFailed:'Не удалось сохранить изображение.',shareText:'Я прошёл JOO QUEST!',caption:'КАК ХОРОШО ТЫ ЗНАЕШЬ ШКОЛУ?',alt:'Настоящее фото JOO High School'},
-en:{back:'BACK TO SITE',skip:'Skip to content',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'DISCOVER',accent:'JOO.',lead:'Enter the world of JOO. Answer 10 questions, unlock real school facts and discover your level.',start:'START THE QUEST',meta:['10 QUESTIONS','3 CHAPTERS','≈ 3 MINUTES'],step:'QUESTION',pts:'POINTS',chapters:['MEET THE SCHOOL','YOUR LEARNING JOURNEY','RESULTS & OPPORTUNITIES'],correct:'CORRECT!',wrong:'BETTER LUCK NEXT TIME!',next:'NEXT QUESTION',finish:'SEE MY RESULT',hint:'Choose an answer. You can also use number keys 1–4.',done:'MISSION COMPLETE',result:'YOUR',result2:'RESULT',desc:'You now know more about JOO High School. Every discovery opens up new possibilities.',out:'OUT OF 100 POINTS',count:'correct answers / 10',again:'PLAY AGAIN',share:'SHARE RESULT',save:'SAVE RESULT CARD',copied:'Result copied!',failed:'Sharing failed.',saveFailed:'Could not save the image.',shareText:'I completed JOO QUEST!',caption:'HOW WELL DO YOU KNOW THE SCHOOL?',alt:'Real JOO High School photo'}
+kk:{back:'САЙТҚА ҚАЙТУ',skip:'Негізгі мазмұнға өту',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'МЕКТЕПТІ',accent:'ТАНЫ.',lead:'JOO әлеміне кір. 10 сұраққа жауап бер, мектеп туралы қызықты деректерді аш және өз деңгейіңді біл.',start:'КВЕСТТІ БАСТАУ',meta:['10 СҰРАҚ','3 КЕЗЕҢ','≈ 3 МИНУТ'],step:'СҰРАҚ',pts:'ҰПАЙ',chapters:['МЕКТЕППЕН ТАНЫСУ','ОҚУ ЖОЛЫ','НӘТИЖЕ МЕН МҮМКІНДІК'],correct:'ДҰРЫС ЖАУАП!',wrong:'КЕЛЕСІДЕ СӘТТІЛІК!',next:'КЕЛЕСІ СҰРАҚ',finish:'НӘТИЖЕНІ КӨРУ',hint:'Жауапты таңда. 1–4 пернелерін де пайдалануға болады.',done:'МИССИЯ АЯҚТАЛДЫ',result:'СЕНІҢ',result2:'НӘТИЖЕҢ',desc:'Сен JOO High School туралы көбірек білдің. Жаңа білім — жаңа мүмкіндіктердің бастауы.',out:'100 ҰПАЙДАН',count:'дұрыс жауап / 10',again:'ҚАЙТА ОЙНАУ',share:'БӨЛІСУ',save:'КАРТОЧКАНЫ САҚТАУ',copied:'Нәтиже көшірілді!',failed:'Бөлісу мүмкін болмады.',saveFailed:'Суретті сақтау мүмкін болмады.',shareText:'Мен JOO QUEST орындадым!',caption:'МЕКТЕПТІ ҚАНШАЛЫҚТЫ БІЛЕСІҢ?',soundOn:'ДЫБЫС ҚОСУЛЫ',soundOff:'ДЫБЫС ӨШІРУЛІ',shotMade:'ДӘЛ ТҮСТІ!',shotMissed:'МҮЛТ КЕТТІ!',alt:'JOO High School мектебінің нақты фотосы'},
+ru:{back:'НА САЙТ',skip:'Перейти к содержимому',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'ОТКРОЙ',accent:'JOO.',lead:'Отправляйся в мир JOO. Ответь на 10 вопросов, узнай больше о школе и открой свой уровень.',start:'НАЧАТЬ КВЕСТ',meta:['10 ВОПРОСОВ','3 ЭТАПА','≈ 3 МИНУТЫ'],step:'ВОПРОС',pts:'БАЛЛЫ',chapters:['ЗНАКОМСТВО СО ШКОЛОЙ','ПУТЬ УЧЕНИКА','РЕЗУЛЬТАТЫ И ВОЗМОЖНОСТИ'],correct:'ВЕРНО!',wrong:'В СЛЕДУЮЩИЙ РАЗ ПОЛУЧИТСЯ!',next:'СЛЕДУЮЩИЙ ВОПРОС',finish:'МОЙ РЕЗУЛЬТАТ',hint:'Выбери ответ. Можно использовать клавиши 1–4.',done:'МИССИЯ ЗАВЕРШЕНА',result:'ТВОЙ',result2:'РЕЗУЛЬТАТ',desc:'Теперь ты знаешь больше о JOO High School. Новые знания открывают возможности.',out:'ИЗ 100 БАЛЛОВ',count:'верных ответов / 10',again:'ИГРАТЬ СНОВА',share:'ПОДЕЛИТЬСЯ',save:'СОХРАНИТЬ КАРТОЧКУ',copied:'Результат скопирован!',failed:'Не удалось поделиться.',saveFailed:'Не удалось сохранить изображение.',shareText:'Я прошёл JOO QUEST!',caption:'КАК ХОРОШО ТЫ ЗНАЕШЬ ШКОЛУ?',soundOn:'ЗВУК ВКЛЮЧЕН',soundOff:'ЗВУК ВЫКЛЮЧЕН',shotMade:'ПОПАДАНИЕ!',shotMissed:'ПРОМАХ!',alt:'Настоящее фото JOO High School'},
+en:{back:'BACK TO SITE',skip:'Skip to content',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'DISCOVER',accent:'JOO.',lead:'Enter the world of JOO. Answer 10 questions, unlock real school facts and discover your level.',start:'START THE QUEST',meta:['10 QUESTIONS','3 CHAPTERS','≈ 3 MINUTES'],step:'QUESTION',pts:'POINTS',chapters:['MEET THE SCHOOL','YOUR LEARNING JOURNEY','RESULTS & OPPORTUNITIES'],correct:'CORRECT!',wrong:'BETTER LUCK NEXT TIME!',next:'NEXT QUESTION',finish:'SEE MY RESULT',hint:'Choose an answer. You can also use number keys 1–4.',done:'MISSION COMPLETE',result:'YOUR',result2:'RESULT',desc:'You now know more about JOO High School. Every discovery opens up new possibilities.',out:'OUT OF 100 POINTS',count:'correct answers / 10',again:'PLAY AGAIN',share:'SHARE RESULT',save:'SAVE RESULT CARD',copied:'Result copied!',failed:'Sharing failed.',saveFailed:'Could not save the image.',shareText:'I completed JOO QUEST!',caption:'HOW WELL DO YOU KNOW THE SCHOOL?',soundOn:'SOUND ON',soundOff:'SOUND OFF',shotMade:'SWISH!',shotMissed:'MISSED!',alt:'Real JOO High School photo'}
 }[lang];
 /* item: chapter, image, correct index, localized questions, localized option arrays, localized explanations */
 const questions=[
@@ -69,22 +69,77 @@ function intro(){
  view('<section class="quest-intro" aria-labelledby="introTitle"><div class="quest-intro-copy"><div class="quest-kicker">'+h(t.eyebrow)+'</div><h1 id="introTitle" tabindex="-1" class="quest-display">'+h(t.big)+'<span>'+h(t.accent)+'</span></h1><p class="quest-lead">'+h(t.lead)+'</p><button class="quest-button" id="startQuest">'+h(t.start)+' <span aria-hidden="true">↗</span></button><div class="quest-micro">'+t.meta.map(s=>'<span>'+h(s)+'</span>').join('')+'</div></div><div class="quest-intro-art"><img src="/assets/images/v28/school-lounge.webp" width="1448" height="1086" alt="'+h(t.alt)+'"><div class="quest-photo-caption"><span>JOO AUEZOV / ALMATY</span><b>01—10</b></div></div></section>','introTitle');
  $('startQuest').addEventListener('click',()=>{state.screen='question';question();});
 }
+
+/* No external audio files: synthesize a low-volume throw, net swish and rim clang. */
+let soundOn=true, audio=null;
+function playShot(made){
+ if(!soundOn)return;
+ try{
+  const Engine=window.AudioContext||window.webkitAudioContext;if(!Engine)return;
+  if(!audio)audio=new Engine();
+  if(audio.state==='suspended')audio.resume().catch(()=>{});
+  const ctx=audio,at=ctx.currentTime+.008;
+  function tone(t,f,to,d,v,type='sine'){
+   const o=ctx.createOscillator(),a=ctx.createGain();o.type=type;
+   o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(Math.max(30,to),t+d);
+   a.gain.setValueAtTime(.0001,t);a.gain.exponentialRampToValueAtTime(v,t+.012);a.gain.exponentialRampToValueAtTime(.0001,t+d);
+   o.connect(a);a.connect(ctx.destination);o.start(t);o.stop(t+d+.01);
+  }
+  function rush(t,d,v,f){
+   const n=Math.ceil(ctx.sampleRate*d),b=ctx.createBuffer(1,n,ctx.sampleRate),data=b.getChannelData(0);
+   for(let i=0;i<n;i++)data[i]=Math.random()*2-1;
+   const src=ctx.createBufferSource(),flt=ctx.createBiquadFilter(),amp=ctx.createGain();
+   src.buffer=b;flt.type='bandpass';flt.frequency.value=f;flt.Q.value=.8;
+   amp.gain.setValueAtTime(.0001,t);amp.gain.linearRampToValueAtTime(v,t+d*.22);amp.gain.exponentialRampToValueAtTime(.0001,t+d);
+   src.connect(flt);flt.connect(amp);amp.connect(ctx.destination);src.start(t);src.stop(t+d+.003);
+  }
+  tone(at,155,90,.11,.07,'triangle');rush(at+.1,.31,.028,940);
+  if(made){rush(at+.73,.3,.12,2700);tone(at+.82,580,790,.18,.065);tone(at+1.01,810,1060,.23,.068);}
+  else{tone(at+.84,320,170,.15,.078,'triangle');tone(at+.85,530,280,.12,.04,'square');tone(at+1.05,175,95,.22,.058);}
+ }catch(_){/* Audio permission and API support must not affect quiz operation. */}
+}
+function scene(picked,made){
+ const outcome=!picked?'is-ready':made?'is-made':'is-missed';
+ const label=picked?'<div class="quest-court__callout"><b>'+h(made?t.shotMade:t.shotMissed)+'</b><small>'+(made?'+10 JOO POINTS':'JOO ARENA / TRY AGAIN')+'</small></div>':'';
+ return '<div class="quest-court '+outcome+'" aria-hidden="true"><div class="quest-court__grid"></div><div class="quest-court__floor"></div>'+
+ '<div class="quest-court__hud"><span>JOO ARENA</span><span>SHOT '+String(state.step+1).padStart(2,'0')+' / 10</span></div>'+
+ '<div class="quest-hoop"><div class="quest-hoop__board"></div><div class="quest-hoop__support"></div><div class="quest-hoop__rim"></div>'+
+ '<svg class="quest-hoop__net" viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false" aria-hidden="true"><path d="M2 2 L98 2 M5 3 L22 96 M28 3 L40 97 M51 3 L50 98 M74 3 L61 97 M95 3 L78 96 M5 25 L94 25 M9 48 L89 48 M14 70 L84 70 M21 93 L79 93"/></svg>'+
+ '<div class="quest-hoop__rim-front"></div></div><div class="quest-ball__shadow"></div><div class="quest-ball"></div>'+label+
+ '<div class="quest-court__sparks"><i></i><i></i><i></i><i></i><i></i></div></div>';
+}
+function soundControl(){
+ return '<button id="questSound" type="button" class="quest-sound-toggle" aria-pressed="'+String(soundOn)+'" aria-label="'+h(soundOn?t.soundOn:t.soundOff)+'">'+
+ '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9H2v6h3l5 4V5z"/><path class="quest-sound-waves" d="M14 9c1.5 2 1.5 4 0 6M17 6c3 3.5 3 8.5 0 12"/><path class="quest-sound-strike" d="M14 9l7 7m0-7l-7 7"/></svg>'+
+ '<span class="quest-sound-title">'+h(soundOn?t.soundOn:t.soundOff)+'</span></button>';
+}
+
 function question(){
  state.screen='question';
- const q=questions[state.step],picked=state.selected!==null;
+ const q=questions[state.step],picked=state.selected!==null,made=picked&&state.selected===q[2];
  const choices=L(q[4]).map((s,i)=>{
   let cls='quest-option';
   if(picked)cls+=i===q[2]?' is-correct':i===state.selected?' is-wrong':' is-dimmed';
   return '<button class="'+cls+'" type="button" data-answer="'+i+'"'+(picked?' disabled':'')+'><b aria-hidden="true">'+(i+1)+'</b><span>'+h(s)+'</span></button>';
  }).join('');
  const feedback=picked?'<div class="quest-feedback" role="status"><strong>'+h(state.selected===q[2]?t.correct:t.wrong)+'</strong><p>'+h(L(q[5]))+'</p></div><button class="quest-button" id="nextQuestion">'+h(state.step===9?t.finish:t.next)+' <span aria-hidden="true">→</span></button>':'<p class="quest-hint">'+h(t.hint)+'</p>';
- view('<div class="quest-topline"><div class="quest-counter"><span>'+String(state.step+1).padStart(2,'0')+'</span> / 10 <small style="font:700 11px Inter,sans-serif;color:#b7cadf">'+h(t.step)+'</small></div><div class="quest-points">'+h(t.pts)+' '+points()+' / 100</div></div><div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1><div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'"><div><span>JOO / SCHOOL EXPERIENCE</span><strong>'+h(t.chapters[q[0]])+'</strong></div></div></section>','questionTitle');
+ view('<div class="quest-topline"><div class="quest-counter"><span>'+String(state.step+1).padStart(2,'0')+'</span> / 10 <small style="font:700 11px Inter,sans-serif;color:#b7cadf">'+h(t.step)+'</small></div><div class="quest-points'+(made?' is-added':'')+'">'+h(t.pts)+' '+points()+' / 100</div></div><div class="quest-progress" role="progressbar" aria-label="'+h(t.step)+'" aria-valuemin="0" aria-valuemax="10" aria-valuenow="'+state.step+'"><div class="quest-progress-fill" style="width:'+(state.step*10)+'%"></div></div><section class="quest-question'+(picked?(made?' quest-question--made':' quest-question--missed'):'')+'" aria-labelledby="questionTitle"><div class="quest-question-main"><div class="quest-chapter">0'+(q[0]+1)+' / '+h(t.chapters[q[0]])+'</div><h1 id="questionTitle" tabindex="-1">'+h(L(q[3]))+'</h1>'+soundControl()+'<div class="quest-options" role="group" aria-label="'+h(t.step)+' '+(state.step+1)+'">'+choices+'</div>'+feedback+'</div><div class="quest-picture"><img src="'+(q[1].startsWith('/')?h(q[1]):'/assets/images/v28/'+h(q[1]))+'" width="1448" height="1086" loading="lazy" alt="'+h(t.alt)+'">'+scene(picked,made)+'<div class="quest-picture-caption"><span>JOO / SCHOOL EXPERIENCE</span><strong>'+h(t.chapters[q[0]])+'</strong></div></div></section>','questionTitle');
  root.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.answer))));
+ $('questSound')?.addEventListener('click',()=>{
+  soundOn=!soundOn;const b=$('questSound');
+  b?.setAttribute('aria-pressed',String(soundOn));
+  b?.setAttribute('aria-label',soundOn?t.soundOn:t.soundOff);
+  const label=b?.querySelector('.quest-sound-title');
+  if(label)label.textContent=soundOn?t.soundOn:t.soundOff;
+ });
  if(picked){$('nextQuestion').addEventListener('click',next);$('nextQuestion').focus({preventScroll:true});}
 }
 function choose(n){
  if(state.screen!=='question'||state.selected!==null||!Number.isInteger(n)||n<0||n>3)return;
- state.selected=n;if(n===questions[state.step][2])state.correct++;question();
+ state.selected=n;
+ const made=n===questions[state.step][2];
+ if(made)state.correct++;
+ playShot(made);question();
 }
 function next(){
  if(state.screen!=='question'||state.selected===null)return;
