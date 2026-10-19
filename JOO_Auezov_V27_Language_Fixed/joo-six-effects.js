@@ -256,10 +256,20 @@
       if(loaded)img.src=path;
       requestAnimationFrame(()=>frame?.classList.remove('is-changing'));
     };
-    $$('.nav-item',menu).forEach(link=>{
-      link.addEventListener('pointerenter',()=>show(link));
-      link.addEventListener('focus',()=>show(link));
+    // Debounce only hover so sweeping over 14 links does not fetch 14 images.
+    // Keyboard focus remains immediate.
+    let previewTimer=0;
+    $('.nav-item',menu).forEach(link=>{
+      link.addEventListener('pointerenter',()=>{
+        clearTimeout(previewTimer);
+        previewTimer=setTimeout(()=>{if(!menu.hidden)show(link);},90);
+      });
+      link.addEventListener('focus',()=>{
+        clearTimeout(previewTimer);
+        if(!menu.hidden)show(link);
+      });
     });
+    menu.addEventListener('pointerleave',()=>clearTimeout(previewTimer));
     const toggle=document.getElementById('menuToggle');
     toggle?.addEventListener('click',()=>{
       if(!menu.hidden)show(menu.querySelector('.nav-item.is-active')||menu.querySelector('.nav-item'));
