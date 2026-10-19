@@ -22,36 +22,36 @@ const questions=[
   "school-building.webp",
   1,
   [
-   "JOO School Auezov қай қалада орналасқан?",
-   "В каком городе находится JOO School Auezov?",
-   "In which city is JOO School Auezov located?"
+   "JOO School Auezov Алматының қай көшесінде орналасқан?",
+   "На какой улице Алматы находится JOO School Auezov?",
+   "On which street in Almaty is JOO School Auezov located?"
   ],
   [
    [
-    "Астана",
-    "Алматы",
-    "Шымкент",
-    "Ақтау"
+    "Халиуллин көшесі",
+    "Цветочная көшесі",
+    "Төле би көшесі",
+    "Бәйдібек би даңғылы"
    ],
    [
-    "Астана",
-    "Алматы",
-    "Шымкент",
-    "Актау"
+    "Улица Халиуллина",
+    "Цветочная улица",
+    "Улица Толе би",
+    "Проспект Байдибек би"
    ],
    [
-    "Astana",
-    "Almaty",
-    "Shymkent",
-    "Aktau"
+    "Khaliullin Street",
+    "Tsvetochnaya Street",
+    "Tole Bi Street",
+    "Baidibek Bi Avenue"
    ]
   ],
   [
-   "JOO School Auezov Алматы қаласында орналасқан.",
-   "JOO School Auezov находится в Алматы.",
-   "JOO School Auezov is located in Almaty."
+   "Auezov филиалының мекенжайы: Алматы, Цветочная көшесі, 1/14.",
+   "Адрес филиала Auezov: Алматы, улица Цветочная, 1/14.",
+   "The Auezov branch address is 1/14 Tsvetochnaya Street, Almaty."
   ],
-  "https://joohs.kz/jooauezov"
+  "https://joo-schools.kz/"
  ],
  [
   0,
@@ -346,34 +346,34 @@ const questions=[
   "school-students.webp",
   2,
   [
-   "JOO Auezov сайтындағы 8 оқушы постерінің ең жоғары ҰБТ нәтижесі қанша?",
-   "Какой максимальный балл ЕНТ среди 8 постеров учеников на сайте JOO Auezov?",
-   "What is the highest UNT score across the eight student posters on the JOO Auezov site?"
+   "ҰБТ нәтижелеріне қатысты қай салыстыру дұрыс?",
+   "Какое сравнение результатов ЕНТ верное?",
+   "Which comparison of UNT results is correct?"
   ],
   [
    [
-    "115",
-    "137",
-    "121",
-    "140"
+    "Ауезов постерлері мен бүкіл желіде ең жоғарысы — 121 балл",
+    "Ауезовтың 8 постері — 137, бүкіл желі — 121 балл",
+    "Ауезовтың 8 постері — 121, JOO желісі — 137 балл",
+    "Екі дереккөзде де ең жоғарысы — 137 балл"
    ],
    [
-    "115",
-    "137",
-    "121",
-    "140"
+    "Максимум в постерах Ауэзова и по сети — 121 балл",
+    "8 постеров Ауэзова — 137, вся сеть — 121 балл",
+    "8 постеров Ауэзова — 121, сеть JOO — 137 баллов",
+    "Оба источника показывают максимум 137 баллов"
    ],
    [
-    "115",
-    "137",
-    "121",
-    "140"
+    "Both the Auezov posters and network show 121",
+    "Auezov's eight posters show 137; the network shows 121",
+    "Auezov's eight posters show 121; the JOO network shows 137",
+    "Both sources show 137"
    ]
   ],
   [
-   "Ауезов сайтындағы 8 постердің ең жоғарысы — 121 балл. JOO School желісінің 137 балдық нәтижесі бұдан бөлек.",
-   "Среди восьми постеров максимум — 121 балл. Показатель 137 относится к сети JOO School, а не к этой выборке.",
-   "The highest of these eight posters is 121 points. The network-wide JOO School figure of 137 is a separate result."
+   "Дұрыс: Ауезов сайтындағы 8 постердің максимумы — 121. JOO School желісі жариялаған 137 балл — жалпы желінің нәтижесі.",
+   "Верно: максимум среди 8 постеров Ауэзова — 121. Показатель 137 баллов опубликован по всей сети JOO School.",
+   "Correct: the eight Auezov posters peak at 121, while the JOO School network reports a separate 137-point result."
   ],
   "/results.html"
  ]
