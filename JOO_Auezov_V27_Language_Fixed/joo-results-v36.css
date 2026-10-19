@@ -1,0 +1,125 @@
+/* JOO V36 — Six scoped motion enhancements for the Results page.
+   Progressive: without JS, all content remains visible. Reduced motion is fully static. */
+body[data-page="results"] .joo-achieve__grid {position:relative}
+body[data-page="results"] .joo-achieve__card {isolation:isolate}
+@media (hover:hover) and (pointer:fine) and (min-width:769px) and (prefers-reduced-motion:no-preference) {
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost) {
+    --v36-rx:0deg;--v36-ry:0deg;--v36-lift:0px;--v36-gx:50%;--v36-gy:50%;
+    position:relative;
+    transform:perspective(1000px) rotateX(var(--v36-rx)) rotateY(var(--v36-ry)) translateY(var(--v36-lift));
+    transition:transform .16s ease-out,border-color .25s ease,box-shadow .25s ease,opacity .7s ease,translate .7s ease;
+  }
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost):hover,
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost):focus-within{
+    --v36-lift:-6px;
+    border-color:#f0cf87ae;box-shadow:0 25px 60px #0006;
+  }
+  /* Gentle cursor-localized glow; unaffected content remains fully readable. */
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost)::before {
+    content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    background:radial-gradient(circle 230px at var(--v36-gx) var(--v36-gy),#ffe1a02b,transparent 74%);
+    opacity:0;transition:opacity .27s ease;z-index:1;
+  }
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost)::after {
+    content:"";position:absolute;top:-65%;bottom:-65%;left:-135%;width:43%;
+    pointer-events:none;z-index:2;
+    background:linear-gradient(90deg,transparent,#ffe4a500 15%,#ffe6a543 50%,#ffe4a500 85%,transparent);
+    transform:skewX(-24deg);transition:left .85s cubic-bezier(.16,.8,.2,1);
+  }
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost):is(:hover,:focus-within)::before{opacity:1}
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost):is(:hover,:focus-within)::after{left:190%}
+}
+/* Cinematic headline: two authored text elements, no destructive HTML rewriting. */
+body[data-page="results"].v36-armed .joo-achieve__head h2>span,
+body[data-page="results"].v36-armed .joo-achieve__head h2>em{
+  opacity:0;transform:translateY(34px);clip-path:inset(0 0 85% 0);
+  transition:opacity .65s ease,transform .84s cubic-bezier(.16,1,.3,1),clip-path .84s cubic-bezier(.16,1,.3,1);
+}
+body[data-page="results"].v36-armed .joo-achieve.v36-title-visible .joo-achieve__head h2>span,
+body[data-page="results"].v36-armed .joo-achieve.v36-title-visible .joo-achieve__head h2>em{
+  opacity:1;transform:none;clip-path:inset(0 0 0 0);
+}
+body[data-page="results"].v36-armed .joo-achieve.v36-title-visible .joo-achieve__head h2>em{transition-delay:135ms}
+/* Staggered scroll arrival, independent of legacy hover transform animations. */
+body[data-page="results"].v36-armed .joo-achieve__card:not(.v36-filter-ghost),
+body[data-page="results"].v36-armed .results-progress .progress-card,
+body[data-page="results"].v36-armed #students .poster,
+body[data-page="results"].v36-armed #grantee-list .grantee{
+  opacity:0;translate:0 24px;
+  transition-property:opacity,translate,transform,box-shadow,background,border-color;
+  transition-duration:.7s,.7s,.25s,.3s,.25s,.25s;
+  transition-timing-function:cubic-bezier(.16,1,.3,1);
+  transition-delay:0ms;
+}
+body[data-page="results"].v36-armed .joo-achieve__card.v36-in,
+body[data-page="results"].v36-armed .results-progress .progress-card.v36-in,
+body[data-page="results"].v36-armed #students .poster.v36-in,
+body[data-page="results"].v36-armed #grantee-list .grantee.v36-in{
+  opacity:1;translate:0 0;
+  transition-delay:var(--v36-stagger,0ms),var(--v36-stagger,0ms),0ms,0ms,0ms,0ms;
+}
+/* Do not hide filtered cards or ghost overlays from the established layout. */
+body[data-page="results"] .joo-achieve__card[hidden]{display:none!important}
+body[data-page="results"] .joo-achieve__grid .v36-filter-ghost{
+  position:absolute!important;z-index:5;pointer-events:none!important;
+  opacity:1!important;translate:none!important;transform:none!important;
+  transition:none!important;animation:none!important;will-change:opacity;
+}
+/* Progress bars: keep original widths and real values. Desktop score/growth already use
+   V33/GSAP; this adds a finite glint. Mobile growth gets a native CSS grow animation. */
+body[data-page="results"] .score-row__track i,
+body[data-page="results"] .progress-card>div i{position:relative;overflow:hidden}
+body[data-page="results"] .score-row__track i::after,
+body[data-page="results"] .progress-card>div i::after{
+  content:"";position:absolute;inset:0;width:45%;
+  background:linear-gradient(90deg,transparent,#ffffff8a,transparent);
+  transform:translateX(-180%) skewX(-24deg);pointer-events:none;opacity:0;
+}
+body[data-page="results"] .score-row.v36-bar-in .score-row__track i::after,
+body[data-page="results"] .progress-card.v36-bar-in>div i::after{
+  animation:v36-bar-glint 1.05s ease-out .38s 1 both;
+}
+@keyframes v36-bar-glint{
+  0%{opacity:0;transform:translateX(-180%) skewX(-24deg)}
+  25%{opacity:.66}
+  100%{opacity:0;transform:translateX(360%) skewX(-24deg)}
+}
+body[data-page="results"].v36-armed .rg-meter i{
+  transform:scaleX(.015);transform-origin:left center;
+  transition:transform 1.15s cubic-bezier(.16,1,.3,1);
+}
+body[data-page="results"].v36-armed .rg-meter.v36-bar-in i{
+  transform:scaleX(1);
+}
+@media(max-width:899px) and (prefers-reduced-motion:no-preference){
+  body[data-page="results"].v36-armed .results-progress .progress-card>div i{
+    transform:scaleX(.015);transform-origin:left center;
+    transition:transform 1.12s cubic-bezier(.16,1,.3,1);
+  }
+  body[data-page="results"].v36-armed .results-progress .progress-card.v36-bar-in>div i{
+    transform:scaleX(1);
+  }
+}
+@media(max-width:768px){
+  body[data-page="results"] .joo-achieve__card:not(.v36-filter-ghost){
+    transform:none!important;
+  }
+}
+/* Motion opt-out applies to every new effect, including heading, filters and bars. */
+@media(prefers-reduced-motion:reduce){
+  body[data-page="results"] .joo-achieve__head h2>span,
+  body[data-page="results"] .joo-achieve__head h2>em,
+  body[data-page="results"] .joo-achieve__card,
+  body[data-page="results"] .results-progress .progress-card,
+  body[data-page="results"] #students .poster,
+  body[data-page="results"] #grantee-list .grantee{
+    opacity:1!important;translate:none!important;clip-path:none!important;
+    animation:none!important;transition:none!important;
+  }
+  body[data-page="results"] .joo-achieve__card{transform:none!important}
+  body[data-page="results"] .score-row__track i,
+  body[data-page="results"] .progress-card>div i,
+  body[data-page="results"] .rg-meter i{transform:none!important;animation:none!important;transition:none!important}
+  body[data-page="results"] .score-row__track i::after,
+  body[data-page="results"] .progress-card>div i::after{animation:none!important;display:none!important}
+}
