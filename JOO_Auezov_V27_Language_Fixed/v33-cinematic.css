@@ -1,0 +1,63 @@
+/* JOO V33 CINEMATIC EDITION — four progressive, scoped upgrades.
+   All visuals keep source imagery, localized text and reduced-motion access. */
+:root{--v33-gold:#f4c666;--v33-night:#081b39;--v33-ease:cubic-bezier(.18,1,.3,1)}
+/* 01 — word-by-word cinematic homepage heading; fallback text always displays. */
+body[data-page="index"] .hero__title.v33-type{position:relative;overflow:visible;isolation:isolate}
+.v33-type .v33-word-wrap{display:inline-block;vertical-align:bottom;overflow:hidden;max-width:100%;padding:.035em .018em .045em;margin:-.035em .002em -.045em}
+.v33-type .v33-word{display:inline-block;transform:translateY(0);opacity:1;will-change:auto}
+.v33-type.v33-hero-armed:not(.v33-hero-play) .v33-word{transform:translateY(118%);opacity:0}
+.v33-type.v33-hero-armed.v33-hero-play .v33-word{animation:v33-word-in .88s var(--v33-ease) both;animation-delay:calc(var(--word-index)*125ms);will-change:transform,opacity}
+body[data-page="index"] .v33-type .v33-word-wrap:last-child .v33-word{color:#f8d077}
+@keyframes v33-word-in{0%{transform:translateY(118%) skewY(5deg);opacity:0}100%{transform:translateY(0) skewY(0);opacity:1}}
+body[data-page="index"] .hero__info:after{content:"JOO  /  CINEMATIC  EDITION";position:absolute;bottom:clamp(12px,2vw,26px);right:var(--edge);font-size:9px;letter-spacing:.2em;font-weight:900;color:#f5ca78;opacity:.78;pointer-events:none}
+/* 02 — asymmetric, real-photo editorial bento campus gallery. */
+body[data-page="campus"] .gallery-band__grid.v33-bento{
+ display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(180px,18vw,295px);
+ gap:clamp(8px,1vw,14px);background:transparent;align-items:stretch
+}
+body[data-page="campus"] .v33-bento figure{height:auto;min-height:0;grid-column:span 3;border:1px solid #a9bbd24d;overflow:hidden;isolation:isolate;position:relative;background:#0b2854}
+body[data-page="campus"] .v33-bento figure:first-child{grid-column:span 6;grid-row:span 2}
+body[data-page="campus"] .v33-bento figure img{width:100%;height:100%;object-fit:cover;transition:transform .65s var(--v33-ease);filter:none!important}
+body[data-page="campus"] .v33-bento figure:first-child img{object-position:center}
+body[data-page="campus"] .v33-bento figure:after{content:"";position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(transparent,#071a36a0);pointer-events:none}
+body[data-page="campus"] .v33-bento figcaption{position:absolute;z-index:2;bottom:12px;left:12px;max-width:calc(100% - 24px);background:#f4c666;color:#071b39;font-size:10px;letter-spacing:.1em;font-weight:900;padding:11px 14px}
+@media(hover:hover) and (pointer:fine){body[data-page="campus"] .v33-bento figure:hover img{transform:scale(1.065)}}
+/* 03 — results score lab: bars reveal in view, no fictional values. */
+body[data-page="results"] .results-chart .score-row{border-inline-start:3px solid transparent;transition:border-color .35s,box-shadow .35s;min-width:0}
+body[data-page="results"] .results-chart .score-row:first-child{border-inline-start-color:#b5832d}
+body[data-page="results"] .results-chart .score-row__track{position:relative;border-radius:999px;overflow:hidden}
+body[data-page="results"] .results-chart .score-row__track i{border-radius:999px;transform-origin:left center}
+body[data-page="results"].v33-motion .results-chart:not(.v33-visible) .score-row__track i{transform:scaleX(.015)}
+body[data-page="results"].v33-motion .results-chart.v33-visible .score-row__track i{transform:scaleX(1);transition:transform 1.15s var(--v33-ease);transition-delay:calc(var(--score-index)*85ms)}
+body[data-page="results"] .results-chart__aside>strong{font-variant-numeric:tabular-nums}
+body[data-page="results"] .poster-grid>.poster{position:relative}
+body[data-page="results"] .poster-grid>.poster:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px #f4c66600;pointer-events:none;transition:box-shadow .35s}
+body[data-page="results"] .poster-grid>.poster:hover:after,body[data-page="results"] .poster-grid>.poster:focus-visible:after{box-shadow:inset 0 0 0 2px #dcaa54}
+/* 04 — staff portraits glow and editorial names, preserving full poster artwork. */
+body[data-page="team"] .staff-grid .joo-team-portrait{--v33-x:50%;--v33-y:35%;backface-visibility:hidden}
+body[data-page="team"] .staff-grid .joo-team-portrait:before{
+ content:"";position:absolute;z-index:2;inset:0;pointer-events:none;
+ background:radial-gradient(circle 210px at var(--v33-x) var(--v33-y),rgba(255,223,143,.18),transparent 72%);
+ opacity:0;transition:opacity .28s ease;mix-blend-mode:screen
+}
+body[data-page="team"] .staff-grid .joo-team-portrait:is(:hover,:focus-visible):before{opacity:1}
+body[data-page="team"] .staff-grid .joo-team-portrait>div{position:relative;z-index:3}
+body[data-page="team"] .staff-grid .joo-team-portrait h3{position:relative;display:table;max-width:100%;padding-bottom:7px;overflow-wrap:anywhere;visibility:visible!important;opacity:1!important}
+body[data-page="team"] .staff-grid .joo-team-portrait h3:after{content:"";position:absolute;left:0;bottom:0;width:38px;height:2px;background:#d2a04b;transform-origin:left;transition:width .48s var(--v33-ease)}
+body[data-page="team"] .staff-grid .joo-team-portrait:is(:hover,:focus-visible) h3:after{width:100%}
+body[data-page="team"] .staff-grid .joo-team-portrait--poster>img{object-fit:contain!important;object-position:center!important}
+/* Contrast and mobile safety, minimum work on coarse pointers. */
+@media(max-width:900px){body[data-page="campus"] .gallery-band__grid.v33-bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(185px,32vw,280px)}
+ body[data-page="campus"] .v33-bento figure{grid-column:span 1}
+ body[data-page="campus"] .v33-bento figure:first-child{grid-column:span 2;grid-row:span 1}}
+@media(max-width:520px){body[data-page="campus"] .gallery-band__grid.v33-bento{grid-auto-rows:190px;gap:8px}
+ body[data-page="campus"] .v33-bento figure:first-child{height:250px;grid-row:span 1}
+ body[data-page="campus"] .v33-bento figcaption{font-size:9px;letter-spacing:.045em;padding:8px 9px;left:8px;bottom:8px}
+ body[data-page="index"] .hero__info:after{position:static;display:block;margin-top:25px}
+ body[data-page="results"] .results-chart .score-row{border-inline-start-width:2px}}
+@media(prefers-reduced-motion:reduce){
+ .v33-type .v33-word,.v33-type.v33-hero-armed:not(.v33-hero-play) .v33-word{transform:none!important;animation:none!important;opacity:1!important}
+ body[data-page="results"].v33-motion .results-chart .score-row__track i{transform:none!important;transition:none!important}
+ body[data-page="campus"] .v33-bento figure img{transform:none!important;transition:none!important}
+ body[data-page="team"] .staff-grid .joo-team-portrait:before{display:none}
+}
