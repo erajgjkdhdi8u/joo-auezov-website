@@ -1,0 +1,45 @@
+name: JOO V34 Signature Motion publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v34-signature-publish.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/v34_install.py'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.css'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.js'
+
+concurrency:
+  group: joo-site-generation
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate V34 scripts
+        run: |
+          node --check JOO_Auezov_V27_Language_Fixed/v34-signature.js
+          python -m py_compile JOO_Auezov_V27_Language_Fixed/tools/v34_install.py
+      - name: Activate V34 on all 42 language pages
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v34_install.py
+      - name: Commit tested page updates
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- JOO_Auezov_V27_Language_Fixed/*.html JOO_Auezov_V27_Language_Fixed/ru/*.html JOO_Auezov_V27_Language_Fixed/en/*.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish V34 Signature Motion Pack on 42 trilingual pages"
+            git pull --rebase origin main
+            git push
+          fi
