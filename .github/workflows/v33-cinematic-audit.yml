@@ -1,0 +1,44 @@
+name: JOO V33 cinematic desktop and mobile audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v33-cinematic-audit.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/v33_desktop_audit.py'
+      - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.css'
+      - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.js'
+
+permissions:
+  contents: read
+
+jobs:
+  cinematic-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install desktop and mobile browser engines
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium webkit
+      - name: Serve current website
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 > /tmp/joo-v33-http.log 2>&1 &
+          sleep 2
+      - name: Check cinematic typography, five-tile gallery, real-score animation and teachers
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v33_desktop_audit.py
+      - name: Save desktop and mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v33-cinematic-visual-evidence
+          path: |
+            JOO_Auezov_V27_Language_Fixed/v33-cinematic-audit.json
+            JOO_Auezov_V27_Language_Fixed/v33-cinematic-screenshots/
+          retention-days: 14
