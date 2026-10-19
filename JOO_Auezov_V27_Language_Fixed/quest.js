@@ -8,52 +8,375 @@ const lang=location.pathname.startsWith('/ru/')?'ru':location.pathname.startsWit
 document.documentElement.lang=lang;
 const li={kk:0,ru:1,en:2}[lang], L=a=>a[li], h=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const t={
-kk:{back:'САЙТҚА ҚАЙТУ',skip:'Негізгі мазмұнға өту',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'МЕКТЕПТІ',accent:'ТАНЫ.',lead:'JOO әлеміне кір. 10 сұраққа жауап бер, мектеп туралы қызықты деректерді аш және өз деңгейіңді біл.',start:'КВЕСТТІ БАСТАУ',meta:['10 СҰРАҚ','3 КЕЗЕҢ','≈ 3 МИНУТ'],step:'СҰРАҚ',pts:'ҰПАЙ',chapters:['МЕКТЕППЕН ТАНЫСУ','ОҚУ ЖОЛЫ','НӘТИЖЕ МЕН МҮМКІНДІК'],correct:'ДҰРЫС ЖАУАП!',wrong:'КЕЛЕСІДЕ СӘТТІЛІК!',next:'КЕЛЕСІ СҰРАҚ',finish:'НӘТИЖЕНІ КӨРУ',hint:'Жауапты таңда. 1–4 пернелерін де пайдалануға болады.',done:'МИССИЯ АЯҚТАЛДЫ',result:'СЕНІҢ',result2:'НӘТИЖЕҢ',desc:'Сен JOO High School туралы көбірек білдің. Жаңа білім — жаңа мүмкіндіктердің бастауы.',out:'100 ҰПАЙДАН',count:'дұрыс жауап / 10',again:'ҚАЙТА ОЙНАУ',share:'БӨЛІСУ',save:'КАРТОЧКАНЫ САҚТАУ',copied:'Нәтиже көшірілді!',failed:'Бөлісу мүмкін болмады.',saveFailed:'Суретті сақтау мүмкін болмады.',shareText:'Мен JOO QUEST орындадым!',caption:'МЕКТЕПТІ ҚАНШАЛЫҚТЫ БІЛЕСІҢ?',soundOn:'ДЫБЫС ҚОСУЛЫ',soundOff:'ДЫБЫС ӨШІРУЛІ',shotMade:'ДӘЛ ТҮСТІ!',shotMissed:'МҮЛТ КЕТТІ!',combo:'ҚАТАРЫНАН ДҰРЫС',best:'ЕҢ ҰЗАҚ СЕРИЯ',accuracy:'ДӘЛДІК',chaptersResult:'КЕЗЕҢДЕР БОЙЫНША НӘТИЖЕ',heat:'ON FIRE!',board:'ОЙЫН ТАБЛОСЫ',scoreLabel:'ҰПАЙ',streakLabel:'СЕРИЯ',shotLabel:'ЛАҚТЫРУ',perfectShot:'ДӘЛ ТҮСТІ',missShot:'МҮЛТ КЕТТІ',notPlayed:'КЕЗЕК КҮТУДЕ',fireReady:'FIREBALL ҚОСЫЛДЫ',fireMax:'INFERNO РЕЖИМІ',shooting:'ЛАҚТЫРУ ОРЫНДАЛУДА…',mvp:'JOO MVP',allStar:'JOO ALL-STAR',rising:'JOO RISING STAR',rookie:'JOO ROOKIE',award:'ОЙЫНШЫ МАРАПАТЫ',awardDesc:'Мектеп туралы біліміңді көрсеттің!',slowmo:'SLOW MOTION',arenaLabel:'АРЕНА',arenaNames:['МЕКТЕП АЛАҢЫ','БІЛІМ АРЕНАСЫ','ЧЕМПИОНДАР АРЕНАСЫ'],shots:['ЖАЙ ЛАҚТЫРУ','ҮШ ҰПАЙЛЫҚ','SLAM DUNK'],half:'ҮЗІЛІС ШОУЫ',halfEnd:'КЕЗЕҢ АЯҚТАЛДЫ',halfProgress:'КЕЗЕҢДЕГІ ДҰРЫС ЖАУАП',halfTotal:'ЖАЛПЫ ҰПАЙ',halfNext:'КЕЛЕСІ АРЕНА',halfContinue:'ЖАЛҒАСТЫРУ',achTitle:'ЖЕТІСТІКТЕР',achButton:'МЕНІҢ ЖЕТІСТІКТЕРІМ',achCollection:'МАРАПАТТАР КОЛЛЕКЦИЯСЫ',achBack:'КВЕСТКЕ ҚАЙТУ',achNew:'ЖАҢА!',achGot:'АЛЫНДЫ',achLocked:'ӘЛІ АЛЫНҒАН ЖОҚ',achNow:'ОСЫ ОЙЫНДАҒЫ ЖЕТІСТІКТЕР',achSaved:'БРАУЗЕРДЕ САҚТАЛҒАН',achNames:['АЛҒАШҚЫ ДӘЛ ЛАҚТЫРУ','FIREBALL MASTER','МЕРГЕН ОЙЫНШЫ','PERFECT SHOOTER','ARENA CHAMPION'],achDetails:['Кемінде 1 сұраққа дұрыс жауап бер','5 сұраққа қатарынан дұрыс жауап бер','10 сұрақтың кемінде 8-іне дұрыс жауап бер','Барлық 10 сұраққа дұрыс жауап бер','Үш аренаны толық аяқта'],alt:'JOO High School мектебінің нақты фотосы'},
-ru:{back:'НА САЙТ',skip:'Перейти к содержимому',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'ОТКРОЙ',accent:'JOO.',lead:'Отправляйся в мир JOO. Ответь на 10 вопросов, узнай больше о школе и открой свой уровень.',start:'НАЧАТЬ КВЕСТ',meta:['10 ВОПРОСОВ','3 ЭТАПА','≈ 3 МИНУТЫ'],step:'ВОПРОС',pts:'БАЛЛЫ',chapters:['ЗНАКОМСТВО СО ШКОЛОЙ','ПУТЬ УЧЕНИКА','РЕЗУЛЬТАТЫ И ВОЗМОЖНОСТИ'],correct:'ВЕРНО!',wrong:'В СЛЕДУЮЩИЙ РАЗ ПОЛУЧИТСЯ!',next:'СЛЕДУЮЩИЙ ВОПРОС',finish:'МОЙ РЕЗУЛЬТАТ',hint:'Выбери ответ. Можно использовать клавиши 1–4.',done:'МИССИЯ ЗАВЕРШЕНА',result:'ТВОЙ',result2:'РЕЗУЛЬТАТ',desc:'Теперь ты знаешь больше о JOO High School. Новые знания открывают возможности.',out:'ИЗ 100 БАЛЛОВ',count:'верных ответов / 10',again:'ИГРАТЬ СНОВА',share:'ПОДЕЛИТЬСЯ',save:'СОХРАНИТЬ КАРТОЧКУ',copied:'Результат скопирован!',failed:'Не удалось поделиться.',saveFailed:'Не удалось сохранить изображение.',shareText:'Я прошёл JOO QUEST!',caption:'КАК ХОРОШО ТЫ ЗНАЕШЬ ШКОЛУ?',soundOn:'ЗВУК ВКЛЮЧЕН',soundOff:'ЗВУК ВЫКЛЮЧЕН',shotMade:'ПОПАДАНИЕ!',shotMissed:'ПРОМАХ!',combo:'СЕРИЯ ПОПАДАНИЙ',best:'ЛУЧШАЯ СЕРИЯ',accuracy:'ТОЧНОСТЬ',chaptersResult:'РЕЗУЛЬТАТЫ ПО ЭТАПАМ',heat:'ON FIRE!',board:'ИГРОВОЕ ТАБЛО',scoreLabel:'СЧЁТ',streakLabel:'СЕРИЯ',shotLabel:'БРОСОК',perfectShot:'ПОПАДАНИЕ',missShot:'ПРОМАХ',notPlayed:'НЕ СЫГРАНО',fireReady:'РЕЖИМ FIREBALL',fireMax:'РЕЖИМ INFERNO',shooting:'БРОСОК ВЫПОЛНЯЕТСЯ…',mvp:'JOO MVP',allStar:'JOO ALL-STAR',rising:'JOO RISING STAR',rookie:'JOO ROOKIE',award:'НАГРАДА ИГРОКА',awardDesc:'Ты показал свои знания о школе!',slowmo:'SLOW MOTION',arenaLabel:'АРЕНА',arenaNames:['ШКОЛЬНАЯ ПЛОЩАДКА','АКАДЕМИЧЕСКАЯ АРЕНА','АРЕНА ЧЕМПИОНОВ'],shots:['ОБЫЧНЫЙ БРОСОК','ТРЁХОЧКОВЫЙ','SLAM DUNK'],half:'ШОУ В ПЕРЕРЫВЕ',halfEnd:'ЭТАП ЗАВЕРШЁН',halfProgress:'ВЕРНЫХ ОТВЕТОВ НА ЭТАПЕ',halfTotal:'ОБЩИЙ СЧЁТ',halfNext:'СЛЕДУЮЩАЯ АРЕНА',halfContinue:'ПРОДОЛЖИТЬ',achTitle:'ДОСТИЖЕНИЯ',achButton:'МОИ ДОСТИЖЕНИЯ',achCollection:'КОЛЛЕКЦИЯ НАГРАД',achBack:'НАЗАД К КВЕСТУ',achNew:'НОВОЕ!',achGot:'ПОЛУЧЕНО',achLocked:'ПОКА НЕ ОТКРЫТО',achNow:'НАГРАДЫ ЗА ЭТУ ИГРУ',achSaved:'СОХРАНЕНО В БРАУЗЕРЕ',achNames:['ПЕРВОЕ ПОПАДАНИЕ','FIREBALL MASTER','МЕТКИЙ СТРЕЛОК','PERFECT SHOOTER','ARENA CHAMPION'],achDetails:['Ответь правильно хотя бы один раз','Дай 5 правильных ответов подряд','Ответь верно хотя бы на 8 из 10 вопросов','Ответь верно на все 10 вопросов','Пройди все три арены'],alt:'Настоящее фото JOO High School'},
-en:{back:'BACK TO SITE',skip:'Skip to content',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'DISCOVER',accent:'JOO.',lead:'Enter the world of JOO. Answer 10 questions, unlock real school facts and discover your level.',start:'START THE QUEST',meta:['10 QUESTIONS','3 CHAPTERS','≈ 3 MINUTES'],step:'QUESTION',pts:'POINTS',chapters:['MEET THE SCHOOL','YOUR LEARNING JOURNEY','RESULTS & OPPORTUNITIES'],correct:'CORRECT!',wrong:'BETTER LUCK NEXT TIME!',next:'NEXT QUESTION',finish:'SEE MY RESULT',hint:'Choose an answer. You can also use number keys 1–4.',done:'MISSION COMPLETE',result:'YOUR',result2:'RESULT',desc:'You now know more about JOO High School. Every discovery opens up new possibilities.',out:'OUT OF 100 POINTS',count:'correct answers / 10',again:'PLAY AGAIN',share:'SHARE RESULT',save:'SAVE RESULT CARD',copied:'Result copied!',failed:'Sharing failed.',saveFailed:'Could not save the image.',shareText:'I completed JOO QUEST!',caption:'HOW WELL DO YOU KNOW THE SCHOOL?',soundOn:'SOUND ON',soundOff:'SOUND OFF',shotMade:'SWISH!',shotMissed:'MISSED!',combo:'HIT STREAK',best:'BEST STREAK',accuracy:'ACCURACY',chaptersResult:'RESULTS BY CHAPTER',heat:'ON FIRE!',board:'LIVE SCOREBOARD',scoreLabel:'SCORE',streakLabel:'STREAK',shotLabel:'SHOT',perfectShot:'MADE',missShot:'MISSED',notPlayed:'UPCOMING',fireReady:'FIREBALL ACTIVE',fireMax:'INFERNO MODE',shooting:'SHOT IN PROGRESS…',mvp:'JOO MVP',allStar:'JOO ALL-STAR',rising:'JOO RISING STAR',rookie:'JOO ROOKIE',award:'PLAYER AWARD',awardDesc:'You showed what you know about the school!',slowmo:'SLOW MOTION',arenaLabel:'ARENA',arenaNames:['SCHOOL COURT','ACADEMIC LAB','CHAMPIONS DOME'],shots:['JUMP SHOT','3-POINT SHOT','SLAM DUNK'],half:'HALFTIME SHOW',halfEnd:'CHAPTER COMPLETE',halfProgress:'CORRECT IN THIS CHAPTER',halfTotal:'TOTAL SCORE',halfNext:'NEXT ARENA',halfContinue:'CONTINUE',achTitle:'ACHIEVEMENTS',achButton:'MY ACHIEVEMENTS',achCollection:'TROPHY COLLECTION',achBack:'BACK TO QUEST',achNew:'NEW!',achGot:'UNLOCKED',achLocked:'NOT YET UNLOCKED',achNow:'EARNED THIS GAME',achSaved:'SAVED IN THIS BROWSER',achNames:['FIRST BUCKET','FIREBALL MASTER','SHARP SHOOTER','PERFECT SHOOTER','ARENA CHAMPION'],achDetails:['Answer at least one question correctly','Get 5 correct answers in a row','Answer at least 8 of 10 questions correctly','Answer all 10 questions correctly','Finish all three arenas'],alt:'Real JOO High School photo'}
+kk:{back:'САЙТҚА ҚАЙТУ',skip:'Негізгі мазмұнға өту',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'МЕКТЕПТІ',accent:'ТАНЫ.',lead:'JOO әлеміне кір. 10 сұраққа жауап бер, мектеп туралы қызықты деректерді аш және өз деңгейіңді біл.',start:'КВЕСТТІ БАСТАУ',meta:['10 СҰРАҚ','3 КЕЗЕҢ','≈ 3 МИНУТ'],step:'СҰРАҚ',pts:'ҰПАЙ',chapters:['МЕКТЕППЕН ТАНЫСУ','ОҚУ ЖОЛЫ','НӘТИЖЕ МЕН МҮМКІНДІК'],correct:'ДҰРЫС ЖАУАП!',wrong:'КЕЛЕСІДЕ СӘТТІЛІК!',next:'КЕЛЕСІ СҰРАҚ',finish:'НӘТИЖЕНІ КӨРУ',hint:'Жауапты таңда. 1–4 пернелерін де пайдалануға болады.',done:'МИССИЯ АЯҚТАЛДЫ',result:'СЕНІҢ',result2:'НӘТИЖЕҢ',desc:'Сен JOO High School туралы көбірек білдің. Жаңа білім — жаңа мүмкіндіктердің бастауы.',out:'100 ҰПАЙДАН',count:'дұрыс жауап / 10',again:'ҚАЙТА ОЙНАУ',share:'БӨЛІСУ',save:'КАРТОЧКАНЫ САҚТАУ',copied:'Нәтиже көшірілді!',failed:'Бөлісу мүмкін болмады.',saveFailed:'Суретті сақтау мүмкін болмады.',shareText:'Мен JOO QUEST орындадым!',caption:'МЕКТЕПТІ ҚАНШАЛЫҚТЫ БІЛЕСІҢ?',soundOn:'ДЫБЫС ҚОСУЛЫ',soundOff:'ДЫБЫС ӨШІРУЛІ',shotMade:'ДӘЛ ТҮСТІ!',shotMissed:'МҮЛТ КЕТТІ!',combo:'ҚАТАРЫНАН ДҰРЫС',best:'ЕҢ ҰЗАҚ СЕРИЯ',accuracy:'ДӘЛДІК',chaptersResult:'КЕЗЕҢДЕР БОЙЫНША НӘТИЖЕ',heat:'ON FIRE!',board:'ОЙЫН ТАБЛОСЫ',scoreLabel:'ҰПАЙ',streakLabel:'СЕРИЯ',shotLabel:'ЛАҚТЫРУ',perfectShot:'ДӘЛ ТҮСТІ',missShot:'МҮЛТ КЕТТІ',notPlayed:'КЕЗЕК КҮТУДЕ',fireReady:'FIREBALL ҚОСЫЛДЫ',fireMax:'INFERNO РЕЖИМІ',shooting:'ЛАҚТЫРУ ОРЫНДАЛУДА…',mvp:'JOO MVP',allStar:'JOO ALL-STAR',rising:'JOO RISING STAR',rookie:'JOO ROOKIE',award:'ОЙЫНШЫ МАРАПАТЫ',awardDesc:'Мектеп туралы біліміңді көрсеттің!',slowmo:'SLOW MOTION',arenaLabel:'АРЕНА',arenaNames:['МЕКТЕП АЛАҢЫ','БІЛІМ АРЕНАСЫ','ЧЕМПИОНДАР АРЕНАСЫ'],shots:['ЖАЙ ЛАҚТЫРУ','ҮШ ҰПАЙЛЫҚ','SLAM DUNK'],half:'ҮЗІЛІС ШОУЫ',halfEnd:'КЕЗЕҢ АЯҚТАЛДЫ',halfProgress:'КЕЗЕҢДЕГІ ДҰРЫС ЖАУАП',halfTotal:'ЖАЛПЫ ҰПАЙ',halfNext:'КЕЛЕСІ АРЕНА',halfContinue:'ЖАЛҒАСТЫРУ',achTitle:'ЖЕТІСТІКТЕР',achButton:'МЕНІҢ ЖЕТІСТІКТЕРІМ',achCollection:'МАРАПАТТАР КОЛЛЕКЦИЯСЫ',achBack:'КВЕСТКЕ ҚАЙТУ',achNew:'ЖАҢА!',achGot:'АЛЫНДЫ',achLocked:'ӘЛІ АЛЫНҒАН ЖОҚ',achNow:'ОСЫ ОЙЫНДАҒЫ ЖЕТІСТІКТЕР',achSaved:'БРАУЗЕРДЕ САҚТАЛҒАН',achNames:['АЛҒАШҚЫ ДӘЛ ЛАҚТЫРУ','FIREBALL MASTER','МЕРГЕН ОЙЫНШЫ','PERFECT SHOOTER','ARENA CHAMPION'],achDetails:['Кемінде 1 сұраққа дұрыс жауап бер','5 сұраққа қатарынан дұрыс жауап бер','10 сұрақтың кемінде 8-іне дұрыс жауап бер','Барлық 10 сұраққа дұрыс жауап бер','Үш аренаны толық аяқта'],difficulties:['ЖЕҢІЛ','ОРТАША','ҚИЫН'],sourceText:'ДЕРЕККӨЗІ',alt:'JOO High School мектебінің нақты фотосы'},
+ru:{back:'НА САЙТ',skip:'Перейти к содержимому',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'ОТКРОЙ',accent:'JOO.',lead:'Отправляйся в мир JOO. Ответь на 10 вопросов, узнай больше о школе и открой свой уровень.',start:'НАЧАТЬ КВЕСТ',meta:['10 ВОПРОСОВ','3 ЭТАПА','≈ 3 МИНУТЫ'],step:'ВОПРОС',pts:'БАЛЛЫ',chapters:['ЗНАКОМСТВО СО ШКОЛОЙ','ПУТЬ УЧЕНИКА','РЕЗУЛЬТАТЫ И ВОЗМОЖНОСТИ'],correct:'ВЕРНО!',wrong:'В СЛЕДУЮЩИЙ РАЗ ПОЛУЧИТСЯ!',next:'СЛЕДУЮЩИЙ ВОПРОС',finish:'МОЙ РЕЗУЛЬТАТ',hint:'Выбери ответ. Можно использовать клавиши 1–4.',done:'МИССИЯ ЗАВЕРШЕНА',result:'ТВОЙ',result2:'РЕЗУЛЬТАТ',desc:'Теперь ты знаешь больше о JOO High School. Новые знания открывают возможности.',out:'ИЗ 100 БАЛЛОВ',count:'верных ответов / 10',again:'ИГРАТЬ СНОВА',share:'ПОДЕЛИТЬСЯ',save:'СОХРАНИТЬ КАРТОЧКУ',copied:'Результат скопирован!',failed:'Не удалось поделиться.',saveFailed:'Не удалось сохранить изображение.',shareText:'Я прошёл JOO QUEST!',caption:'КАК ХОРОШО ТЫ ЗНАЕШЬ ШКОЛУ?',soundOn:'ЗВУК ВКЛЮЧЕН',soundOff:'ЗВУК ВЫКЛЮЧЕН',shotMade:'ПОПАДАНИЕ!',shotMissed:'ПРОМАХ!',combo:'СЕРИЯ ПОПАДАНИЙ',best:'ЛУЧШАЯ СЕРИЯ',accuracy:'ТОЧНОСТЬ',chaptersResult:'РЕЗУЛЬТАТЫ ПО ЭТАПАМ',heat:'ON FIRE!',board:'ИГРОВОЕ ТАБЛО',scoreLabel:'СЧЁТ',streakLabel:'СЕРИЯ',shotLabel:'БРОСОК',perfectShot:'ПОПАДАНИЕ',missShot:'ПРОМАХ',notPlayed:'НЕ СЫГРАНО',fireReady:'РЕЖИМ FIREBALL',fireMax:'РЕЖИМ INFERNO',shooting:'БРОСОК ВЫПОЛНЯЕТСЯ…',mvp:'JOO MVP',allStar:'JOO ALL-STAR',rising:'JOO RISING STAR',rookie:'JOO ROOKIE',award:'НАГРАДА ИГРОКА',awardDesc:'Ты показал свои знания о школе!',slowmo:'SLOW MOTION',arenaLabel:'АРЕНА',arenaNames:['ШКОЛЬНАЯ ПЛОЩАДКА','АКАДЕМИЧЕСКАЯ АРЕНА','АРЕНА ЧЕМПИОНОВ'],shots:['ОБЫЧНЫЙ БРОСОК','ТРЁХОЧКОВЫЙ','SLAM DUNK'],half:'ШОУ В ПЕРЕРЫВЕ',halfEnd:'ЭТАП ЗАВЕРШЁН',halfProgress:'ВЕРНЫХ ОТВЕТОВ НА ЭТАПЕ',halfTotal:'ОБЩИЙ СЧЁТ',halfNext:'СЛЕДУЮЩАЯ АРЕНА',halfContinue:'ПРОДОЛЖИТЬ',achTitle:'ДОСТИЖЕНИЯ',achButton:'МОИ ДОСТИЖЕНИЯ',achCollection:'КОЛЛЕКЦИЯ НАГРАД',achBack:'НАЗАД К КВЕСТУ',achNew:'НОВОЕ!',achGot:'ПОЛУЧЕНО',achLocked:'ПОКА НЕ ОТКРЫТО',achNow:'НАГРАДЫ ЗА ЭТУ ИГРУ',achSaved:'СОХРАНЕНО В БРАУЗЕРЕ',achNames:['ПЕРВОЕ ПОПАДАНИЕ','FIREBALL MASTER','МЕТКИЙ СТРЕЛОК','PERFECT SHOOTER','ARENA CHAMPION'],achDetails:['Ответь правильно хотя бы один раз','Дай 5 правильных ответов подряд','Ответь верно хотя бы на 8 из 10 вопросов','Ответь верно на все 10 вопросов','Пройди все три арены'],difficulties:['ЛЕГКО','СРЕДНИЙ','СЛОЖНО'],sourceText:'ИСТОЧНИК',alt:'Настоящее фото JOO High School'},
+en:{back:'BACK TO SITE',skip:'Skip to content',eyebrow:'JOO HIGH SCHOOL / INTERACTIVE EXPERIENCE',big:'DISCOVER',accent:'JOO.',lead:'Enter the world of JOO. Answer 10 questions, unlock real school facts and discover your level.',start:'START THE QUEST',meta:['10 QUESTIONS','3 CHAPTERS','≈ 3 MINUTES'],step:'QUESTION',pts:'POINTS',chapters:['MEET THE SCHOOL','YOUR LEARNING JOURNEY','RESULTS & OPPORTUNITIES'],correct:'CORRECT!',wrong:'BETTER LUCK NEXT TIME!',next:'NEXT QUESTION',finish:'SEE MY RESULT',hint:'Choose an answer. You can also use number keys 1–4.',done:'MISSION COMPLETE',result:'YOUR',result2:'RESULT',desc:'You now know more about JOO High School. Every discovery opens up new possibilities.',out:'OUT OF 100 POINTS',count:'correct answers / 10',again:'PLAY AGAIN',share:'SHARE RESULT',save:'SAVE RESULT CARD',copied:'Result copied!',failed:'Sharing failed.',saveFailed:'Could not save the image.',shareText:'I completed JOO QUEST!',caption:'HOW WELL DO YOU KNOW THE SCHOOL?',soundOn:'SOUND ON',soundOff:'SOUND OFF',shotMade:'SWISH!',shotMissed:'MISSED!',combo:'HIT STREAK',best:'BEST STREAK',accuracy:'ACCURACY',chaptersResult:'RESULTS BY CHAPTER',heat:'ON FIRE!',board:'LIVE SCOREBOARD',scoreLabel:'SCORE',streakLabel:'STREAK',shotLabel:'SHOT',perfectShot:'MADE',missShot:'MISSED',notPlayed:'UPCOMING',fireReady:'FIREBALL ACTIVE',fireMax:'INFERNO MODE',shooting:'SHOT IN PROGRESS…',mvp:'JOO MVP',allStar:'JOO ALL-STAR',rising:'JOO RISING STAR',rookie:'JOO ROOKIE',award:'PLAYER AWARD',awardDesc:'You showed what you know about the school!',slowmo:'SLOW MOTION',arenaLabel:'ARENA',arenaNames:['SCHOOL COURT','ACADEMIC LAB','CHAMPIONS DOME'],shots:['JUMP SHOT','3-POINT SHOT','SLAM DUNK'],half:'HALFTIME SHOW',halfEnd:'CHAPTER COMPLETE',halfProgress:'CORRECT IN THIS CHAPTER',halfTotal:'TOTAL SCORE',halfNext:'NEXT ARENA',halfContinue:'CONTINUE',achTitle:'ACHIEVEMENTS',achButton:'MY ACHIEVEMENTS',achCollection:'TROPHY COLLECTION',achBack:'BACK TO QUEST',achNew:'NEW!',achGot:'UNLOCKED',achLocked:'NOT YET UNLOCKED',achNow:'EARNED THIS GAME',achSaved:'SAVED IN THIS BROWSER',achNames:['FIRST BUCKET','FIREBALL MASTER','SHARP SHOOTER','PERFECT SHOOTER','ARENA CHAMPION'],achDetails:['Answer at least one question correctly','Get 5 correct answers in a row','Answer at least 8 of 10 questions correctly','Answer all 10 questions correctly','Finish all three arenas'],difficulties:['EASY','MEDIUM','HARD'],sourceText:'SOURCE',alt:'Real JOO High School photo'}
 }[lang];
 /* item: chapter, image, correct index, localized questions, localized option arrays, localized explanations */
+/* Difficulty progression: EASY (1–3), MEDIUM (4–7), HARD (8–10).
+   Question explanations cite sources; group-wide and branch-specific figures stay separate.
+   Data shape: [chapter, image, correctIndex, translatedQuestion, translatedOptions, translatedExplanation, sourceURL]. */
 const questions=[
-[0,'school-building.webp',1,
-['JOO High School Auezov қай қалада орналасқан?','В каком городе находится JOO High School Auezov?','Which city is JOO High School Auezov located in?'],
-[['Астана','Алматы','Шымкент','Қарағанды'],['Астана','Алматы','Шымкент','Караганда'],['Astana','Almaty','Shymkent','Karaganda']],
-['JOO High School Auezov Алматыда орналасқан.','JOO High School Auezov находится в Алматы.','JOO High School Auezov is located in Almaty.']],
-[0,'school-classroom.webp',2,
-['JOO Auezov мектебінде қай сыныптар оқиды?','Какие классы охватывает JOO Auezov?','Which grades does JOO Auezov serve?'],
-[['1–4','5–9','2–11','10–11'],['1–4','5–9','2–11','10–11'],['1–4','5–9','2–11','10–11']],
-['Мектеп сайты 2–11 сыныптарға арналғанын көрсетеді.','Согласно сайту, школа охватывает 2–11 классы.','The school website lists grades 2–11.']],
-[0,'school-building.webp',0,
-['Мектеп Алматының қай ауданында?','В каком районе Алматы расположена школа?','Which Almaty district is the school in?'],
-[['Әуезов','Бостандық','Медеу','Наурызбай'],['Ауэзовский','Бостандыкский','Медеуский','Наурызбайский'],['Auezov','Bostandyk','Medeu','Nauryzbay']],
-['Мектеп Әуезов ауданында орналасқан.','Школа находится в Ауэзовском районе.','The school is located in the Auezov district.']],
-[1,'school-reception.webp',2,
-['2–4 сыныптардың оқу кезеңі қалай аталады?','Как называется этап 2–4 классов?','What is the name of the grades 2–4 stage?'],
-[['LAUNCH','EXPLORE','START','FOUNDATION'],['LAUNCH','EXPLORE','START','FOUNDATION'],['LAUNCH','EXPLORE','START','FOUNDATION']],
-['Сайтта 2–4 сынып кезеңі START деп аталады.','Этап 2–4 классов на сайте обозначен START.','The site labels grades 2–4 as START.']],
-[1,'school-students.webp',1,
-['7–9 сыныптардың EXPLORE кезеңінде неге мән беріледі?','Что важно на этапе EXPLORE в 7–9 классах?','What is emphasized in the grades 7–9 EXPLORE stage?'],
-[['Тек спорт','Ғылым, IT және жобалар','Тек емтихан','Тек өнер'],['Только спорт','Наука, IT и проекты','Только экзамены','Только искусство'],['Only sports','Science, IT and projects','Only exams','Only art']],
-['EXPLORE — ғылым, IT және жобалар арқылы қызығушылықты байқап көру кезеңі.','EXPLORE позволяет пробовать науку, IT и работу над проектами.','EXPLORE lets students try science, IT and project work.']],
-[1,'/assets/images/computerlab-800.webp',1,
-['Сайтта қай оқу кеңістігінің фотосы бар?','Какое учебное пространство показано на фото сайта?','Which learning space is pictured on the site?'],
-[['Әуежай','Компьютерлік кабинет','Аквариум','Планетарий'],['Аэропорт','Компьютерный кабинет','Аквариум','Планетарий'],['Airport','Computer lab','Aquarium','Planetarium']],
-['Сайтта нақты компьютерлік кабинеттің фотосы бар.','На сайте есть настоящее фото компьютерного кабинета.','The website includes a real photo of a computer lab.']],
-[1,'school-classroom.webp',0,
-['10–11 сыныптардағы LAUNCH кезеңінің бағыты қандай?','На что нацелен этап LAUNCH в 10–11 классах?','What does the grades 10–11 LAUNCH stage focus on?'],
-[['ҰБТ, IELTS және келесі оқу бағыты','Тек ойындар','Тек бастауыш пәндер','Оқу жоқ'],['ЕНТ, IELTS и дальнейший путь','Только игры','Только начальные предметы','Нет обучения'],['UNT, IELTS and next study path','Games only','Primary subjects only','No studies']],
-['LAUNCH кезеңінде профиль, ҰБТ, IELTS және келесі оқу бағыты көрсетіледі.','LAUNCH включает профиль, ЕНТ, IELTS и будущий учебный путь.','LAUNCH covers subject pathways, UNT, IELTS and future studies.']],
-[2,'school-reception.webp',2,
-['Қабылдау туралы ақпарат қай бөлімде?','В каком разделе искать информацию о поступлении?','Which section contains admissions information?'],
-[['Нәтижелер','Жаңалықтар','Қабылдау','Өмір'],['Результаты','Новости','Поступление','Жизнь школы'],['Results','News','Admissions','School life']],
-['«Қабылдау» бөлімінде мектепке түсу және байланыс жолдары көрсетілген.','Раздел «Поступление» объясняет, как обратиться в школу.','The Admissions section explains how to contact the school about applying.']],
-[2,'school-students.webp',1,
-['Сайттағы ҰБТ нәтижелері қанша ұсынылған оқушы постеріне негізделген?','По скольким предоставленным постерам учеников показаны результаты ЕНТ?','How many supplied student posters underpin the displayed UNT results?'],
-[['3','8','20','50'],['3','8','20','50'],['3','8','20','50']],
-['Сайттағы сандар 8 ұсынылған постерге ғана қатысты — бүкіл мектепке емес.','Цифры основаны на 8 постерах, а не на статистике всей школы.','The figures reflect 8 supplied posters, not the whole school.']],
-[2,'school-students.webp',2,
-['Осы 8 постердегі ең жоғары көрсетілген ҰБТ ұпайы қандай?','Какой максимальный балл ЕНТ указан среди этих 8 постеров?','What is the highest displayed UNT score among those 8 posters?'],
-[['100','115','121','140'],['100','115','121','140'],['100','115','121','140']],
-['Осы постерлер арасындағы ең жоғары нәтиже — 121 балл.','Максимальный показанный результат среди этих постеров — 121 балл.','The highest displayed result among these posters is 121 points.']]
+ [
+  0,
+  "school-building.webp",
+  1,
+  [
+   "JOO School Auezov қай қалада орналасқан?",
+   "В каком городе находится JOO School Auezov?",
+   "In which city is JOO School Auezov located?"
+  ],
+  [
+   [
+    "Астана",
+    "Алматы",
+    "Шымкент",
+    "Ақтау"
+   ],
+   [
+    "Астана",
+    "Алматы",
+    "Шымкент",
+    "Актау"
+   ],
+   [
+    "Astana",
+    "Almaty",
+    "Shymkent",
+    "Aktau"
+   ]
+  ],
+  [
+   "JOO School Auezov Алматы қаласында орналасқан.",
+   "JOO School Auezov находится в Алматы.",
+   "JOO School Auezov is located in Almaty."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  0,
+  "school-reception.webp",
+  2,
+  [
+   "JOO School Auezov қай жылы құрылған?",
+   "В каком году была основана JOO School Auezov?",
+   "In what year was JOO School Auezov founded?"
+  ],
+  [
+   [
+    "2018",
+    "2020",
+    "2022",
+    "2024"
+   ],
+   [
+    "2018",
+    "2020",
+    "2022",
+    "2024"
+   ],
+   [
+    "2018",
+    "2020",
+    "2022",
+    "2024"
+   ]
+  ],
+  [
+   "Ауезов мектебінің ресми парағында негізі 2022 жылы қаланғаны жазылған.",
+   "Официальная страница школы указывает год основания — 2022.",
+   "The Auezov school’s official page states it was founded in 2022."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  0,
+  "school-students.webp",
+  1,
+  [
+   "JOO мектебінің ресми сипаттамасында форма ретінде не беріледі?",
+   "Какие предметы школьной формы указаны на официальной странице JOO?",
+   "Which uniform items does JOO list on its official page?"
+  ],
+  [
+   [
+    "Көйлек пен галстук",
+    "Поло мен бомбер",
+    "Костюм мен жилет",
+    "Бірдей спорт костюмі"
+   ],
+   [
+    "Рубашка и галстук",
+    "Поло и бомбер",
+    "Костюм и жилет",
+    "Одинаковый спортивный костюм"
+   ],
+   [
+    "Shirt and tie",
+    "Polo shirt and bomber jacket",
+    "Suit and vest",
+    "Matching tracksuit"
+   ]
+  ],
+  [
+   "Ресми FAQ бойынша мектеп формасы ретінде поло мен бомбер беріледі, ал күнделікті киім стилі — Smart Casual.",
+   "По официальному FAQ выдаются поло и бомбер; повседневный стиль одежды — Smart Casual.",
+   "The official FAQ lists a polo shirt and bomber jacket, with Smart Casual as the usual dress style."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  1,
+  "school-classroom.webp",
+  0,
+  [
+   "JOO Auezov-та 5–6 сыныптар үшін қандай пәндерге басымдық беріледі?",
+   "На каких предметах делают акцент в 5–6 классах JOO Auezov?",
+   "Which subjects are emphasized for grades 5–6 at JOO Auezov?"
+  ],
+  [
+   [
+    "Математика мен ағылшын тілі",
+    "Тек ҰБТ тесттері",
+    "Университет гранттары",
+    "Тек спорттық дайындық"
+   ],
+   [
+    "Математика и английский язык",
+    "Только тесты ЕНТ",
+    "Гранты университетов",
+    "Только спортивная подготовка"
+   ],
+   [
+    "Mathematics and English",
+    "Only UNT practice tests",
+    "University grants",
+    "Only sports training"
+   ]
+  ],
+  [
+   "5–6 сыныптарда математика мен ағылшын тіліне басымдық беріліп, НЗМ/БИЛ бағытындағы дайындық қарастырылған.",
+   "В 5–6 классах внимание уделяется математике, английскому и подготовке к НИШ/БИЛ.",
+   "Grades 5–6 focus on mathematics and English, including preparation for NIS/BIL entry."
+  ],
+  "https://joo-schools.kz/"
+ ],
+ [
+  1,
+  "school-students.webp",
+  3,
+  [
+   "JOO AUEZ UMIT жобасының негізгі бағыты қандай?",
+   "Чему посвящён проект JOO AUEZ UMIT?",
+   "What is the main purpose of JOO AUEZ UMIT?"
+  ],
+  [
+   [
+    "Спорттық рейтинг жасау",
+    "Мектепке құжат қабылдау",
+    "ҰБТ балын есептеу",
+    "Еріктілік пен қоғамға пайдалы іс"
+   ],
+   [
+    "Спортивный рейтинг",
+    "Приём документов",
+    "Подсчёт баллов ЕНТ",
+    "Волонтёрство и общественно полезные дела"
+   ],
+   [
+    "Sports rankings",
+    "Processing applications",
+    "Calculating UNT scores",
+    "Volunteering and community service"
+   ]
+  ],
+  [
+   "JOO AUEZ UMIT — оқушылардың жауапкершілігін дамытатын еріктілік және қоғамға пайдалы іс бағыты.",
+   "JOO AUEZ UMIT — направление волонтёрства и полезной для общества деятельности.",
+   "JOO AUEZ UMIT is a student volunteering and community service initiative."
+  ],
+  "/student-life.html"
+ ],
+ [
+  1,
+  "/assets/images/computerlab-800.webp",
+  2,
+  [
+   "JOO оқу бағдарламасындағы PBL әдісі қалай жүзеге асады?",
+   "Как проходит обучение по методу PBL в JOO?",
+   "How does JOO use the PBL approach?"
+  ],
+  [
+   [
+    "Тек дайын мәтінді жаттау",
+    "Тек дәріс тыңдау",
+    "Мәселені зерттеп, жоба жасап, қорғау",
+    "Сабаққа қатыспай тест тапсыру"
+   ],
+   [
+    "Только заучивать текст",
+    "Только слушать лекции",
+    "Исследовать проблему, создать и защитить проект",
+    "Сдавать тесты без занятий"
+   ],
+   [
+    "Only memorizing notes",
+    "Only listening to lectures",
+    "Researching problems, creating and presenting projects",
+    "Taking tests without lessons"
+   ]
+  ],
+  [
+   "PBL оқушыларды мәселені зерттеп, өз шешімін жоба түрінде жасап, оны қорғауға үйретеді.",
+   "PBL предполагает исследование проблемы, создание проекта и его защиту.",
+   "PBL involves investigating problems, developing a project and presenting the solution."
+  ],
+  "/academics.html"
+ ],
+ [
+  1,
+  "school-reception.webp",
+  1,
+  [
+   "Оқушыға мамандық пен оқу бағытын таңдауға JOO-да кім көмектеседі?",
+   "Кто помогает ученику JOO выбрать профессию и направление учёбы?",
+   "Who helps JOO students choose a career and study pathway?"
+  ],
+  [
+   [
+    "Спорт жаттықтырушысы",
+    "Профориентатор",
+    "Кітапханашы",
+    "Күзет қызметкері"
+   ],
+   [
+    "Спортивный тренер",
+    "Профориентатор",
+    "Библиотекарь",
+    "Сотрудник охраны"
+   ],
+   [
+    "Sports coach",
+    "Career guidance specialist",
+    "Librarian",
+    "Security officer"
+   ]
+  ],
+  [
+   "Мектептегі профориентаторлар оқушының қабілеті мен қызығушылығын ескеріп, мамандық таңдауға көмектеседі.",
+   "Профориентаторы помогают выбрать профессию с учётом способностей и интересов ученика.",
+   "Career guidance specialists help students choose paths based on their abilities and interests."
+  ],
+  "https://joohs.kz/jooauezov"
+ ],
+ [
+  2,
+  "school-classroom.webp",
+  1,
+  [
+   "JOO оқу бағдарламасында 10–11 сыныптағы 90 минуттық сабақ қалай бөлінеді?",
+   "Как в программе JOO делится 90-минутное занятие в 10–11 классах?",
+   "How does JOO divide a 90-minute lesson for grades 10–11?"
+  ],
+  [
+   [
+    "60 минут теория, 30 минут практика",
+    "45 минут теория, 45 минут практика",
+    "30 минут теория, 60 минут практика",
+    "90 минут тек теория"
+   ],
+   [
+    "60 минут теории, 30 практики",
+    "45 минут теории, 45 практики",
+    "30 минут теории, 60 практики",
+    "90 минут только теории"
+   ],
+   [
+    "60 minutes theory, 30 practice",
+    "45 minutes theory, 45 practice",
+    "30 minutes theory, 60 practice",
+    "90 minutes of theory only"
+   ]
+  ],
+  [
+   "JOO бағдарламасының сипаттамасында 90 минуттық сабақ 45 минут теория және 45 минут практикадан тұрады.",
+   "В описании программы JOO 90-минутный урок состоит из 45 минут теории и 45 минут практики.",
+   "JOO's program describes 90 minutes as 45 minutes of theory and 45 minutes of practice."
+  ],
+  "https://joo-schools.kz/"
+ ],
+ [
+  2,
+  "school-students.webp",
+  2,
+  [
+   "JOO Auezov сайтындағы грант қорытындысында қанша мемлекеттік грант көрсетілген?",
+   "Сколько государственных грантов показано в итогах JOO Auezov на сайте?",
+   "How many state grants are shown in the JOO Auezov website results?"
+  ],
+  [
+   [
+    "8",
+    "12",
+    "25",
+    "137"
+   ],
+   [
+    "8",
+    "12",
+    "25",
+    "137"
+   ],
+   [
+    "8",
+    "12",
+    "25",
+    "137"
+   ]
+  ],
+  [
+   "«Нәтижелер» бөлімінде 25 мемлекеттік грант бөлек жарияланған. Бұл көрсеткіш 8 ҰБТ постерінің статистикасымен шатастырылмайды.",
+   "Раздел «Результаты» отдельно показывает 25 государственных грантов — не путайте их со статистикой 8 постеров ЕНТ.",
+   "The Results section separately lists 25 state grants; this is a different dataset from the eight UNT posters."
+  ],
+  "/results.html"
+ ],
+ [
+  2,
+  "school-students.webp",
+  2,
+  [
+   "JOO Auezov сайтындағы 8 оқушы постерінің ең жоғары ҰБТ нәтижесі қанша?",
+   "Какой максимальный балл ЕНТ среди 8 постеров учеников на сайте JOO Auezov?",
+   "What is the highest UNT score across the eight student posters on the JOO Auezov site?"
+  ],
+  [
+   [
+    "115",
+    "137",
+    "121",
+    "140"
+   ],
+   [
+    "115",
+    "137",
+    "121",
+    "140"
+   ],
+   [
+    "115",
+    "137",
+    "121",
+    "140"
+   ]
+  ],
+  [
+   "Ауезов сайтындағы 8 постердің ең жоғарысы — 121 балл. JOO School желісінің 137 балдық нәтижесі бұдан бөлек.",
+   "Среди восьми постеров максимум — 121 балл. Показатель 137 относится к сети JOO School, а не к этой выборке.",
+   "The highest of these eight posters is 121 points. The network-wide JOO School figure of 137 is a separate result."
+  ],
+  "/results.html"
+ ]
 ];
 const state={step:0,correct:0,selected:null,screen:'intro',streak:0,bestStreak:0,chapterCorrect:[0,0,0],shots:[],shotReady:true,activeShot:'jump',newAchievements:[]},points=()=>state.correct*10;
 const url=l=>l==='kk'?'/quest.html':'/'+l+'/quest.html';
