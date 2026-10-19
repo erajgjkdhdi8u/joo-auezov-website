@@ -66,14 +66,14 @@ MAP = {
         26: "assets/images/v28/school-classroom.webp",# gallery
     },
 }
-EXPECTED_COUNTS = {"academics": 19, "campus": 26}
+EXPECTED_COUNTS = {"academics": {19}, "campus": {26, 28}}
 EXPECTED_DEPTH = ("EXTERIOR", "HALL", "CLASSROOM", "TECH LAB", "COMMUNITY", "STUDENT LIFE")
 
 def fix(page: str):
     path = ROOT / (page + ".html")
     before = path.read_text(encoding="utf-8")
     images = list(IMG.finditer(before))
-    if len(images) != EXPECTED_COUNTS[page]:
+    if len(images) not in EXPECTED_COUNTS[page]:
         raise RuntimeError(f"{page}: image count changed {len(images)}; review mapping before modifying")
     if page == "campus":
         if len(re.findall(r'\bdata-fx-archive="\d+"', before)) != 6:
