@@ -9,6 +9,8 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/performance_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/style.css'
       - 'JOO_Auezov_V27_Language_Fixed/site.js'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.css'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.js'
 
 permissions:
   contents: read
