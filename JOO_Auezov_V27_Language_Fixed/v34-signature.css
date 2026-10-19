@@ -15,17 +15,6 @@
 .menu-panel.v34-luxury .joo-mega-showcase__bottom{background:#f0ca77}
 .menu-panel.v34-luxury.v34-open .nav-item{animation:v34-menu-rise .64s var(--v34-ease) both;animation-delay:calc(var(--v34-menu-i)*32ms)}
 @keyframes v34-menu-rise{from{opacity:.45;transform:translateY(17px)}to{opacity:1;transform:translateY(0)}}
-/* 02. Desktop chapter rail */
-.v34-chapters{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:175;width:38px;padding:13px 7px;border:1px solid #d5a95a8a;background:#061b39ed;color:#f5d596;box-shadow:0 14px 45px #081a3645;backdrop-filter:blur(9px);border-radius:20px;display:flex;align-items:center;flex-direction:column;gap:8px;font-family:Inter,system-ui,sans-serif}
-.v34-chapters__label{font-size:9px;font-weight:900;letter-spacing:.045em;white-space:nowrap}
-.v34-chapters__bar{height:1px;width:16px;background:#f5d59680}
-.v34-chapters__dots{display:flex;flex-direction:column;align-items:center;gap:9px}
-.v34-chapters__dot{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#f3cc82;outline-offset:3px}
-.v34-chapters__dot:before{content:"";width:5px;height:5px;background:#88a7d0;border-radius:50%;transition:transform .2s,background .2s}
-.v34-chapters__dot.v34-active:before,.v34-chapters__dot:hover:before,.v34-chapters__dot:focus-visible:before{background:var(--v34-gold);transform:scale(2)}
-.v34-chapters__dot:focus-visible{outline:2px solid #f6d38c}
-.v34-chapters__track{width:3px;height:35px;background:#54719a;border-radius:9px;overflow:hidden}
-.v34-chapters__fill{display:block;width:100%;height:var(--v34-progress,0%);background:#f4cf7c;transition:height .24s ease}
 /* 03. Authentic photos reveal through simple curtains */
 .v34-curtain{position:relative;isolation:isolate;overflow:hidden}
 .v34-curtain:before,.v34-curtain:after{content:"";position:absolute;top:0;bottom:0;width:50.25%;background:#0b2b5e;z-index:8;pointer-events:none;transform:translateX(0);transition:transform 1.05s var(--v34-ease)}
@@ -43,7 +32,6 @@
 .v34-marquee__phrase{flex:none;white-space:nowrap;padding-right:32px;font:600 clamp(24px,3.5vw,52px)/1.15 Oswald,Impact,sans-serif;letter-spacing:.12em;text-transform:uppercase}
 @keyframes v34-roll{to{transform:translateX(-50%)}}
 @media(hover:hover){.v34-marquee:hover .v34-marquee__track{animation-play-state:paused}}
-@media(max-width:1150px){.v34-chapters{display:none}}
 @media(max-width:760px){
  .menu-panel.v34-luxury{overflow-y:auto;overflow-x:hidden;padding-top:18px;padding-bottom:24px}
  .menu-panel.v34-luxury .nav-item{min-height:60px;word-break:normal}
@@ -57,5 +45,4 @@
  .menu-panel.v34-luxury.v34-open .nav-item{animation:none!important;opacity:1!important;transform:none!important}
  .v34-curtain:before,.v34-curtain:after{display:none!important}
  .v34-marquee__track{animation:none!important;transform:none!important;will-change:auto!important}
- .v34-chapters__fill,.v34-chapters__dot:before{transition:none!important}
 }
