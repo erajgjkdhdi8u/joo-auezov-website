@@ -365,3 +365,92 @@ button,a{font:inherit}button{cursor:pointer}a{color:inherit}
  .quest-mvp-ceremony__cup,.quest-mvp-ceremony__confetti i,.quest-question--shooting .quest-button:disabled::after{animation:none}
  .quest-mvp-ceremony__confetti{display:none}
 }
+
+/* JOO ARENA 6.0 — three genuinely distinct, self-contained arenas.
+   Every element is CSS/markup; original school photos remain untouched. */
+.quest-court.is-v6{--arena-floor:#d29b62;--arena-accent:#ffe4a2;--arena-secondary:#ffb77d;--arena-crowd:#f8cc9155}
+.quest-court.is-v6 .quest-arena-sky__banner{bottom:31%;opacity:.6}
+.quest-court.is-v6.arena-stage--1{--arena-floor:#a66e45;--arena-accent:#ffe3a1;--arena-secondary:#f5b47e;--arena-crowd:#cf9a6680;background:radial-gradient(ellipse at 62% 7%,#6c6775,#1c3a52 42%,#07172b 100%)}
+.quest-court.is-v6.arena-stage--2{--arena-floor:#295b7a;--arena-accent:#80e5ff;--arena-secondary:#a4d6ff;--arena-crowd:#18bde360;background:radial-gradient(ellipse at 66% 12%,#1d5274,#0b3454 48%,#06172e 100%)}
+.quest-court.is-v6.arena-stage--3{--arena-floor:#7c536c;--arena-accent:#f6d78b;--arena-secondary:#c7a7fc;--arena-crowd:#dc9bff6b;background:radial-gradient(ellipse at 64% 12%,#70435b,#2b2550 52%,#0b1027 100%)}
+.quest-court.is-v6 .quest-arena-architecture{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
+.quest-court.is-v6 .quest-arena-architecture__windows,.quest-court.is-v6 .quest-arena-architecture__screen,.quest-court.is-v6 .quest-arena-architecture__arc,.quest-court.is-v6 .quest-arena-architecture__ring,.quest-court.is-v6 .quest-arena-architecture__stars{position:absolute;display:block}
+.quest-court.is-v6 .quest-arena-architecture__windows{inset:11% 2% auto;height:31%;border:7px solid #a3bfd75d;box-shadow:inset 0 0 34px #ffdb9363,0 0 20px #0b1c29ab;background:repeating-linear-gradient(90deg,#ffe0a014 0 12%,#132b425a 12% 14%,#ffdf9e14 14% 27%)}
+.quest-court.is-v6 .quest-arena-architecture__windows::after{content:"";position:absolute;inset:45% 0 0;border-top:5px solid #bdc0c65e;box-shadow:0 16px 32px #8e5a3660}
+.quest-court.is-v6 .quest-arena-architecture__screen{right:15%;top:10%;font:900 20px Oswald,Impact,sans-serif;color:#f9dda9;letter-spacing:.12em;border:3px solid #c8a979b0;padding:7px 12px;background:#0a1a27e8;transform:skewX(-7deg);text-shadow:0 0 14px #ffc7739e}
+.quest-court.is-v6 .quest-arena-architecture__screen span{font-size:11px;color:#adc2d0}
+.quest-court.is-v6 .quest-arena-architecture__arc{bottom:5%;left:2%;width:83%;height:39%;border:2px solid #facf955f;border-radius:50%;transform:perspective(550px) rotateX(65deg)}
+.quest-court.is-v6 .quest-arena-architecture__ring{display:none}
+.quest-court.is-v6 .quest-arena-architecture__stars{display:none}
+.quest-court.is-v6.arena-stage--1 .quest-arena-sky__stands{background:repeating-linear-gradient(0deg,#aa6d3b12 0 18px,#ffe1a92c 21px 22px),repeating-linear-gradient(90deg,transparent 0 40px,#54342644 43px 44px);opacity:.85}
+.quest-court.is-v6.arena-stage--1 .quest-court__camera .quest-court__floor{background:repeating-linear-gradient(90deg,#a2683845 0 40px,#c18b5152 43px 48px),linear-gradient(180deg,#d09e5a73,#6538239c);border-top:2px solid #ffe5ba75;box-shadow:0 -2px 26px #bf865464}
+.quest-court.is-v6.arena-stage--1 .quest-arena-sky__lights i{box-shadow:0 0 10px #ffe7bd,0 0 45px #b68e67}
+/* Academic Lab: glowing classroom-display wall and circuit-board floor */
+.quest-court.is-v6.arena-stage--2 .quest-arena-architecture__windows{inset:7% 2% 42%;border:2px solid #69cdfdcc;background:repeating-linear-gradient(90deg,transparent 0 9%,#75edff2e 9.3% 9.6%),repeating-linear-gradient(0deg,#64c8ff19 0 12px,#091936a3 14px 25px);box-shadow:inset 0 0 29px #12b8e752,0 0 20px #00cfff58}
+.quest-court.is-v6.arena-stage--2 .quest-arena-architecture__windows::after{border-color:#3fdbff77;box-shadow:0 0 25px #14dfff73}
+.quest-court.is-v6.arena-stage--2 .quest-arena-architecture__screen{color:#a4faff;border-color:#3cdbff;background:#052b44ef;box-shadow:0 0 22px #2bcbf780;transform:skewX(0)}
+.quest-court.is-v6.arena-stage--2 .quest-arena-architecture__screen span{color:#78d4f9}
+.quest-court.is-v6.arena-stage--2 .quest-arena-architecture__arc{border-color:#4df4ff9a;box-shadow:0 0 22px #50aef677}
+.quest-court.is-v6.arena-stage--2 .quest-court__camera .quest-court__floor{background:repeating-linear-gradient(90deg,#66e1fc17 0 18px,#58cbfa57 19px 20px),linear-gradient(180deg,#1f5e79bb,#071932d1);box-shadow:0 0 25px #24d3f46b}
+.quest-court.is-v6.arena-stage--2 .quest-arena-sky__lights i{box-shadow:0 0 20px #51e9ff,0 0 47px #28c9f887}
+.quest-court.is-v6.arena-stage--2 .quest-arena-sky__banner{color:#79edff50}
+/* Champions Dome: vaulted championship arch, tiered LED crowd and five stars. */
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__windows{inset:15% 0 38%;border:none;border-top:3px solid #e6bc6e70;border-radius:60% 60% 0 0;background:repeating-radial-gradient(ellipse at 50% -40%,transparent 0 33px,#fcde9440 34px 35px,transparent 36px 66px);box-shadow:inset 0 16px 35px #d9a04c47}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__windows::after{border-top:1px solid #f1dcab75;box-shadow:none;inset:51% 0 0}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__screen{color:#fff4cd;right:11%;top:8%;border-color:#ffe49e;background:linear-gradient(125deg,#35254c,#81502b);box-shadow:0 0 25px #f6c57397;transform:rotate(-4deg)}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__screen span{color:#ffe9a8}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__arc{border:3px solid #fce8a6b8;box-shadow:0 0 25px #ffe2a28c}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__ring{display:block;left:8%;right:8%;top:10%;height:58%;border:3px solid #c6a26f6e;border-radius:50% 50% 22% 22%;transform:perspective(450px) rotateX(23deg);box-shadow:0 0 60px #f8b95042}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__stars{display:flex;gap:13px;top:12%;left:11%}
+.quest-court.is-v6.arena-stage--3 .quest-arena-architecture__stars i{width:9px;height:9px;background:#ffe397;clip-path:polygon(50% 0,62% 36%,100% 40%,69% 62%,79% 100%,50% 78%,21% 100%,31% 62%,0 40%,38% 36%);filter:drop-shadow(0 0 4px #ffe7a2)}
+.quest-court.is-v6.arena-stage--3 .quest-court__camera .quest-court__floor{background:repeating-linear-gradient(90deg,#ffec9e12 0 26px,#f4d38345 27px 28px),linear-gradient(180deg,#5e416a88,#221a3bbb);box-shadow:0 -7px 27px #fcd08165}
+.quest-court.is-v6.arena-stage--3 .quest-arena-sky__lights i{background:#ffecc0;box-shadow:0 0 18px #fff0b8,0 0 58px #eab66e}
+.quest-court.is-v6.arena-stage--3 .quest-arena-sky__banner{color:#f9d58943}
+/* Arena identity and active shot label (not dependent on arena's background image). */
+.quest-court.is-v6 .quest-shot-type{position:absolute;left:5%;bottom:28%;z-index:9;display:flex;flex-direction:column;gap:3px;border-left:3px solid var(--arena-accent);padding:7px 11px;background:linear-gradient(90deg,#091e35dd,#091e356b);max-width:55%;box-shadow:0 8px 18px #00102944}
+.quest-shot-type span{font-size:9px;color:var(--arena-secondary);letter-spacing:.16em;font-weight:900}
+.quest-shot-type strong{font:600 clamp(17px,2.1vw,28px)/1.1 Oswald,Impact,sans-serif;letter-spacing:.035em;color:#ffffff}
+.quest-shot-type small{font-size:10px;font-weight:900;letter-spacing:.06em;color:var(--arena-accent)}
+.quest-court.is-v6 .quest-court__camera{z-index:4}
+.quest-court.is-v6 .quest-arena-sky{z-index:1}
+/* 3-pointer starts further behind the free throw line; fast dunk close to the rim. */
+.quest-court.is-v6.shot--three .quest-ball{left:2%;top:79%;transform:scale(.84)}
+.quest-court.is-v6.shot--dunk .quest-ball{left:41%;top:76%;transform:scale(1.07)}
+.quest-court.is-v6.shot--dunk .quest-ball__shadow{left:44%;bottom:16%;width:46px}
+.quest-court.is-v6.shot--three .quest-ball__shadow{left:3%;bottom:16%;width:52px}
+.quest-ball__trail{display:none;position:absolute;inset:25% 75% 25% -170%;border-radius:999px;pointer-events:none;z-index:-1;background:linear-gradient(90deg,transparent,#fff7c67a,#f4aa40e0);filter:blur(5px);opacity:.8}
+.quest-court.is-v6.shot--three .quest-ball__trail{display:block;width:165%;transform:rotate(7deg)}
+.quest-court.is-v6.shot--dunk .quest-ball__trail{display:block;inset:-120% 35% 80% 35%;background:linear-gradient(180deg,transparent,#ffe4a1bc,#ff994d);filter:blur(7px)}
+.quest-court.is-v6.shot--three.is-made .quest-ball{filter:drop-shadow(0 0 11px #ffe7ad8c)}
+.quest-court.is-v6.shot--dunk.is-made .quest-hoop__rim-front{box-shadow:0 0 17px #ffd583}
+.quest-court.is-v6.shot--dunk.is-made .quest-hoop__net{animation-duration:.77s}
+.quest-court.is-v6.shot--dunk.is-missed .quest-hoop__rim{animation-duration:.43s}
+.quest-court.is-v6 .quest-ball{will-change:transform}
+/* Arena arrival banner on questions 4 and 8. */
+.quest-stage-transition{display:flex;align-items:center;flex-wrap:wrap;gap:8px 13px;border:1px solid #bb9b6699;border-left:4px solid #f6d47d;background:linear-gradient(100deg,#6c4b2266,#0b294638);padding:9px 13px;margin:0 0 17px;animation:q-stage-open .62s cubic-bezier(.2,.8,.2,1) both}
+.quest-stage-transition>span{font-size:18px;color:#ffda8b}
+.quest-stage-transition small{font-size:10px;font-weight:900;letter-spacing:.08em;color:#f2d49c}
+.quest-stage-transition strong{font:600 18px Oswald,Impact,sans-serif;letter-spacing:.05em;color:white}
+@keyframes q-stage-open{from{opacity:0;transform:translateY(-10px);filter:blur(4px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:980px){
+ .quest-question-main>.quest-stage-transition{order:2;grid-column:1;margin:10px clamp(20px,5vw,42px) 0}
+ .quest-court.is-v6 .quest-shot-type{bottom:25%;max-width:58%}
+ .quest-scoreboard__round{max-width:68%}
+}
+@media(max-width:590px){
+ .quest-question-main>.quest-stage-transition{margin:12px 18px 0;gap:5px 9px}
+ .quest-stage-transition small{font-size:9px}
+ .quest-stage-transition strong{font-size:17px}
+ .quest-court.is-v6 .quest-shot-type{bottom:25%;padding:6px 8px;left:5%;max-width:57%}
+ .quest-shot-type strong{font-size:19px}
+ .quest-shot-type small{font-size:9px}
+ .quest-court.is-v6 .quest-arena-architecture__screen{font-size:16px;right:10%;top:10%}
+ .quest-court.is-v6 .quest-arena-architecture__stars{gap:9px}
+ .quest-scoreboard__round{max-width:62%;font-size:9px}
+ .quest-court.is-v6.shot--three .quest-ball{left:4%}
+}
+@media(prefers-reduced-motion:reduce){
+ .quest-stage-transition{animation:none}
+ .quest-court.is-v6 .quest-ball{will-change:auto}
+ .quest-ball__trail{display:none!important}
+}
