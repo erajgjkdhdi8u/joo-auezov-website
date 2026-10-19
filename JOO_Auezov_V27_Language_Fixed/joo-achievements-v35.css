@@ -1,0 +1,36 @@
+/* JOO V35 — Results achievements overview. Scoped to the Results page. */
+.joo-achieve{--ja-ink:#071c39;--ja-card:#0e2a50;--ja-gold:#f0cf87;--ja-line:#49617e;position:relative;isolation:isolate;overflow:hidden;scroll-margin-top:84px;background:linear-gradient(120deg,#07182f 0%,#0b254b 55%,#123662 100%);color:#fff;padding:clamp(64px,8vw,118px) var(--edge,clamp(20px,5vw,84px))}
+.joo-achieve::before{content:"";position:absolute;inset:-30% -10% auto 38%;height:660px;background:radial-gradient(circle,#2d64954d 0,transparent 65%);pointer-events:none;z-index:-1}
+.joo-achieve::after{content:"JOO";position:absolute;right:-.03em;bottom:-.27em;font:700 clamp(170px,32vw,460px)/1 Oswald,Impact,sans-serif;letter-spacing:-.11em;color:#ffffff08;pointer-events:none;z-index:-1}
+.joo-achieve__shell{max-width:1500px;margin-inline:auto}
+.joo-achieve__eyebrow{display:flex;align-items:center;gap:12px;color:var(--ja-gold);font-size:11px;font-weight:850;letter-spacing:.17em;text-transform:uppercase;margin-bottom:clamp(22px,4vw,45px)}
+.joo-achieve__eyebrow::before{content:"";display:block;width:8px;height:8px;background:var(--ja-gold);border-radius:50%}
+.joo-achieve__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);align-items:end;gap:24px 8%;margin-bottom:36px}
+.joo-achieve__head h2{font:650 clamp(44px,7vw,104px)/.98 Oswald,Impact,'Arial Narrow',sans-serif;letter-spacing:-.035em;text-transform:uppercase;margin:0;max-width:14ch}
+.joo-achieve__head h2 span,.joo-achieve__head h2 em{display:block}
+.joo-achieve__head h2 em{font-style:normal;color:var(--ja-gold)}
+.joo-achieve__head>p{font-size:clamp(14px,1.25vw,18px);line-height:1.75;color:#c2d4e9;max-width:530px;margin:0 0 5px}
+.joo-achieve__filters{display:flex;gap:7px;flex-wrap:wrap;padding:0 0 20px;border-bottom:1px solid #ffffff3d;margin-bottom:22px}
+.joo-achieve__filters button{appearance:none;border:1px solid #ffffff45;border-radius:999px;background:transparent;color:#dce7f5;min-height:43px;padding:10px 19px;font:750 12px/1.35 Inter,Arial,sans-serif;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.joo-achieve__filters button:hover{border-color:var(--ja-gold);transform:translateY(-1px)}
+.joo-achieve__filters button[aria-pressed="true"]{background:var(--ja-gold);border-color:var(--ja-gold);color:#061c38}
+.joo-achieve :is(a,button):focus-visible{outline:3px solid var(--ja-gold);outline-offset:4px}
+.joo-achieve__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.joo-achieve__card{min-width:0;min-height:315px;background:linear-gradient(155deg,#183962 0%,var(--ja-card) 78%);border:1px solid #ffffff24;border-radius:12px;padding:clamp(22px,2.5vw,35px);display:flex;flex-direction:column;align-items:flex-start;transition:transform .3s,border-color .3s,box-shadow .3s}
+.joo-achieve__card:nth-child(even){background:linear-gradient(155deg,#102f57 0%,#091f40 80%)}
+.joo-achieve__card:hover{transform:translateY(-5px);border-color:#f0cf8792;box-shadow:0 20px 45px #0003}
+.joo-achieve__card[hidden]{display:none!important}
+.joo-achieve__card-tag{font-size:10px;letter-spacing:.16em;color:#b1cce9;font-weight:850;text-transform:uppercase}
+.joo-achieve__number{font:700 clamp(65px,7.3vw,116px)/1 Oswald,Impact,sans-serif;letter-spacing:-.055em;color:var(--ja-gold);margin:23px 0 10px;font-variant-numeric:tabular-nums}
+.joo-achieve__card h3{font:750 clamp(15px,1.25vw,19px)/1.25 Inter,Arial,sans-serif;margin:0 0 11px;color:#fff}
+.joo-achieve__card p{font-size:12px;line-height:1.65;color:#b4c9e2;margin:0 0 22px}
+.joo-achieve__card a{margin-top:auto;color:var(--ja-gold);display:inline-flex;align-items:center;gap:12px;font:800 12px/1.4 Inter,Arial,sans-serif;text-decoration:none}
+.joo-achieve__card a:hover{text-decoration:underline;text-underline-offset:4px}
+.joo-achieve__bottom{display:flex;align-items:start;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #ffffff3d;margin-top:24px;padding-top:24px}
+.joo-achieve__bottom p{font-size:12px;line-height:1.7;color:#afc3dc;max-width:850px;margin:0}
+.joo-achieve__bottom a{font:850 12px/1.4 Inter,Arial,sans-serif;letter-spacing:.02em;color:var(--ja-gold);text-decoration:none}
+.joo-achieve__bottom a:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:1100px){.joo-achieve__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.joo-achieve__card{min-height:300px}}
+@media(max-width:680px){.joo-achieve__head{grid-template-columns:1fr;gap:18px}.joo-achieve__head h2{font-size:clamp(46px,13.4vw,73px)}.joo-achieve__grid{gap:10px}.joo-achieve__card{min-height:266px;padding:18px}.joo-achieve__number{font-size:clamp(57px,12vw,83px)}.joo-achieve__card h3{font-size:14px}.joo-achieve__card p{font-size:11px}.joo-achieve__filters button{font-size:11px;padding:10px 13px}.joo-achieve__eyebrow{font-size:10px}}
+@media(max-width:430px){.joo-achieve__grid{grid-template-columns:1fr}.joo-achieve__card{min-height:240px}.joo-achieve__number{margin-top:12px}}
+@media(prefers-reduced-motion:reduce){.joo-achieve__card,.joo-achieve__filters button{transition:none!important}.joo-achieve__card:hover,.joo-achieve__filters button:hover{transform:none}}
