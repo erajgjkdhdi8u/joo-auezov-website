@@ -38,6 +38,11 @@ jobs:
             'v30-portraits': 'https://joo-auezov.netlify.app/joo-six-effects.css',
             'ru-resources': 'https://joo-auezov.netlify.app/ru/resources.html',
             'en-resources': 'https://joo-auezov.netlify.app/en/resources.html',
+            'v33-css': 'https://joo-auezov.netlify.app/v33-cinematic.css',
+            'v33-script': 'https://joo-auezov.netlify.app/v33-cinematic.js',
+            'v33-ru-campus': 'https://joo-auezov.netlify.app/ru/campus.html',
+            'v33-en-results': 'https://joo-auezov.netlify.app/en/results.html',
+            'v33-kk-team': 'https://joo-auezov.netlify.app/team.html',
           }
           failures = []
           for label, url in urls.items():
@@ -60,6 +65,11 @@ jobs:
                         'v30-portraits': 'V32: Teacher names stay visibly readable',
                         'ru-resources': 'На странице не приводятся',
                         'en-resources': 'This page avoids',
+                        'v33-css': 'JOO V33 CINEMATIC EDITION',
+                        'v33-script': 'JOO V33 Cinematic Edition',
+                        'v33-ru-campus': '05 / JOO AUEZOV',
+                        'v33-en-results': 'v33-cinematic.js',
+                        'v33-kk-team': 'v33-cinematic.css',
                       }[label]
                       success = status == 200 and (marker in data if marker else True)
                       print(label, 'HTTP', status, 'marker', marker, 'found', success)
