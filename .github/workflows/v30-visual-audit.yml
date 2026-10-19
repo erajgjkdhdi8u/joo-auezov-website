@@ -11,6 +11,8 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/joo-six-effects.css'
       - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.css'
       - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.js'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.css'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.js'
       - 'JOO_Auezov_V27_Language_Fixed/index.html'
       - 'JOO_Auezov_V27_Language_Fixed/academics.html'
       - 'JOO_Auezov_V27_Language_Fixed/campus.html'
