@@ -205,6 +205,7 @@ function runShot(made){
  const ball=court?.querySelector('.quest-ball');
  const rim=court?.querySelector('.quest-hoop__rim');
  const camera=court?.querySelector('.quest-court__camera');
+ const shadow=court?.querySelector('.quest-ball__shadow');
  const shot=state.activeShot;
  const slow=state.step===4||state.step===9;
  const reduced=Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
@@ -235,9 +236,16 @@ function runShot(made){
   const dx=(rimRect.left+rimRect.width*.5)-(ballRect.left+ballRect.width*.5);
   const dy=(rimRect.top+rimRect.height*.5)-(ballRect.top+ballRect.height*.5);
   const height=courtRect.height;
-  const apex=shot==='three'?Math.max(155,Math.min(330,height*.85)):
+  // The long three-pointer used to rise above compact phone courts and disappear
+  // behind overflow:hidden. Constrain each arc by the actual visible headroom.
+  const desiredApex=shot==='three'?Math.max(155,Math.min(330,height*.85)):
      shot==='dunk'?Math.max(95,Math.min(190,height*.47)):
      Math.max(90,Math.min(225,height*.58));
+  const startCenter=ballRect.top+ballRect.height*.5-courtRect.top;
+  const endCenter=rimRect.top+rimRect.height*.5-courtRect.top;
+  const ceiling=Math.max(17,ballRect.height*.52);
+  const headroom=(startCenter+endCenter)*.5-ceiling-Math.abs(endCenter-startCenter)*.10;
+  const apex=Math.min(desiredApex,Math.max(38,headroom));
   const offsets=shot==='dunk'?[0,.13,.27,.42,.54,impact]:
     shot==='three'?[0,.15,.31,.47,.64,impact]:
     [0,.15,.30,.45,.60,impact];
@@ -254,10 +262,24 @@ function runShot(made){
    keyframes.push({offset:1,transform:'translate3d('+(dx+5)+'px,'+(dy+ballRect.height*2.5)+'px,0) rotate(880deg) scale(.45)',opacity:0});
   }else{
    const bounce=shot==='dunk'?[-63,-44]:shot==='three'?[66,-53]:[43,-36];
-   keyframes.push({offset:Math.min(.94,impact+.08),transform:'translate3d('+(dx+bounce[0])+'px,'+(dy+bounce[1])+'px,0) rotate(670deg) scale(.67)',opacity:1});
+   // First impact compresses the ball, then it ricochets on a shallow, falling arc.
+   keyframes.push({offset:Math.min(.90,impact+.045),transform:'translate3d('+(dx+bounce[0]*.5)+'px,'+(dy+bounce[1]*.38)+'px,0) rotate(620deg) scale(.66,.57)',opacity:1});
+   keyframes.push({offset:Math.min(.96,impact+.10),transform:'translate3d('+(dx+bounce[0])+'px,'+(dy+bounce[1])+'px,0) rotate(710deg) scale(.68)',opacity:1});
    keyframes.push({offset:1,transform:'translate3d('+(dx+Math.max(130,courtRect.width*.31))+'px,'+(dy+Math.max(145,height*.48))+'px,0) rotate(980deg) scale(.51)',opacity:0});
   }
   const animation=ball.animate(keyframes,{duration,easing:'linear',fill:'forwards'});
+  // Move the floor shadow along with the shot; a stationary shadow made mobile
+  // three-pointers appear detached from the court.
+  if(shadow?.animate){
+   const missX=made?dx:dx+Math.max(130,courtRect.width*.31);
+   const shadowKeyframes=[
+    {offset:0,transform:'translate3d(0,0,0) scale(1)',opacity:.42},
+    {offset:impact*.5,transform:'translate3d('+(dx*.52)+'px,0,0) scale(.55)',opacity:.12},
+    {offset:impact,transform:'translate3d('+dx+'px,0,0) scale(.78)',opacity:.32},
+    {offset:1,transform:'translate3d('+missX+'px,0,0) scale(.46)',opacity:0}
+   ];
+   shadow.animate(shadowKeyframes,{duration,easing:'linear',fill:'forwards'});
+  }
   if(camera?.animate){
    const base={transform:'scale(1) translate3d(0,0,0)',offset:0};
    let motion;
