@@ -125,6 +125,7 @@ function scene(picked,made){
  const label=picked?'<div class="quest-court__callout"><b>'+h(made?t.shotMade:t.shotMissed)+'</b><small>'+
     (made?(fire?h(tier===2?t.fireMax:t.fireReady)+' · ':'')+'+10 JOO POINTS':'JOO ARENA / TRY AGAIN')+'</small></div>':'';
  const flames=fire?'<span class="quest-ball__fire" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>':'';
+ const slowLabel=(state.step===4||state.step===9)?'<div class="quest-arena-slow" aria-hidden="true">◉ '+h(t.slowmo)+'</div>':'';
  const stateLabel=fire?'<div class="quest-arena-fire-status" aria-hidden="true">'+(fire===2?'INFERNO':'FIREBALL')+' <span>×'+state.streak+'</span></div>':'';
  return '<div class="quest-court '+outcome+' arena-stage--'+(questions[state.step][0]+1)+'" aria-hidden="true">'+
  '<div class="quest-arena-sky"><div class="quest-arena-sky__stands"></div><div class="quest-arena-sky__lights"><i></i><i></i><i></i></div>'+
@@ -136,7 +137,7 @@ function scene(picked,made){
  '<div class="quest-hoop__rim-front"></div></div><div class="quest-ball__shadow"></div>'+
  '<div class="quest-ball">'+flames+'</div>'+
  '<div class="quest-court__sparks"><i></i><i></i><i></i><i></i><i></i></div></div>'+
- '<div class="quest-court__hud"><span>JOO ARENA</span><span>SHOT '+String(state.step+1).padStart(2,'0')+' / 10</span></div>'+stateLabel+label+'</div>';
+ '<div class="quest-court__hud"><span>JOO ARENA</span><span>SHOT '+String(state.step+1).padStart(2,'0')+' / 10</span></div>'+stateLabel+slowLabel+label+'</div>';
 }
 function soundControl(){
  return '<button id="questSound" type="button" class="quest-sound-toggle" aria-pressed="'+String(soundOn)+'" aria-label="'+h(soundOn?t.soundOn:t.soundOff)+'">'+
@@ -262,8 +263,13 @@ function result(){
  }).join('');
  const recap='<div class="quest-recap" aria-label="'+h(t.chaptersResult)+'">'+
    '<div class="quest-recap-head">'+h(t.chaptersResult)+'</div>'+chapterRows+'</div>';
+ const trophy=points()>=90?t.mvp:points()>=70?t.allStar:points()>=50?t.rising:t.rookie;
+ const ceremony='<div class="quest-mvp-ceremony" role="group" aria-label="'+h(t.award)+'">'+
+  '<div class="quest-mvp-ceremony__confetti" aria-hidden="true">'+Array.from({length:18},(_,i)=>'<i style="--piece:'+i+'"></i>').join('')+'</div>'+
+  '<div class="quest-mvp-ceremony__cup" aria-hidden="true"><svg viewBox="0 0 120 132" width="92" height="105" fill="none"><defs><linearGradient id="questTrophy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF5C7"/><stop offset=".55" stop-color="#E9B953"/><stop offset="1" stop-color="#A86A2C"/></linearGradient></defs><path d="M37 15h46v29c0 27-11 37-23 37S37 71 37 44V15Z" fill="url(#questTrophy)" stroke="#FFE9A3" stroke-width="3"/><path d="M38 23H18c0 24 10 38 27 37M82 23h20c0 24-10 38-27 37" stroke="#EDBC62" stroke-width="9" stroke-linecap="round"/><path d="M60 82v17M40 111h40M34 120h52" stroke="#E9BC69" stroke-width="12" stroke-linecap="round"/><path d="m60 28 6 11 12 2-9 9 2 13-11-6-11 6 2-13-9-9 12-2Z" fill="#FDF1BF"/></svg></div>'+
+  '<small>'+h(t.award)+'</small><strong>'+h(trophy)+'</strong><p>'+h(t.awardDesc)+'</p></div>';
  view('<section class="quest-result" aria-labelledby="resultTitle"><div><div class="quest-kicker">'+h(t.done)+'</div><h1 id="resultTitle" tabindex="-1">'+h(t.result)+'<br><em>'+h(t.result2)+'</em></h1><p>'+h(t.desc)+'</p><div class="quest-badge">'+ranks[level()]+'</div>'+
- '<div class="quest-result-numbers"><div><span>'+h(t.accuracy)+'</span><strong>'+points()+'%</strong></div><div><span>'+h(t.best)+'</span><strong>×'+state.bestStreak+'</strong></div></div>'+
+ ceremony+'<div class="quest-result-numbers"><div><span>'+h(t.accuracy)+'</span><strong>'+points()+'%</strong></div><div><span>'+h(t.best)+'</span><strong>×'+state.bestStreak+'</strong></div></div>'+
  recap+
  '<div class="quest-result-actions"><button class="quest-button" id="saveResult">'+h(t.save)+' ↓</button><button class="quest-button quest-button--outline" id="shareResult">'+h(t.share)+' ↗</button><button class="quest-button quest-button--outline" id="replayQuest">'+h(t.again)+' ↺</button></div></div><div><div class="quest-score-ring" style="--score:'+points()+'" role="img" aria-label="'+points()+' '+h(t.out)+'"><div class="quest-score-center"><strong>'+points()+'</strong><small>'+h(t.out)+'</small></div></div><div class="quest-result-stat">'+state.correct+' '+h(t.count)+'</div></div></section>','resultTitle');
  $('replayQuest').addEventListener('click',intro);$('shareResult').addEventListener('click',share);$('saveResult').addEventListener('click',save);
