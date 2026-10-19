@@ -191,7 +191,7 @@ function question(){
   // Mobile users answer above the court: reveal the shot instead of animating offscreen.
   try{
    if(window.matchMedia?.('(max-width: 980px)').matches){
-    root.querySelector('.quest-picture')?.scrollIntoView({behavior:'instant',block:'center'});
+    root.querySelector('.quest-picture')?.scrollIntoView({behavior:'auto',block:'center'});
    }
   }catch(_){}
  }
@@ -226,8 +226,11 @@ function runShot(made){
  }
  if(slow)court?.classList.add('is-slowmo');
  if(court)court.style.setProperty('--shot-impact-delay',Math.round(duration*impact)+'ms');
- playShot(made,reduced?440:duration,impact,shot);
- if(reduced||!ball?.animate||!rim?.getBoundingClientRect){finish();return;}
+ const canAnimate=!reduced&&Boolean(ball?.animate&&rim?.getBoundingClientRect);
+ // When animation is unavailable, play the response immediately instead of
+ // leaving a delayed rim sound ringing over the following question.
+ playShot(made,canAnimate?duration:120,canAnimate?impact:.10,shot);
+ if(!canAnimate){finish();return;}
  try{
   const ballRect=ball.getBoundingClientRect();
   const rimRect=rim.getBoundingClientRect();
@@ -283,7 +286,12 @@ function runShot(made){
   if(camera?.animate){
    const base={transform:'scale(1) translate3d(0,0,0)',offset:0};
    let motion;
-   if(shot==='three')motion=[base,
+   if(!made)motion=[base,
+      {offset:.47,transform:'scale(1.018) translate3d(-.5%,0,0)'},
+      {offset:impact,transform:'scale(1.045) translate3d(-1%,0,0)'},
+      {offset:Math.min(.94,impact+.09),transform:'scale(1.025) translate3d(.8%,0,0)'},
+      {offset:1,transform:'scale(1) translate3d(0,0,0)'}];
+   else if(shot==='three')motion=[base,
       {offset:.44,transform:'scale(.95) translate3d(2%,0,0)'},
       {offset:impact,transform:'scale(1.075) translate3d(-2%,-1%,0)'},
       {offset:1,transform:'scale(1.04) translate3d(-1%,0,0)'}];
