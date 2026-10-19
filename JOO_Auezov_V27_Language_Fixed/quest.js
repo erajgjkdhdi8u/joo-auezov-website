@@ -173,6 +173,69 @@ function question(){
   }catch(_){}
  }
 }
+/* JOO ARENA 5.0: measured, responsive shot arcs and rim rebounds.
+   Ball + hoop are in the same court coordinate system; WAAPI is a progressive enhancement. */
+function runShot(made){
+ const court=root.querySelector('.quest-court');
+ const ball=court?.querySelector('.quest-ball');
+ const rim=court?.querySelector('.quest-hoop__rim');
+ const camera=court?.querySelector('.quest-court__camera');
+ const slow=state.step===4||state.step===9;
+ const reduced=Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+ const duration=slow?2150:1450;
+ const activeQuestion=state.step;
+ let done=false;
+ function finish(){
+  if(done||state.screen!=='question'||state.step!==activeQuestion)return;
+  done=true;
+  state.shotReady=true;
+  state.shots.push(made);
+  const board=root.querySelector('.quest-scoreboard');
+  if(board)board.outerHTML=scoreboard();
+  root.querySelector('.quest-question')?.classList.remove('quest-question--shooting');
+  const nextButton=$('nextQuestion');
+  if(nextButton){nextButton.disabled=false;nextButton.removeAttribute('aria-disabled');nextButton.focus({preventScroll:true});}
+ }
+ if(slow)court?.classList.add('is-slowmo');
+ if(court)court.style.setProperty('--shot-impact-delay',Math.round(duration*.75)+'ms');
+ playShot(made,reduced?440:duration);
+ if(reduced||!ball?.animate||!rim?.getBoundingClientRect){finish();return;}
+ try{
+  const ballRect=ball.getBoundingClientRect();
+  const rimRect=rim.getBoundingClientRect();
+  const courtRect=court.getBoundingClientRect();
+  if(!courtRect.width||!ballRect.width||!rimRect.width){finish();return;}
+  const dx=(rimRect.left+rimRect.width*.5)-(ballRect.left+ballRect.width*.5);
+  const dy=(rimRect.top+rimRect.height*.5)-(ballRect.top+ballRect.height*.5);
+  const height=courtRect.height;
+  const apex=Math.max(90,Math.min(225,height*.58));
+  const keyframes=[];
+  const beforeImpact=[0,.15,.30,.45,.60,.75];
+  for(const t of beforeImpact){
+   const u=t/.75;
+   const x=dx*u;
+   const y=dy*u-4*apex*u*(1-u);
+   keyframes.push({offset:t,transform:'translate3d('+x+'px,'+y+'px,0) rotate('+(u*540-20)+'deg) scale('+(1-u*.35)+')',opacity:1});
+  }
+  if(made){
+   keyframes.push({offset:.83,transform:'translate3d('+(dx+2)+'px,'+(dy+ballRect.height*.75)+'px,0) rotate(620deg) scale(.58)',opacity:1});
+   keyframes.push({offset:1,transform:'translate3d('+(dx+6)+'px,'+(dy+ballRect.height*2.5)+'px,0) rotate(810deg) scale(.47)',opacity:0});
+  }else{
+   keyframes.push({offset:.84,transform:'translate3d('+(dx+43)+'px,'+(dy-36)+'px,0) rotate(630deg) scale(.63)',opacity:1});
+   keyframes.push({offset:1,transform:'translate3d('+(dx+Math.max(110,courtRect.width*.3))+'px,'+(dy+Math.max(120,height*.42))+'px,0) rotate(830deg) scale(.54)',opacity:0});
+  }
+  const anim=ball.animate(keyframes,{duration,easing:'linear',fill:'forwards'});
+  if(camera?.animate){
+   const points=made
+    ?[{transform:'scale(1) translate3d(0,0,0)',offset:0},{transform:'scale(1.035) translate3d(-1%,0,0)',offset:.52},{transform:'scale(1.11) translate3d(-3%,-1%,0)',offset:.77},{transform:'scale(1.075) translate3d(-2%,0,0)',offset:1}]
+    :[{transform:'scale(1)',offset:0},{transform:'scale(1.03) translate3d(-1%,0,0)',offset:.75},{transform:'scale(1.015) translate3d(1%,0,0)',offset:.86},{transform:'scale(1)',offset:1}];
+   camera.animate(points,{duration,fill:'forwards',easing:'ease-in-out'});
+  }
+  anim.finished.then(finish,finish);
+  // Browser throttling, hidden tabs and animation cancellation must not trap the player.
+  window.setTimeout(finish,duration+150);
+ }catch(_){finish();}
+}
 function choose(n){
  if(state.screen!=='question'||state.selected!==null||!Number.isInteger(n)||n<0||n>3)return;
  state.selected=n;
