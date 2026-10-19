@@ -15,6 +15,7 @@ on:
       - 'JOO_Auezov_V27_Language_Fixed/tools/translation_fixes_v29.py'
       - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.css'
       - 'JOO_Auezov_V27_Language_Fixed/v33-cinematic.js'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/v34_install.py'
       - 'JOO_Auezov_V27_Language_Fixed/index.html'
       - 'JOO_Auezov_V27_Language_Fixed/campus.html'
       - 'JOO_Auezov_V27_Language_Fixed/results.html'
@@ -55,6 +56,8 @@ jobs:
         run: python JOO_Auezov_V27_Language_Fixed/tools/translation_fixes_v29.py
       - name: Generate indexable language pages
         run: python JOO_Auezov_V27_Language_Fixed/tools/localize_v29.py
+      - name: Preserve V34 signature motion across translated pages
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v34_install.py
       - name: Verify all 42 localized pages
         shell: bash
         run: |
@@ -99,6 +102,12 @@ jobs:
               gallery = campus.split('<div class="gallery-band__grid">',1)[1].split('</div>',1)[0]
               assert gallery.count('<figure>') == 5, (lang,'gallery frames')
           print('PASS: V33 cinematic visual features published in KK, RU and EN')
+          for lang in ('kk','ru','en'):
+              folder = root if lang=='kk' else root/lang
+              for page in names:
+                  html = (folder/(page+'.html')).read_text(encoding='utf-8')
+                  assert html.count('v34-signature.css') == 1 and html.count('v34-signature.js') == 1, (lang,page)
+          print('PASS: V34 signature motion enabled for all 42 URLs')
           print('PASS: 42 language pages, localized SEO, sitemap, photos and admissions form')
           PY
       - name: Commit generated language pages and imagery
