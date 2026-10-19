@@ -55,7 +55,7 @@
   // All three language directories share the same six header links.
   // Compare the URL's final filename, not the literal /ru/ or /en/ prefix.
   const activePage=(document.body.dataset.page||'index')+'.html';
-  $('.nav-main-link').forEach(a=>{
+  $$('.nav-main-link').forEach(a=>{
     let last='';
     try{
       const pathname=new URL(a.getAttribute('href'),document.baseURI).pathname;
@@ -272,12 +272,12 @@
       });
       // Preserve existing story-photo hover zoom: GSAP transform on the same
       // image previously overrode its CSS hover transform on desktop.
-      $('.ecosystem__tile img').forEach(img=>{
+      $$('.ecosystem__tile img').forEach(img=>{
         gsap.fromTo(img,{yPercent:-3,scale:1.07},{yPercent:3,scale:1.07,ease:'none',scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
       });
       // Score bars are exclusively animated by v33-cinematic.css on Results.
       // Growth bars use this desktop timeline; v36 supplies the mobile fallback.
-      $('.results-progress .progress-card>div i').forEach(bar=>{
+      $$('.results-progress .progress-card>div i').forEach(bar=>{
         gsap.fromTo(bar,{scaleX:.02},{scaleX:1,duration:1.15,ease:'power2.out',scrollTrigger:{trigger:bar,start:'top 92%',once:true}});
       });
     }
