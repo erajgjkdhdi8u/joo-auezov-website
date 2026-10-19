@@ -18,14 +18,16 @@
       link.textContent=label.menu;
       menu.appendChild(link);
     }
+    // Keep the first screen focused on admissions. QUEST remains reachable from
+    // the menu and has a secondary link in the closing section of the homepage.
     if(document.body.dataset.page === 'index'){
-      const hero=document.querySelector('.hero__actions');
-      if(hero && !hero.querySelector('.joo-quest-home-link')){
+      const closing=document.querySelector('.home-closing');
+      if(closing && !closing.querySelector('.joo-quest-home-link')){
         const link=document.createElement('a');
         link.className='pill pill--white joo-quest-home-link';
         link.href=url;
         link.textContent=label.hero+' ↗';
-        hero.appendChild(link);
+        closing.appendChild(link);
       }
     }
   })();
@@ -50,8 +52,17 @@
   closeButton?.addEventListener('click', () => setMenu(false));
   document.addEventListener('keydown', (e)=>{if(e.key==='Escape' && menu && !menu.hidden) setMenu(false);});
   $$('.menu-panel a').forEach(a=>a.addEventListener('click',()=>{ menu.hidden=true; document.body.classList.remove('menu-is-open'); }));
-  $$('.nav-main-link').forEach(a=>{
-    if(a.getAttribute('href')===(document.body.dataset.page||'index')+'.html')a.setAttribute('aria-current','page');
+  // All three language directories share the same six header links.
+  // Compare the URL's final filename, not the literal /ru/ or /en/ prefix.
+  const activePage=(document.body.dataset.page||'index')+'.html';
+  $('.nav-main-link').forEach(a=>{
+    let last='';
+    try{
+      const pathname=new URL(a.getAttribute('href'),document.baseURI).pathname;
+      last=pathname.split('/').filter(Boolean).pop() || 'index.html';
+    }catch(_){return;}
+    if(last===activePage)a.setAttribute('aria-current','page');
+    else a.removeAttribute('aria-current');
   });
   /* Native scrolling remains available on every page, including Student Life. */
   window.addEventListener('pageshow',()=>{setMenu(false);document.body.style.removeProperty('overflow');root.style.removeProperty('overflow');});
@@ -258,12 +269,14 @@
       $$('.section-top h2,.story__heading h2,.home-closing h2,.gallery-band__head h2').forEach(el=>{
         gsap.fromTo(el,{y:21},{y:0,duration:.78,ease:'power2.out',clearProps:'transform',scrollTrigger:{trigger:el,start:'top 94%',once:true}});
       });
-      if(matchMedia('(min-width: 900px)').matches){
-        $$('.story__visual img,.ecosystem__tile img').forEach(img=>{
-          gsap.fromTo(img,{yPercent:-3,scale:1.07},{yPercent:3,scale:1.07,ease:'none',scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
-        });
-      }
-      $$('.score-row__track i,.progress-card i').forEach(bar=>{
+      // Preserve existing story-photo hover zoom: GSAP transform on the same
+      // image previously overrode its CSS hover transform on desktop.
+      $('.ecosystem__tile img').forEach(img=>{
+        gsap.fromTo(img,{yPercent:-3,scale:1.07},{yPercent:3,scale:1.07,ease:'none',scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
+      });
+      // Score bars are exclusively animated by v33-cinematic.css on Results.
+      // Growth bars use this desktop timeline; v36 supplies the mobile fallback.
+      $('.results-progress .progress-card>div i').forEach(bar=>{
         gsap.fromTo(bar,{scaleX:.02},{scaleX:1,duration:1.15,ease:'power2.out',scrollTrigger:{trigger:bar,start:'top 92%',once:true}});
       });
     }
