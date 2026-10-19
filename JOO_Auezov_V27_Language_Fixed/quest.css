@@ -647,3 +647,34 @@ button,a{font:inherit}button{cursor:pointer}a{color:inherit}
 
 .quest-fact-sources{display:flex;flex-wrap:wrap;align-items:center;column-gap:20px;row-gap:2px;margin-top:8px}
 .quest-fact-sources .quest-fact-source{margin-top:0}
+
+
+/* JOO ARENA 10.0 — switch between natural court sounds and retro arcade SFX. */
+.quest-audio-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:12px 0 18px;max-width:100%}
+.quest-audio-toolbar .quest-sound-toggle{margin:0;border-radius:999px}
+.quest-sound-style{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:9px 13px;color:#fee2a8;background:linear-gradient(125deg,#234160,#102b49);border:1px solid #aa9060;border-radius:999px;cursor:pointer;font:800 11px/1.3 Inter,Arial,sans-serif;letter-spacing:.035em;transition:background .2s,border-color .2s,transform .2s}
+.quest-sound-style:hover{border-color:#ffe2a5;background:#325477}
+.quest-sound-style:focus-visible,.quest-audio-toolbar .quest-sound-toggle:focus-visible{outline:3px solid #f8d37d;outline-offset:3px}
+.quest-sound-style[aria-pressed="true"]{color:#f8e2ff;border-color:#af91ec;background:linear-gradient(125deg,#422c6d,#252050)}
+.quest-sound-style>span:first-child{font-size:16px;line-height:1}
+.quest-sound-style-arrows{font-size:15px;opacity:.7}
+.quest-intro-copy>.quest-audio-toolbar{margin:0 0 21px}
+.quest-gallery>.quest-audio-toolbar{margin:6px 0 21px}
+.quest-intermission__stage>.quest-audio-toolbar{justify-content:center;margin:17px auto 0}
+.quest-result .quest-audio-toolbar{margin:22px 0 6px}
+@media(max-width:980px){
+ .quest-result .quest-audio-toolbar{justify-content:center}
+}
+@media(max-width:590px){
+ .quest-audio-toolbar{gap:6px;margin:10px 0 15px}
+ .quest-audio-toolbar .quest-sound-toggle,.quest-sound-style{min-height:42px;padding:9px 11px;font-size:10px}
+ .quest-sound-style-arrows{font-size:13px}
+ .quest-intermission__stage>.quest-audio-toolbar{margin-top:12px}
+}
+@media(max-width:360px){
+ .quest-audio-toolbar{gap:7px}
+ .quest-audio-toolbar .quest-sound-toggle,.quest-sound-style{min-height:40px;padding:8px 9px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .quest-sound-style{transition:none}
+}
