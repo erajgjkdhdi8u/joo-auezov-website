@@ -204,18 +204,56 @@
       'admissions.html':['МЕКТЕПКЕ ҚАБЫЛДАУ.','exterior-1200.webp'],
       'contacts.html':['БІЗБЕН БАЙЛАНЫС.','exterior-1200.webp']
     };
+    // Use page hero headlines already authored on this site, not invented copy.
+    const titles={
+      'index.html':['БОЛАШАҚҚА ДАЙЫН МЕКТЕП.','Школа, готовящая к будущему.','MADE FOR THE FUTURE.'],
+      'about.html':['ӨЗІҢДІ ТАНЫ. БАҒЫТЫҢДЫ ТАП.','УЗНАЙ СЕБЯ. НАЙДИ СВОЙ ПУТЬ.','KNOW YOURSELF. FIND YOUR WAY.'],
+      'academics.html':['ТӨРТ КЕЗЕҢ. БІР ТРАЕКТОРИЯ.','ЧЕТЫРЕ ЭТАПА. ОДНА ТРАЕКТОРИЯ.','FOUR STAGES. ONE DIRECTION.'],
+      'student-life.html':['МЕКТЕП ӨМІРІ. ШЫНАЙЫ СӘТТЕР.','ШКОЛЬНАЯ ЖИЗНЬ. НАСТОЯЩИЕ МОМЕНТЫ.','LIFE BEYOND THE CLASSROOM.'],
+      'results.html':['НӘТИЖЕ — ӨСУДІҢ ІЗІ.','РЕЗУЛЬТАТ — ТРАЕКТОРИЯ РОСТА.','EVERY SCORE TELLS A STORY.'],
+      'team.html':['АДАМДАР — МЕКТЕП ЖҮРЕГІ.','ЛЮДИ — СЕРДЦЕ ШКОЛЫ.','PEOPLE MAKE THE DIFFERENCE.'],
+      'campus.html':['КЕҢІСТІК ТЕ ҮЙРЕТЕДІ.','ПРОСТРАНСТВО ТОЖЕ УЧИТ.','SPACE TO BECOME MORE.'],
+      'parents.html':['БІР МЕКТЕП. БІР КОМАНДА.','ОДНА ШКОЛА. ОДНА КОМАНДА.','FAMILY AND SCHOOL AS ONE.'],
+      'career.html':['ПРОФОРИЕНТАЦИЯ.','ПРОФОРИЕНТАЦИЯ.','CAREER GUIDANCE.'],
+      'wellbeing.html':['ӘР ОҚУШЫҒА ҚОЛДАУ КЕРЕК.','ПОДДЕРЖКА КАЖДОМУ.','A PLACE TO FEEL SUPPORTED.'],
+      'resources.html':['КЕРЕК ДЕРЕК. БІР ЖЕРДЕ.','ВСЁ ВАЖНОЕ. В ОДНОМ МЕСТЕ.','WHAT YOU NEED. WHERE YOU NEED IT.'],
+      'news.html':['МЕКТЕП ТЫНЫСЫ. КАДРДА.','ЖИЗНЬ ШКОЛЫ. В КАДРЕ.','STORIES FROM OUR CAMPUS.'],
+      'admissions.html':['ЖАҢА ҚАДАМ. ОСЫНАН БАСТАЛАДЫ.','НОВЫЙ ЭТАП. НАЧИНАЕТСЯ ЗДЕСЬ.','YOUR NEXT STEP STARTS HERE.'],
+      'contacts.html':['БІР СҰРАҚ. БІР ӘҢГІМЕ.','ЕСТЬ ВОПРОС? ДАВАЙТЕ ОБСУДИМ.','GOOD CONVERSATIONS START HERE.']
+    };
+    const links=$$('.nav-item',menu);
+    const indexTag=document.createElement('span');
+    indexTag.className='v35-menu-preview-index';
+    indexTag.setAttribute('aria-hidden','true');
+    indexTag.textContent='01 / '+String(links.length).padStart(2,'0');
+    frame?.appendChild(indexTag);
+    const imageCache=new Map();
     let version=0;
     const show=async link=>{
       if(!img||!heading||!link)return;
-      const key=link.getAttribute('href')?.split(/[?#]/)[0];
+      // /ru/ and /en/ navigation must resolve to the same filename as /.
+      let key='index.html';
+      try{
+        const name=new URL(link.getAttribute('href'),document.baseURI).pathname.split('/').pop();
+        key=name||'index.html';
+      }catch(e){ /* Keep the index-page fallback. */ }
       const choice=mapping[key];if(!choice)return;
       const thisRun=++version;
-      const path=`assets/images/${choice[1]}`;
+      const lang=document.documentElement.lang;
+      const langIndex=lang==='ru'?1:lang==='en'?2:0;
+      heading.textContent=titles[key]?.[langIndex] || link.getAttribute('data-'+lang) || choice[0];
+      const index=links.indexOf(link);
+      if(indexTag && index>=0) indexTag.textContent=String(index+1).padStart(2,'0')+' / '+String(links.length).padStart(2,'0');
+      const path='assets/images/'+choice[1];
+      if(img.getAttribute('src')===path){frame?.classList.remove('is-changing');return;}
       frame?.classList.add('is-changing');
-      const pic=new Image();pic.src=path;
-      try{await pic.decode()}catch(e){frame?.classList.remove('is-changing');return;}
+      if(!imageCache.has(path)){
+        const photo=new Image();photo.src=path;
+        imageCache.set(path,photo.decode().then(()=>true).catch(()=>false));
+      }
+      const loaded=await imageCache.get(path);
       if(thisRun!==version)return;
-      img.src=path;const dict=window.JOO_I18N; const original=choice[0]; const tr=dict?.translate?.(original,document.documentElement.lang); heading.textContent=tr||original;
+      if(loaded)img.src=path;
       requestAnimationFrame(()=>frame?.classList.remove('is-changing'));
     };
     $$('.nav-item',menu).forEach(link=>{
