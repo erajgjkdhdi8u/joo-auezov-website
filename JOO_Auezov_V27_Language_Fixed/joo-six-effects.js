@@ -252,7 +252,7 @@
     // Debounce only hover so sweeping over 14 links does not fetch 14 images.
     // Keyboard focus remains immediate.
     let previewTimer=0;
-    $('.nav-item',menu).forEach(link=>{
+    $$('.nav-item',menu).forEach(link=>{
       link.addEventListener('pointerenter',()=>{
         clearTimeout(previewTimer);
         previewTimer=setTimeout(()=>{if(!menu.hidden)show(link);},90);
