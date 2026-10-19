@@ -225,3 +225,45 @@ main>section.v35-chapter.v35-chapter--light::before{background:#1d61ba}
   main>section.v35-chapter.v35-in .v35-chapter-label{animation:none!important;translate:none!important}
   .gallery-band.v35-photo-editorial .gallery-band__grid figure img{transform:none!important;transition:none!important}
 }
+
+/* V35.1 audit fixes: the 15th menu item occupies a deliberate full row.
+   This restores visual balance and preserves the JOO QUEST link on touch. */
+.menu-panel.joo-mega-enabled .menu-panel__links>.joo-quest-menu-link{
+  grid-column:1/-1;
+  min-height:64px;
+  border-bottom:1px solid #f0ca7780;
+  color:#ffe4a2;
+  font-size:clamp(19px,2vw,28px);
+}
+.menu-panel.joo-mega-enabled .menu-panel__links>.joo-quest-menu-link:is(:hover,:focus-visible){
+  background:rgba(240,202,119,.12);
+}
+/* QUEST is a secondary action in the closing section, not the initial hero. */
+body[data-page="index"] .home-closing>.joo-quest-home-link{
+  min-height:46px;
+  margin-top:-14px;
+  background:transparent;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.7);
+  padding:12px 20px;
+  font-size:11px;
+  letter-spacing:.06em;
+}
+body[data-page="index"] .home-closing>.joo-quest-home-link:is(:hover,:focus-visible){
+  background:rgba(255,255,255,.12);
+}
+@media(max-width:700px){
+  .menu-panel.joo-mega-enabled .menu-panel__links>.joo-quest-menu-link{
+    min-height:56px;font-size:18px;
+  }
+  body[data-page="index"] .home-closing>.joo-quest-home-link{
+    margin-top:-8px;
+    max-width:100%;
+    white-space:normal;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body[data-page="index"] .home-closing>.joo-quest-home-link{
+    transition:none!important;transform:none!important;
+  }
+}
