@@ -1389,7 +1389,7 @@ function gallery(){
  state.screen='gallery';
  playSfx('tap');
  savedAchievements=readAchievements();
- view('<section class="quest-gallery" aria-labelledby="galleryTitle"><div class="quest-kicker">JOO ARENA / 9.0</div>'+
+ view('<section class="quest-gallery" aria-labelledby="galleryTitle"><div class="quest-kicker">JOO ARENA / 10.0</div>'+
  '<h1 id="galleryTitle" tabindex="-1">'+h(t.achCollection)+'</h1>'+
  '<div class="quest-gallery__meta">'+h(t.achSaved)+' · '+savedAchievements.size+' / '+achievementDefs.length+'</div>'+soundControl()+
  '<div class="quest-achievements">'+awardCards(savedAchievements)+'</div>'+
@@ -1574,7 +1574,7 @@ function scoreboard(){
   [t.shotLabel,String(state.step+1).padStart(2,'0')+'<small>/10</small>','shot']
  ].map(([label,value,key])=>'<div class="quest-board-cell quest-board-cell--'+key+'"><small>'+h(label)+'</small><strong>'+value+'</strong></div>').join('');
  return '<section class="quest-scoreboard" aria-label="'+h(t.board)+'">'+
-   '<div class="quest-scoreboard__head"><span class="quest-scoreboard__live"><i aria-hidden="true"></i> JOO ARENA <b>9.0</b></span>'+
+   '<div class="quest-scoreboard__head"><span class="quest-scoreboard__live"><i aria-hidden="true"></i> JOO ARENA <b>10.0</b></span>'+
    '<span class="quest-scoreboard__round">'+h(arena)+' · '+h(shotTitle)+'</span></div>'+
    '<div class="quest-scoreboard__main">'+cells+'<div class="quest-scoreboard__streak">'+fire+
    '<div class="quest-scoreboard__shots" role="group" aria-label="'+h(t.shotLabel)+'">'+hits.join('')+'</div></div></div></section>';
@@ -1804,7 +1804,7 @@ function intermission(){
  const beams=Array.from({length:7},(_,i)=>'<i style="--beam:'+i+'"></i>').join('');
  view('<section class="quest-intermission arena-stage--'+(nextChapter+1)+'" aria-labelledby="halftimeTitle">'+
   '<div class="quest-intermission__lights" aria-hidden="true">'+beams+'</div>'+
-  '<div class="quest-intermission__header"><span>JOO ARENA / 9.0</span><span>0'+(nextChapter+1)+' / 03</span></div>'+
+  '<div class="quest-intermission__header"><span>JOO ARENA / 10.0</span><span>0'+(nextChapter+1)+' / 03</span></div>'+
   '<div class="quest-intermission__stage"><div class="quest-intermission__eyebrow">'+h(t.half)+'</div>'+
    '<div class="quest-intermission__finish">'+h(t.halfEnd)+'</div>'+
    '<div class="quest-intermission__stats"><div><span>'+h(t.halfProgress)+'</span><strong>'+correct+' / '+count+'</strong></div>'+
@@ -1813,14 +1813,16 @@ function intermission(){
    '<p class="quest-intermission__next">'+h(t.halfNext)+' <span class="quest-intermission__level">'+h(t.difficulties[nextChapter])+'</span></p>'+
    '<h1 id="halftimeTitle" tabindex="-1">'+h(newArena)+'</h1>'+
    '<div class="quest-intermission__arena" aria-hidden="true"><div class="quest-intermission__court"></div><div class="quest-intermission__ball"></div><div class="quest-intermission__hoop"></div></div>'+
-   '<button class="quest-button" id="continueHalftime">'+h(t.halfContinue)+' →</button>'+
+   '<button class="quest-button" id="continueHalftime">'+h(t.halfContinue)+' →</button>'+soundControl()+
   '</div></section>','halftimeTitle');
  const nextStep=state.step;
  const advance=()=>{
   if(state.screen!=='intermission'||state.step!==nextStep)return;
-  state.activeShot=selectShot();question();
+  state.activeShot=selectShot();question();playSfx('arena');
  };
  $('continueHalftime').addEventListener('click',advance);
+ bindSoundControl();
+ playSfx('halftime');
  try{
   if(!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)
    window.setTimeout(advance,4100);
@@ -1861,9 +1863,12 @@ function result(){
   '<small>'+h(t.award)+'</small><strong>'+h(trophy)+'</strong><p>'+h(t.awardDesc)+'</p></div>';
  view('<section class="quest-result" aria-labelledby="resultTitle"><div><div class="quest-kicker">'+h(t.done)+'</div><h1 id="resultTitle" tabindex="-1">'+h(t.result)+'<br><em>'+h(t.result2)+'</em></h1><p>'+h(t.desc)+'</p><div class="quest-badge">'+ranks[level()]+'</div>'+
  ceremony+'<div class="quest-result-numbers"><div><span>'+h(t.accuracy)+'</span><strong>'+points()+'%</strong></div><div><span>'+h(t.best)+'</span><strong>×'+state.bestStreak+'</strong></div></div>'+
- recap+trophies+
+ recap+trophies+soundControl()+
  '<div class="quest-result-actions"><button class="quest-button" id="saveResult">'+h(t.save)+' ↓</button><button class="quest-button quest-button--outline" id="shareResult">'+h(t.share)+' ↗</button><button class="quest-button quest-button--outline" id="replayQuest">'+h(t.again)+' ↺</button></div></div><div><div class="quest-score-ring" style="--score:'+points()+'" role="img" aria-label="'+points()+' '+h(t.out)+'"><div class="quest-score-center"><strong>'+points()+'</strong><small>'+h(t.out)+'</small></div></div><div class="quest-result-stat">'+state.correct+' '+h(t.count)+'</div></div></section>','resultTitle');
- $('replayQuest').addEventListener('click',intro);$('shareResult').addEventListener('click',share);$('saveResult').addEventListener('click',save);
+ $('replayQuest').addEventListener('click',()=>{playSfx('tap');intro();});
+ $('shareResult').addEventListener('click',share);$('saveResult').addEventListener('click',save);
+ bindSoundControl();
+ playSfx(state.newAchievements.length?'achievement':points()>=70?'win':'finish');
 }
 function toast(s){
  document.querySelector('.quest-toast')?.remove();
