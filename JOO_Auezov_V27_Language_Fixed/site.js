@@ -1,6 +1,35 @@
 /* JOO Auezov V24: accessible interactions without scroll-lock animations or custom cursor */
 (() => {
   'use strict';
+  /* JOO QUEST entry — links only. Existing pages, navigation and language logic remain intact. */
+  (() => {
+    const locale = location.pathname.startsWith('/ru/') ? 'ru' : location.pathname.startsWith('/en/') ? 'en' : 'kk';
+    const url = locale === 'kk' ? '/quest' : '/' + locale + '/quest';
+    const label = {
+      kk: {menu:'JOO QUEST · МЕКТЕПТІ ТАНЫ', hero:'JOO QUEST · ОЙНА'},
+      ru: {menu:'JOO QUEST · УЗНАЙ ШКОЛУ', hero:'JOO QUEST · ИГРАТЬ'},
+      en: {menu:'JOO QUEST · DISCOVER', hero:'JOO QUEST · PLAY'}
+    }[locale];
+    const menu = document.querySelector('.menu-panel__links');
+    if(menu && !menu.querySelector('.joo-quest-menu-link')){
+      const link=document.createElement('a');
+      link.className='nav-item joo-quest-menu-link';
+      link.href=url;
+      link.textContent=label.menu;
+      menu.appendChild(link);
+    }
+    if(document.body.dataset.page === 'index'){
+      const hero=document.querySelector('.hero__actions');
+      if(hero && !hero.querySelector('.joo-quest-home-link')){
+        const link=document.createElement('a');
+        link.className='pill pill--white joo-quest-home-link';
+        link.href=url;
+        link.textContent=label.hero+' ↗';
+        hero.appendChild(link);
+      }
+    }
+  })();
+
   const $ = (s, base=document) => base.querySelector(s);
   const $$ = (s, base=document) => [...base.querySelectorAll(s)];
   const root = document.documentElement;
