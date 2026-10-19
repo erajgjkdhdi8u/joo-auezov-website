@@ -1409,35 +1409,145 @@ function intro(){
  $('openGallery').addEventListener('click',gallery);
 }
 
-/* No external audio files: synthesize a low-volume throw, net swish and rim clang. */
-let soundOn=true, audio=null;
-function playShot(made,durationMs=1450,impactRatio=.75,shot='jump'){
- if(!soundOn)return;
+/* JOO ARENA 10.0 — lightweight procedural sounds; no remote audio files.
+   No AudioContext is created until the player interacts. All cues share a
+   master gain so muting silences even already-scheduled effects. */
+const SOUND_PREF_KEY='joo-arena-audio-v1';
+let soundOn=true,soundStyle='court',audio=null,audioMaster=null;
+try{
+ const saved=JSON.parse(window.localStorage?.getItem(SOUND_PREF_KEY)||'null');
+ if(saved&&typeof saved==='object'){
+  if(typeof saved.enabled==='boolean')soundOn=saved.enabled;
+  if(saved.style==='court'||saved.style==='arcade')soundStyle=saved.style;
+ }
+}catch(_){}
+function storeSound(){
+ try{window.localStorage?.setItem(SOUND_PREF_KEY,JSON.stringify({enabled:soundOn,style:soundStyle}));}catch(_){}
+}
+function getAudio(){
+ if(!soundOn)return null;
  try{
-  const Engine=window.AudioContext||window.webkitAudioContext;if(!Engine)return;
-  if(!audio)audio=new Engine();
-  if(audio.state==='suspended')audio.resume().catch(()=>{});
-  const ctx=audio,at=ctx.currentTime+.008;
-  function tone(t,f,to,d,v,type='sine'){
-   const o=ctx.createOscillator(),a=ctx.createGain();o.type=type;
-   o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(Math.max(30,to),t+d);
-   a.gain.setValueAtTime(.0001,t);a.gain.exponentialRampToValueAtTime(v,t+.012);a.gain.exponentialRampToValueAtTime(.0001,t+d);
-   o.connect(a);a.connect(ctx.destination);o.start(t);o.stop(t+d+.01);
+  if(!audio){
+   const Engine=window.AudioContext||window.webkitAudioContext;
+   if(!Engine)return null;
+   audio=new Engine();
+   audioMaster=audio.createGain();
+   audioMaster.gain.value=.48;
+   audioMaster.connect(audio.destination);
   }
-  function rush(t,d,v,f){
-   const n=Math.ceil(ctx.sampleRate*d),b=ctx.createBuffer(1,n,ctx.sampleRate),data=b.getChannelData(0);
-   for(let i=0;i<n;i++)data[i]=Math.random()*2-1;
-   const src=ctx.createBufferSource(),flt=ctx.createBiquadFilter(),amp=ctx.createGain();
-   src.buffer=b;flt.type='bandpass';flt.frequency.value=f;flt.Q.value=.8;
-   amp.gain.setValueAtTime(.0001,t);amp.gain.linearRampToValueAtTime(v,t+d*.22);amp.gain.exponentialRampToValueAtTime(.0001,t+d);
-   src.connect(flt);flt.connect(amp);amp.connect(ctx.destination);src.start(t);src.stop(t+d+.003);
+  if(audio.state==='suspended'){
+   const request=audio.resume();
+   request?.catch?.(()=>{});
   }
-  const hitAt=at+durationMs*impactRatio/1000;
-  tone(at,shot==='dunk'?210:shot==='three'?190:155,90,.11,.07,'triangle');
-  rush(at+.12,Math.min(.4,durationMs*.26/1000),shot==='three'?.042:.027,shot==='three'?1390:940);
-  if(made){rush(hitAt,shot==='dunk'?.38:.28,shot==='dunk'?.19:.12,2700);tone(hitAt+.10,shot==='dunk'?330:580,790,.18,.065);tone(hitAt+.27,810,1060,.22,.068);}
-  else{tone(hitAt,320,170,.15,.078,'triangle');tone(hitAt+.015,530,280,.12,.04,'square');tone(hitAt+.22,175,95,.22,.058);}
- }catch(_){/* Audio permission and API support must not affect quiz operation. */}
+  return audio;
+ }catch(_){return null;}
+}
+function soundVoice(ctx,time,from,to,duration,volume,type='sine'){
+ if(!ctx||duration<=0)return;
+ const osc=ctx.createOscillator(),gain=ctx.createGain();
+ osc.type=type;
+ osc.frequency.setValueAtTime(Math.max(45,from),time);
+ osc.frequency.exponentialRampToValueAtTime(Math.max(45,to),time+duration);
+ gain.gain.setValueAtTime(.0001,time);
+ gain.gain.linearRampToValueAtTime(volume,time+Math.min(.018,duration*.22));
+ gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
+ osc.connect(gain);gain.connect(audioMaster);
+ osc.start(time);osc.stop(time+duration+.01);
+}
+function soundNoise(ctx,time,duration,volume,frequency=1100,filterType='bandpass'){
+ if(!ctx?.createBuffer||!ctx.createBiquadFilter||duration<=0)return;
+ const count=Math.max(1,Math.ceil(ctx.sampleRate*duration));
+ const buffer=ctx.createBuffer(1,count,ctx.sampleRate),data=buffer.getChannelData(0);
+ for(let i=0;i<count;i++)data[i]=Math.random()*2-1;
+ const src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain();
+ src.buffer=buffer;filter.type=filterType;filter.frequency.value=frequency;filter.Q.value=.7;
+ gain.gain.setValueAtTime(.0001,time);
+ gain.gain.linearRampToValueAtTime(volume,time+Math.min(.04,duration*.24));
+ gain.gain.exponentialRampToValueAtTime(.0001,time+duration);
+ src.connect(filter);filter.connect(gain);gain.connect(audioMaster);
+ src.start(time);src.stop(time+duration+.005);
+}
+function playSfx(kind){
+ const ctx=getAudio();if(!ctx)return;
+ try{
+  const at=ctx.currentTime+.015,arcade=soundStyle==='arcade';
+  if(kind==='tap'){
+   soundVoice(ctx,at,arcade?640:360,arcade?820:240,.085,.035,arcade?'square':'sine');
+  }else if(kind==='start'){
+   soundVoice(ctx,at,arcade?330:190,arcade?520:280,.20,.075,'triangle');
+   soundVoice(ctx,at+.14,arcade?490:280,arcade?740:440,.24,.085,arcade?'square':'sine');
+   soundVoice(ctx,at+.33,arcade?740:440,arcade?990:660,.30,.068,'triangle');
+   if(!arcade)soundNoise(ctx,at+.10,.27,.024,1250);
+  }else if(kind==='halftime'){
+   // Short basketball arena horn, with retro square-wave alternative.
+   [0,.17,.34].forEach((offset,i)=>{
+    soundVoice(ctx,at+offset,arcade?440:225,arcade?460:205,i===2?.42:.13,arcade?.052:.078,arcade?'square':'sawtooth');
+   });
+   if(!arcade)soundNoise(ctx,at+.06,.47,.03,680);
+  }else if(kind==='arena'){
+   [330,440,554].forEach((pitch,i)=>soundVoice(ctx,at+i*.10,pitch,pitch*1.18,.26,.046,arcade?'square':'triangle'));
+  }else if(kind==='fire'){
+   soundVoice(ctx,at,300,820,.37,.085,arcade?'square':'sawtooth');
+   soundVoice(ctx,at+.14,460,1150,.30,.055,'triangle');
+   if(!arcade)soundNoise(ctx,at+.07,.30,.056,2400);
+  }else if(kind==='inferno'){
+   [392,588,784,1176].forEach((pitch,i)=>soundVoice(ctx,at+i*.08,pitch,pitch*1.15,.36,.052,arcade?'square':'triangle'));
+   if(!arcade)soundNoise(ctx,at+.12,.49,.055,1700);
+  }else if(kind==='achievement'){
+   [523,659,784,1047].forEach((pitch,i)=>soundVoice(ctx,at+i*.115,pitch,pitch*1.06,.34,.057,arcade?'square':'sine'));
+  }else if(kind==='win'){
+   [262,392,523].forEach((pitch,i)=>soundVoice(ctx,at+i*.12,pitch,pitch*1.08,.36,.059,arcade?'square':'triangle'));
+   if(!arcade)soundNoise(ctx,at+.32,.45,.033,2600);
+  }else if(kind==='finish'){
+   soundVoice(ctx,at,392,330,.20,.060,'triangle');
+   soundVoice(ctx,at+.20,523,659,.31,.064,'sine');
+  }
+ }catch(_){/* Sound is optional and must never block gameplay. */}
+}
+function playShot(made,durationMs=1450,impactRatio=.75,shot='jump'){
+ const ctx=getAudio();if(!ctx)return;
+ try{
+  const at=ctx.currentTime+.012,hit=at+durationMs*impactRatio/1000;
+  const arcade=soundStyle==='arcade';
+  // Basketball release and court bounce have warm, short low-frequency transients.
+  soundVoice(ctx,at,arcade?240:155,arcade?100:75,.13,arcade?.068:.12,'triangle');
+  if(arcade){
+   soundVoice(ctx,at+.10,shot==='three'?810:590,shot==='three'?1320:940,.28,.05,'square');
+  }else{
+   soundNoise(ctx,at+.08,Math.max(.08,Math.min(.50,durationMs*.29/1000)),shot==='three'?.057:.038,shot==='three'?1650:1060);
+  }
+  if(made){
+   // A swish sounds airy, unlike a metal clang. Slam-dunk adds a heavy impact.
+   if(arcade){
+    soundVoice(ctx,hit,660,1020,.16,.090,'sine');
+    soundVoice(ctx,hit+.12,880,1340,.24,.072,'square');
+   }else{
+    soundNoise(ctx,hit,shot==='dunk'?.40:.34,shot==='dunk'?.19:.13,3300);
+    soundNoise(ctx,hit+.04,.30,.065,1850);
+    soundVoice(ctx,hit+.17,480,740,.19,.035,'sine');
+    if(shot==='dunk')soundVoice(ctx,hit,170,83,.23,.12,'triangle');
+   }
+   // Crowd response is deliberately modest under the correct answer.
+   if(!arcade)soundNoise(ctx,hit+.24,.43,.031,850);
+   if(state.streak===3)playComboAt(ctx,hit+.28,false,arcade);
+   if(state.streak===5)playComboAt(ctx,hit+.28,true,arcade);
+  }else{
+   if(arcade){
+    soundVoice(ctx,hit,410,160,.24,.079,'square');
+    soundVoice(ctx,hit+.13,280,110,.20,.057,'triangle');
+   }else{
+    soundVoice(ctx,hit,520,310,.16,.077,'triangle');
+    soundVoice(ctx,hit+.012,960,490,.11,.031,'square');
+    soundNoise(ctx,hit,.19,.060,1300);
+    soundVoice(ctx,hit+.22,180,85,.25,.053,'triangle');
+   }
+  }
+ }catch(_){/* No sound device should ever prevent answering. */}
+}
+function playComboAt(ctx,time,inferno,arcade){
+ const notes=inferno?[440,660,880,1175]:[392,523,784];
+ notes.forEach((pitch,i)=>soundVoice(ctx,time+i*.095,pitch,pitch*1.06,.28,.058,arcade?'square':'triangle'));
+ if(!arcade)soundNoise(ctx,time+.04,inferno?.53:.35,inferno?.058:.038,1850);
 }
 /* Consistent shot selection; types are visual only, still 10 points per correct answer. */
 function selectShot(){
