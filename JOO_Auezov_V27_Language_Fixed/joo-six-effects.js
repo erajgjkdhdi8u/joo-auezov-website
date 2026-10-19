@@ -190,7 +190,9 @@
       'resources.html':['ҚАЖЕТТІ РЕСУРСТАР.','classroom-1200.webp'],
       'news.html':['МЕКТЕП ЖАҢАЛЫҚТАРЫ.','assembly-1200.webp'],
       'admissions.html':['МЕКТЕПКЕ ҚАБЫЛДАУ.','exterior-1200.webp'],
-      'contacts.html':['БІЗБЕН БАЙЛАНЫС.','exterior-1200.webp']
+      'contacts.html':['БІЗБЕН БАЙЛАНЫС.','exterior-1200.webp'],
+      'quest':['JOO QUEST','v28/school-lounge.webp'],
+      'quest.html':['JOO QUEST','v28/school-lounge.webp']
     };
     // Use page hero headlines already authored on this site, not invented copy.
     const titles={
@@ -222,14 +224,17 @@
       // /ru/ and /en/ navigation must resolve to the same filename as /.
       let key='index.html';
       try{
-        const name=new URL(link.getAttribute('href'),document.baseURI).pathname.split('/').pop();
+        const pathname=new URL(link.getAttribute('href'),document.baseURI).pathname.replace(/\/$/,'');
+        const name=pathname.split('/').pop();
         key=name||'index.html';
       }catch(e){ /* Keep the index-page fallback. */ }
       const choice=mapping[key];if(!choice)return;
       const thisRun=++version;
       const lang=document.documentElement.lang;
       const langIndex=lang==='ru'?1:lang==='en'?2:0;
-      heading.textContent=titles[key]?.[langIndex] || link.getAttribute('data-'+lang) || choice[0];
+      heading.textContent=(key==='quest'||key==='quest.html')
+        ? link.textContent.trim()
+        : (titles[key]?.[langIndex] || link.getAttribute('data-'+lang) || choice[0]);
       const index=links.indexOf(link);
       if(indexTag && index>=0) indexTag.textContent=String(index+1).padStart(2,'0')+' / '+String(links.length).padStart(2,'0');
       const path='assets/images/'+choice[1];
