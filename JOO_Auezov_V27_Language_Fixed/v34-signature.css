@@ -267,3 +267,16 @@ body[data-page="index"] .home-closing>.joo-quest-home-link:is(:hover,:focus-visi
     transition:none!important;transform:none!important;
   }
 }
+
+/* Narrow-screen readability in all three languages. */
+.menu-panel.joo-mega-enabled .nav-item{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.gsed__intro h2{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+@media(max-width:700px){
+  .gsed__intro h2{font-size:clamp(37px,9.3vw,52px)}
+}
