@@ -34,6 +34,7 @@ with sync_playwright() as playwright:
                     item = {"browser":browser_name,"width":width,"lang":lang,"page":name}
                     try:
                         response = page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                        page.wait_for_function('''() => [...document.querySelectorAll('link[rel="stylesheet"]')].filter(l => l.href.startsWith(location.origin)).every(l => !!l.sheet)''', timeout=12000)
                         page.wait_for_timeout(100)
                         item["http"] = response.status if response else 0
                         item.update(page.evaluate("""() => {
