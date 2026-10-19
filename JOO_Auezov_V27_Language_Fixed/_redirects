@@ -1,0 +1,7 @@
+# JOO QUEST short links (existing URLs stay unchanged)
+/quest           /quest.html           200
+/quest/          /quest.html           200
+/ru/quest        /ru/quest.html        200
+/ru/quest/       /ru/quest.html        200
+/en/quest        /en/quest.html        200
+/en/quest/       /en/quest.html        200
