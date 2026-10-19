@@ -1,0 +1,44 @@
+name: JOO V34 Signature Motion browser audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/v34-browser-audit.yml'
+      - 'JOO_Auezov_V27_Language_Fixed/tools/v34_browser_audit.py'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.css'
+      - 'JOO_Auezov_V27_Language_Fixed/v34-signature.js'
+
+permissions:
+  contents: read
+
+jobs:
+  v34-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Chromium and WebKit browsers
+        run: |
+          python -m pip install 'playwright>=1.50,<2'
+          python -m playwright install --with-deps chromium webkit
+      - name: Start preview web server
+        run: |
+          cd JOO_Auezov_V27_Language_Fixed
+          nohup python -m http.server 8765 --bind 127.0.0.1 > /tmp/v34-http.log 2>&1 &
+          sleep 2
+      - name: Test 42 pages and 54 three-language motion interactions
+        run: python JOO_Auezov_V27_Language_Fixed/tools/v34_browser_audit.py
+      - name: Upload V34 screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: joo-v34-browser-evidence
+          path: |
+            JOO_Auezov_V27_Language_Fixed/v34-browser-audit.json
+            JOO_Auezov_V27_Language_Fixed/v34-audit-screenshots/
+          retention-days: 14
