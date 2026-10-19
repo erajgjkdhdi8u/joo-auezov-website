@@ -224,8 +224,11 @@
       // /ru/ and /en/ navigation must resolve to the same filename as /.
       let key='index.html';
       try{
-        const pathname=new URL(link.getAttribute('href'),document.baseURI).pathname.replace(/\/$/,'');
-        const name=pathname.split('/').pop();
+        const pathname=new URL(link.getAttribute('href'),document.baseURI).pathname;
+        // /ru/ and /en/ are home links; /quest and /ru/quest are game links.
+        const name=pathname.endsWith('/')
+          ? (pathname.split('/').filter(Boolean).pop()==='quest' ? 'quest' : 'index.html')
+          : pathname.split('/').pop();
         key=name||'index.html';
       }catch(e){ /* Keep the index-page fallback. */ }
       const choice=mapping[key];if(!choice)return;
